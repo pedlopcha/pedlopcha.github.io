@@ -1,0 +1,221 @@
+% !TEX program = xelatex
+\documentclass[10.5pt,a4paper]{article}
+
+%---------------------------------------------------------------
+% PACKAGES
+%---------------------------------------------------------------
+\usepackage[top=1.4cm,bottom=1.4cm,left=1.8cm,right=1.8cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{german}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+\usepackage{ragged2e}
+\usepackage{parskip}
+\usepackage{needspace}
+
+\graphicspath{{./}}
+
+%---------------------------------------------------------------
+% FONT
+%---------------------------------------------------------------
+\setmainfont{Carlito}
+
+%---------------------------------------------------------------
+% COLORS
+%---------------------------------------------------------------
+\definecolor{primary}{HTML}{16324F}   % dunkles Petrol-Navy
+\definecolor{accent}{HTML}{2B7A9B}    % helleres Blau fuer Akzente
+\definecolor{gray}{HTML}{5B5B5B}
+\definecolor{lightgray}{HTML}{8A8A8A}
+\definecolor{rule}{HTML}{D8DEE4}
+
+\pagestyle{empty}
+\RaggedRight
+\setlength{\parindent}{0pt}
+\tolerance=9999
+\emergencystretch=3em
+\hyphenpenalty=200
+\exhyphenpenalty=50
+
+%---------------------------------------------------------------
+% SECTION STYLE
+%---------------------------------------------------------------
+\titleformat{\section}
+  {\Large\bfseries\color{primary}}
+  {}{0em}{}
+  [\vspace{-6pt}{\color{rule}\hrule height 1pt}\vspace{2pt}]
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{primary}}
+  {}{0em}{}
+\titlespacing*{\subsection}{0pt}{6pt}{2pt}
+
+%---------------------------------------------------------------
+% HELPER COMMANDS
+%---------------------------------------------------------------
+% Job entry: #1 dates  #2 role  #3 company  #4 body (paragraph + optional itemize)
+\newcommand{\cventry}[4]{%
+  \needspace{6\baselineskip}%
+  \noindent\textbf{\large #2}\hfill{\color{gray}\textbf{\small #1}}\\[1pt]
+  {\color{accent}\textit{#3}}\\[3pt]
+  #4
+  \vspace{5pt}
+}
+
+% Compact one-line entry for early career stations
+\newcommand{\cvcompact}[3]{%
+  \noindent\textbf{#2}\hfill{\color{gray}\small #1}\\[1pt]
+  {\small\color{gray}\textit{#3}}\\[4pt]
+}
+
+% Education entry
+\newcommand{\cvedu}[4]{%
+  \needspace{6\baselineskip}%
+  \noindent\textbf{\large #2}\hfill{\color{gray}\textbf{\small #1}}\\[1pt]
+  {\color{accent}\textit{#3}}\\[3pt]
+  #4
+  \vspace{7pt}
+}
+
+\newenvironment{tightitemize}{
+  \begin{itemize}[leftmargin=12pt,itemsep=1pt,topsep=2pt,parsep=0pt,label={\color{accent}\textbullet}]
+}{\end{itemize}}
+
+% Skill category line
+\newcommand{\skillcat}[2]{\noindent{\color{primary}\textbf{#1}}\quad #2\\[5pt]}
+
+%---------------------------------------------------------------
+\begin{document}
+
+%---------------------------------------------------------------
+% HEADER
+%---------------------------------------------------------------
+\begin{minipage}[c]{0.74\textwidth}
+  {\fontsize{26}{28}\selectfont\bfseries\color{primary} Pedro López Chao}\\[4pt]
+  {\large\color{accent} Product Owner mit technischer Tiefe \;\textbar\; Auf dem Weg zur Head of Product}\\[8pt]
+  {\small\color{gray}
+    \href{mailto:deine.private@email.de}{deine.private@email.de} \;\textbar\;
+    [Telefonnummer ergänzen] \;\textbar\;
+    [Stadt, Deutschland] \;\textbar\;
+    \href{https://www.xing.com/profile/}{xing.com/profile/…}
+  }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.20\textwidth}
+  \raggedleft
+  \begin{tikzpicture}
+    \clip (0,0) rectangle (2.6cm,2.6cm);
+    \node[anchor=south west,inner sep=0] at (0,0) {\includegraphics[width=2.6cm]{photo_square.jpg}};
+  \end{tikzpicture}
+\end{minipage}
+
+\vspace{4pt}
+{\color{rule}\hrule height 1.4pt}
+\vspace{6pt}
+
+%---------------------------------------------------------------
+\section*{Profil}
+Produktexperte mit über 8 Jahren Erfahrung in Requirements Engineering, Product Ownership und Produktmanagement in Industrien wie IoT, MedTech, E-Mobility und Sondermaschinenbau. Kombiniert End-to-End-Produktverantwortung (UX/UI-Design, Requirements, Nutzerkontakt) mit technischer Tiefe: eigenständige Erstellung von C4-Architekturdiagrammen, SQL-basierte Datenanalysen und Diskussionen auf Augenhöhe mit Entwicklern zu API-Design und Architektur-Trade-offs. Fachliche Führung cross-funktionaler Teams sowie Kommunikation von Produktentscheidungen bis auf Director- und C-Level-Ebene. Nächstes Ziel: Verantwortung für eine größere Produktorganisation als Head of Product.
+
+%---------------------------------------------------------------
+\section*{Beruflicher Werdegang}
+
+\cventry{11/2023 -- heute}{Product Owner}{GLS IT Services GmbH}{
+Fachliche Führung eines cross-funktionalen Teams aus Entwicklern und Testern (5 FTEs) und Verantwortung für Produktvision sowie strategische Ausrichtung der IT-Tools im Bereich Nahverkehr.
+\begin{tightitemize}
+  \item Alleinige End-to-End-Produktverantwortung ohne dedizierten Business Analysten: UX/UI-Design (Figma), Requirements, kontinuierlicher Nutzerkontakt und Support
+  \item Erstellung von C4-Architekturdiagrammen (System Context, Container, Business) zur Abbildung von Systemgrenzen und Abhängigkeiten
+  \item Eigenständige SQL-basierte Datenanalysen zur datengetriebenen Identifikation organisatorischer Probleme und Priorisierung von Features
+  \item Technische Diskussionen auf Augenhöhe mit Entwicklern zu API-Design, Datenquellen und Architektur-Trade-offs
+  \item Kommunikation und Verantwortung von Produktentscheidungen gegenüber Nutzern, Director- und teilweise C-Level-Ebene; Vorbereitung von Budgetfreigaben
+  \item \textbf{Ergebnis:} Nutzungsrate eines zentralen Tools verdoppelt; deutlich verbesserte Prozesstransparenz mit positivem Effekt auf die Kundenzufriedenheit
+\end{tightitemize}
+}
+
+\cventry{03/2019 -- 10/2023}{Expert Business Analyst}{Zühlke Engineering GmbH}{
+Requirements Engineering und Product-Ownership-Rollen mit Schwerpunkt Anforderungserhebung und Kundenschnittstelle in verschiedenen branchenübergreifenden Projekten:
+\begin{tightitemize}
+  \item Produktdefinition und Lastenheft-Erstellung für eine smarte Matratze (führender Matratzenhersteller)
+  \item Product Owner für die IoT-Erneuerung der Maschinensoftware eines führenden Sondermaschinenbau-Unternehmens -- erfolgreich im Markt gelauncht
+  \item Requirements Engineering und API-Spezifikation für ein MDM-System (führende Hersteller von Haushaltsgeräten) nach den Prinzipien "API-First" und "API-as-a-Product"
+  \item Product-Team-Lead in der Machbarkeitsphase eines vernetzten Medizingeräts -- Koordination eines 5-köpfigen Teams, intensiver Kundenkontakt bis teilweise Director-Ebene
+  \item Requirements Engineering und Coaching des Projektteams für ein Personaleinsatzplanungssystem einer Fluggesellschaft -- durchgehend hohe Kundenzufriedenheit trotz komplexer Anforderungslage
+\end{tightitemize}
+}
+
+\cventry{01/2017 -- 02/2019}{Produktmanager E-Bike}{Fahrrad XXL Group GmbH}{
+Management des Produktentwicklungsprozesses für den gesamten E-Bike-Bereich:
+\begin{tightitemize}
+  \item Erstellung der Entwicklungs-Roadmap sowie Definition der Produktanforderungen in Zusammenarbeit mit der Engineering-Abteilung
+  \item Erstellung der Produktpalette und Preisstrategie in Abstimmung mit der Geschäftsführung
+  \item Erstellung der Produktspezifikationen und Anpassung im Rahmen des Preisfindungsprozesses
+  \item Leitung des Zertifizierungsprozesses nach EMV-Richtlinien
+  \item Marktbeobachtung und Marktanalyse
+\end{tightitemize}
+}
+
+\cventry{01/2016 -- 12/2016}{Account Manager Business Development}{COBI GmbH}{
+\begin{tightitemize}
+  \item Ansprechpartner für nationale und internationale E-Bike-Antriebshersteller
+  \item Projektleitung im Rahmen verschiedener Integrationsprojekte von COBI mit E-Bike-Systemen
+  \item Zusammenarbeit mit der Embedded-Systems-Abteilung für die Weiterentwicklung des Produkts
+  \item Mitarbeit an der Erstellung zukünftiger Mobilitätskonzepte
+\end{tightitemize}
+}
+
+\subsection*{Frühere Stationen}
+\cvcompact{01/2015 -- 09/2015}{Mobility Media GmbH -- Bosch Group}{Praktikant / Werkstudent Sales}
+\cvcompact{02/2014 -- 12/2014}{Karlsruher Institut für Technologie -- Institut für Produktionstechnik}{Wissenschaftliche Hilfskraft}
+\cvcompact{03/2012 -- 06/2012}{Movand S.A.}{Praktikum}
+
+%---------------------------------------------------------------
+\section*{Ausbildung}
+
+\cvedu{03/2012 -- 10/2015}{Wirtschaftsingenieurwesen -- Licenciatura (Master-Äquivalent)}{Universidad de Cádiz, Spanien}{
+\begin{tightitemize}
+  \item Schwerpunkte: Produktionsplanung, Qualitätssicherung, Projektmanagement
+  \item Abschlussarbeit: Entwicklung eines Fahrrades und dessen Produktionsprozess durch Anwendung von Lean-Manufacturing-Methoden
+\end{tightitemize}
+}
+
+\cvedu{10/2013 -- 10/2014}{Wirtschaftsingenieurwesen -- Austauschprogramm im Rahmen der Licenciatura}{Karlsruher Institut für Technologie (KIT)}{
+\begin{tightitemize}
+  \item Schwerpunkte: Management neuer Technologien, Innovationsmanagement, Operations Research
+\end{tightitemize}
+}
+
+\cvedu{09/2007 -- 12/2011}{Industriedesign Ingenieurwesen -- Diplomatura (Bachelor-Äquivalent)}{Universidad de Sevilla, Spanien}{
+\begin{tightitemize}
+  \item Schwerpunkte: CAD, CAM, CAE, Produktentwicklung, Materialwissenschaft
+  \item Abschlussarbeit: Design und Entwicklung eines Stadtfahrrads basierend auf der Analyse verschiedener Städte
+\end{tightitemize}
+}
+
+%---------------------------------------------------------------
+\section*{Besondere Fähigkeiten}
+
+\subsection*{Fachliche Kompetenzen}
+\skillcat{Produkt \& Führung:}{Product Management, Product Ownership, Requirements Engineering, Teamführung, Strategic Planning, Stakeholder Management}
+\skillcat{Technisch:}{C4-Modell / Architekturdiagramme, SQL, Python, Data Analysis, Business Analytics, API-Design, Figma}
+\skillcat{Methoden:}{Agile Development (Scrum), User Story Mapping, Design Thinking, Business Model Canvas, Product Roadmapping}
+\skillcat{Tools:}{Atlassian Stack (Jira, Confluence), Miro, Mural, Microsoft Office Suite}
+
+\subsection*{Sprachen}
+\noindent Spanisch (Muttersprache) \;\textbar\; Deutsch (fließend) \;\textbar\; Englisch (fließend) \;\textbar\; Französisch (Grundkenntnisse)
+
+\subsection*{Persönliche Fähigkeiten}
+\noindent Teamarbeit, Kreativität, analytisches Denkvermögen, Pragmatismus
+
+%---------------------------------------------------------------
+\section*{Interessen \& Hobbys}
+\noindent\textbf{Interessen:} Nachhaltige Produktentwicklung und Design; Neue Technologien und Wissenschaft\\
+\textbf{Hobbys:} Triathlon, Musik, Kunst
+
+\end{document}

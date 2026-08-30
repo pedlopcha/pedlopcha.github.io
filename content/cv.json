@@ -1,0 +1,358 @@
+{
+  "meta": {
+    "name": "Pedro López Chao",
+    "headline": "Product Owner mit technischer Tiefe | Auf dem Weg zur Head of Product",
+    "headlineParts": [
+      "Product Owner mit technischer Tiefe",
+      "Auf dem Weg zur Head of Product"
+    ],
+    "photo": "photo_square.jpg",
+    "documentLanguage": "de",
+    "contact": {
+      "email": "deine.private@email.de",
+      "phone": "[Telefonnummer ergänzen]",
+      "location": "[Stadt, Deutschland]"
+    },
+    "links": [
+      {
+        "label": "Xing",
+        "url": "https://www.xing.com/profile/",
+        "display": "xing.com/profile/…"
+      }
+    ],
+    "languages": [
+      {
+        "language": "Spanisch",
+        "level": "Muttersprache"
+      },
+      {
+        "language": "Deutsch",
+        "level": "fließend"
+      },
+      {
+        "language": "Englisch",
+        "level": "fließend"
+      },
+      {
+        "language": "Französisch",
+        "level": "Grundkenntnisse"
+      }
+    ],
+    "sourceHeadings": [
+      "Profil",
+      "Beruflicher Werdegang",
+      "Frühere Stationen",
+      "Ausbildung",
+      "Besondere Fähigkeiten",
+      "Fachliche Kompetenzen",
+      "Sprachen",
+      "Persönliche Fähigkeiten",
+      "Interessen & Hobbys"
+    ],
+    "placeholders": [
+      "meta.contact.email",
+      "meta.contact.phone",
+      "meta.contact.location",
+      "meta.links[0].url",
+      "meta.links[0].display",
+      "skills.technical[].items[].level — 18 values, rated categories only, 1-5 integers"
+    ]
+  },
+  "summary": "Produktexperte mit über 10 Jahre Erfahrung in Requirements Engineering, Product Ownership und Produktmanagement in Industrien wie IoT, MedTech, E-Mobility und Sondermaschinenbau. Kombiniert End-to-End-Produktverantwortung (UX/UI-Design, Requirements, Nutzerkontakt) mit technischer Tiefe: eigenständige Erstellung von C4-Architekturdiagrammen, SQL-basierte Datenanalysen und Diskussionen auf Augenhöhe mit Entwicklern zu API-Design und Architektur-Trade-offs. Fachliche Führung cross-funktionaler Teams sowie Kommunikation von Produktentscheidungen bis auf Director- und C-Level-Ebene. Nächstes Ziel: Verantwortung für eine größere Produktorganisation als Head of Product.",
+  "experience": [
+    {
+      "role": "Product Owner",
+      "company": "GLS IT Services GmbH",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2023-11",
+      "end": null,
+      "current": true,
+      "dateRaw": "11/2023 -- heute",
+      "summary": "Fachliche Führung eines cross-funktionalen Teams aus Entwicklern und Testern (5 FTEs) und Verantwortung für Produktvision sowie strategische Ausrichtung der IT-Tools im Bereich Nahverkehr.",
+      "highlights": [
+        "Alleinige End-to-End-Produktverantwortung ohne dedizierten Business Analysten: UX/UI-Design (Figma), Requirements, kontinuierlicher Nutzerkontakt und Support",
+        "Erstellung von C4-Architekturdiagrammen (System Context, Container, Business) zur Abbildung von Systemgrenzen und Abhängigkeiten",
+        "Eigenständige SQL-basierte Datenanalysen zur datengetriebenen Identifikation organisatorischer Probleme und Priorisierung von Features",
+        "Technische Diskussionen auf Augenhöhe mit Entwicklern zu API-Design, Datenquellen und Architektur-Trade-offs",
+        "Kommunikation und Verantwortung von Produktentscheidungen gegenüber Nutzern, Director- und teilweise C-Level-Ebene; Vorbereitung von Budgetfreigaben",
+        "Ergebnis: Nutzungsrate eines zentralen Tools verdoppelt; deutlich verbesserte Prozesstransparenz mit positivem Effekt auf die Kundenzufriedenheit"
+      ],
+      "resultHighlightIndex": 5
+    },
+    {
+      "role": "Expert Business Analyst",
+      "company": "Zühlke Engineering GmbH",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2019-03",
+      "end": "2023-10",
+      "current": false,
+      "dateRaw": "03/2019 -- 10/2023",
+      "summary": "Requirements Engineering und Product-Ownership-Rollen mit Schwerpunkt Anforderungserhebung und Kundenschnittstelle in verschiedenen branchenübergreifenden Projekten:",
+      "highlights": [
+        "Produktdefinition und Lastenheft-Erstellung für eine smarte Matratze (führender Matratzenhersteller)",
+        "Product Owner für die IoT-Erneuerung der Maschinensoftware eines führenden Sondermaschinenbau-Unternehmens – erfolgreich im Markt gelauncht",
+        "Requirements Engineering und API-Spezifikation für ein MDM-System (führende Hersteller von Haushaltsgeräten) nach den Prinzipien \"API-First\" und \"API-as-a-Product\"",
+        "Product-Team-Lead in der Machbarkeitsphase eines vernetzten Medizingeräts – Koordination eines 5-köpfigen Teams, intensiver Kundenkontakt bis teilweise Director-Ebene",
+        "Requirements Engineering und Coaching des Projektteams für ein Personaleinsatzplanungssystem einer Fluggesellschaft – durchgehend hohe Kundenzufriedenheit trotz komplexer Anforderungslage"
+      ]
+    },
+    {
+      "role": "Produktmanager E-Bike",
+      "company": "Fahrrad XXL Group GmbH",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2017-01",
+      "end": "2019-02",
+      "current": false,
+      "dateRaw": "01/2017 -- 02/2019",
+      "summary": "Management des Produktentwicklungsprozesses für den gesamten E-Bike-Bereich:",
+      "highlights": [
+        "Erstellung der Entwicklungs-Roadmap sowie Definition der Produktanforderungen in Zusammenarbeit mit der Engineering-Abteilung",
+        "Erstellung der Produktpalette und Preisstrategie in Abstimmung mit der Geschäftsführung",
+        "Erstellung der Produktspezifikationen und Anpassung im Rahmen des Preisfindungsprozesses",
+        "Leitung des Zertifizierungsprozesses nach EMV-Richtlinien",
+        "Marktbeobachtung und Marktanalyse"
+      ]
+    },
+    {
+      "role": "Account Manager Business Development",
+      "company": "COBI GmbH",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2016-01",
+      "end": "2016-12",
+      "current": false,
+      "dateRaw": "01/2016 -- 12/2016",
+      "summary": null,
+      "highlights": [
+        "Ansprechpartner für nationale und internationale E-Bike-Antriebshersteller",
+        "Projektleitung im Rahmen verschiedener Integrationsprojekte von COBI mit E-Bike-Systemen",
+        "Zusammenarbeit mit der Embedded-Systems-Abteilung für die Weiterentwicklung des Produkts",
+        "Mitarbeit an der Erstellung zukünftiger Mobilitätskonzepte"
+      ]
+    }
+  ],
+  "earlierStations": [
+    {
+      "organization": "Mobility Media GmbH – Bosch Group",
+      "role": "Praktikant / Werkstudent Sales",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2015-01",
+      "end": "2015-09",
+      "dateRaw": "01/2015 -- 09/2015"
+    },
+    {
+      "organization": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
+      "role": "Wissenschaftliche Hilfskraft",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2014-02",
+      "end": "2014-12",
+      "dateRaw": "02/2014 -- 12/2014"
+    },
+    {
+      "organization": "Movand S.A.",
+      "role": "Praktikum",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2012-03",
+      "end": "2012-06",
+      "dateRaw": "03/2012 -- 06/2012"
+    }
+  ],
+  "education": [
+    {
+      "field": "Wirtschaftsingenieurwesen",
+      "credential": "Licenciatura (Master-Äquivalent)",
+      "title": "Wirtschaftsingenieurwesen – Licenciatura (Master-Äquivalent)",
+      "institution": "Universidad de Cádiz",
+      "location": {
+        "city": null,
+        "country": "Spanien"
+      },
+      "start": "2012-03",
+      "end": "2015-10",
+      "dateRaw": "03/2012 -- 10/2015",
+      "highlights": [
+        "Schwerpunkte: Produktionsplanung, Qualitätssicherung, Projektmanagement",
+        "Abschlussarbeit: Entwicklung eines Fahrrades und dessen Produktionsprozess durch Anwendung von Lean-Manufacturing-Methoden"
+      ]
+    },
+    {
+      "field": "Wirtschaftsingenieurwesen",
+      "credential": "Austauschprogramm im Rahmen der Licenciatura",
+      "title": "Wirtschaftsingenieurwesen – Austauschprogramm im Rahmen der Licenciatura",
+      "institution": "Karlsruher Institut für Technologie (KIT)",
+      "location": {
+        "city": null,
+        "country": null
+      },
+      "start": "2013-10",
+      "end": "2014-10",
+      "dateRaw": "10/2013 -- 10/2014",
+      "highlights": [
+        "Schwerpunkte: Management neuer Technologien, Innovationsmanagement, Operations Research"
+      ]
+    },
+    {
+      "field": "Industriedesign Ingenieurwesen",
+      "credential": "Diplomatura (Bachelor-Äquivalent)",
+      "title": "Industriedesign Ingenieurwesen – Diplomatura (Bachelor-Äquivalent)",
+      "institution": "Universidad de Sevilla",
+      "location": {
+        "city": null,
+        "country": "Spanien"
+      },
+      "start": "2007-09",
+      "end": "2011-12",
+      "dateRaw": "09/2007 -- 12/2011",
+      "highlights": [
+        "Schwerpunkte: CAD, CAM, CAE, Produktentwicklung, Materialwissenschaft",
+        "Abschlussarbeit: Design und Entwicklung eines Stadtfahrrads basierend auf der Analyse verschiedener Städte"
+      ]
+    }
+  ],
+  "skills": {
+    "technical": [
+      {
+        "category": "Produkt & Führung",
+        "rated": true,
+        "items": [
+          {
+            "name": "Product Management",
+            "level": 5
+          },
+          {
+            "name": "Product Ownership",
+            "level": 5
+          },
+          {
+            "name": "Requirements Engineering",
+            "level": 5
+          },
+          {
+            "name": "Teamführung",
+            "level": 4
+          },
+          {
+            "name": "Strategic Planning",
+            "level": 4
+          },
+          {
+            "name": "Stakeholder Management",
+            "level": 4
+          }
+        ]
+      },
+      {
+        "category": "Technisch",
+        "rated": true,
+        "items": [
+          {
+            "name": "C4-Modell / Architekturdiagramme",
+            "level": 3
+          },
+          {
+            "name": "SQL",
+            "level": 3
+          },
+          {
+            "name": "Python",
+            "level": 2
+          },
+          {
+            "name": "Data Analysis",
+            "level": 4
+          },
+          {
+            "name": "Business Analytics",
+            "level": 4
+          },
+          {
+            "name": "API-Design",
+            "level": 2
+          },
+          {
+            "name": "Figma",
+            "level": 3
+          }
+        ]
+      },
+      {
+        "category": "Methoden",
+        "rated": true,
+        "items": [
+          {
+            "name": "Agile Development (Scrum)",
+            "level": 5
+          },
+          {
+            "name": "User Story Mapping",
+            "level": 5
+          },
+          {
+            "name": "Design Thinking",
+            "level": 3
+          },
+          {
+            "name": "Business Model Canvas",
+            "level": 3
+          },
+          {
+            "name": "Product Roadmapping",
+            "level": 5
+          }
+        ]
+      },
+      {
+        "category": "Tools",
+        "rated": false,
+        "items": [
+          {
+            "name": "Atlassian Stack (Jira, Confluence)"
+          },
+          {
+            "name": "Miro"
+          },
+          {
+            "name": "Microsoft Office Suite and Copilot with Agents"
+          }
+        ]
+      }
+    ],
+    "personal": [
+      "Teamarbeit",
+      "Kreativität",
+      "analytisches Denkvermögen",
+      "Pragmatismus"
+    ]
+  },
+  "interests": [
+    "Nachhaltige Produktentwicklung und Design",
+    "Neue Technologien und Wissenschaft"
+  ],
+  "hobbies": [
+    "Triathlon",
+    "Musik",
+    "Kunst"
+  ],
+  "projects": [],
+  "publications": []
+}
