@@ -1,14 +1,9 @@
-STATUS: DRAFT
+STATUS: APPROVED
 
 # Architecture
 
 Phase 5. Decides how the site is built, what shape the data takes, and what phase 6 may not
 improvise. No application code is written here.
-
-**Filename.** `.claude/skills/architect/SKILL.md` says `docs/04-architecture.md`. `CLAUDE.md`'s
-phase table says phase 5 → `docs/05-architecture.md`, and `04` is already the UI spec. `CLAUDE.md`
-wins. The skill file is stale in the same way the UX skill's print section was, and should be
-corrected.
 
 **Gate.** `01-concept-brief.md`, `02-ux-spec.md`, `03-copy.md` and `04-ui-spec.md` were all
 `APPROVED` when this was written. `02-ux-spec.md` was amended to **revision 6** in the same turn,
@@ -148,11 +143,34 @@ by every visitor and readable at their URLs.
 
 | # | Change | Why |
 |---|---|---|
-| 1 | **Strip every `_note`, `_alternatives`, `original`, `source`, `_revision` and `_pairing` key.** | Measured: the file is **44,148 bytes, of which 19,021 survive stripping and minification.** More than half the payload every visitor downloads is phase-3 authoring provenance — rejected alternatives, and editorial commentary naming the user and the interview it came from. That is deliberation, not content, and it should not be a public URL. It belongs in `docs/03-copy.md`, which is already excluded from the published site. **No rendered string changes**, so `03-copy.md` stays `APPROVED`. |
+| 1 | **Strip every `_note`, `_alternatives`, `original`, `source`, `_revision` and `_pairing` key.** | Measured: the file is **44,148 bytes, of which 19,021 survive stripping and minification.** More than half the payload every visitor downloads is phase-3 authoring provenance — rejected alternatives, and editorial commentary naming the user and the interview it came from. That is deliberation, not content, and it should not be a public URL. It moves to **`docs/03-copy-provenance.json`** (below), which is excluded from the published site. **No rendered string changes**, so `03-copy.md` stays `APPROVED`. |
 | 2 | **Re-key `sections.range.skillLabels` and `radarLabels` from skill name to skill id.** | Change 5 above. |
 | 3 | **Re-key `sections.range.group{Product,Methods,Technical}` to `sections.range.groups.{product,methods,technical}`.** | Change 4 above. |
 | 4 | **Replace `sections.range.toolsLine` with `sections.range.toolsLabel`** — „Werkzeug" / "Tooling" — and add `sections.range.toolLabels` keyed by tool id, holding only tools whose `cv.json` name is not language-neutral. | **This closes G1**, the one open hard-constraint violation in the project. `toolsLine` currently names Jira, Confluence, Miro and Copilot, which are facts living in `cv.skills.technical[tools]`, and it has already drifted once (Snowflake). The renderer composes `{toolsLabel}: {tools joined by ", "}` from `cv.json`. Today exactly one tool needs a label — "Microsoft Office Suite and Copilot with Agents" carries English connectives — so `toolLabels` holds one entry per language, and the other two render as facts. |
 | 5 | **Keep `microcopy.levelAriaFormat`.** | G4 resolved: it is used, to build the radar's `<desc>` from all eighteen skill/level pairs. Not deleted. |
+
+### `docs/03-copy-provenance.json` — new file
+
+The stripped material is **moved, not deleted**. A sidecar mirrors `copy.json`'s key paths and
+holds the phase-3 record for each string:
+
+```json
+{ "meta.headline": {
+    "source": "rewrite",
+    "original": "Product Owner mit technischer Tiefe | Auf dem Weg zur Head of Product",
+    "alternatives": [ { "de": "…", "en": "…" } ],
+    "note": "Rev. 3: the category label was removed because it echoed the opening statement." } }
+```
+
+A keyed JSON rather than prose folded into `03-copy.md`, because the alternatives are **attached to
+specific strings**: "what else did we consider for the headline" has to be answerable by key
+lookup, and prose inside a 596-line document loses that pairing permanently. The narrative
+reasoning — why the voice changed, what user testing showed — stays in `03-copy.md`, which already
+holds it.
+
+Migration is mechanical and lossless: every `_note`, `_alternatives`, `original` and `source` moves
+across under its full key path. Nothing is lost. The file stays in the repository and in git
+history; it simply stops being a public URL.
 
 The four head strings — `meta.pageTitle`, `metaDescription`, `ogTitle`, `ogDescription` — **stay in
 `copy.json` and are also written literally into `index.html`**. This is the named duplication in
@@ -195,6 +213,8 @@ string-keyed pairing left in the project.**
 5. **Append once.** One `main.replaceChildren(fragment)`. The visitor sees the shell, then the
    finished page. No partial states, no reflow cascade, no skeleton, no spinner — all four
    forbidden by UX revision 6.
+   **The render target is `<main>` and nothing else.** This is what protects the legal link — see
+   *The legal strip*. The renderer never touches `<body>`'s other children.
 6. **Bind interactions** (`i18n.js`, `a11y.js`), then measure and pack the timeline
    (`timeline.js`), which is the only step that needs real layout.
 
@@ -228,6 +248,38 @@ fall-back. The page never shows an empty element and never shows a raw key.
 
 Switching announces itself through a polite live region using `copy.microcopy.langToggleAriaLabel`,
 because to a screen reader an in-place text swap is otherwise silent.
+
+### The legal strip
+
+`02-ux-spec.md` interaction 6 requires the „Datenschutz" link to survive with JavaScript off. Under
+revision 6 the human footer is *rendered content*, so a link inside it would be wiped by step 5 and
+would never exist at all without script. Putting it there is therefore wrong, and an earlier draft
+of this document did exactly that.
+
+**The link lives in a static strip that is a sibling of `<main>`, authored literally in
+`index.html`, outside the render target:**
+
+```html
+<main id="inhalt"><!-- rendered --></main>
+
+<div class="legal-strip">
+  <a href="/datenschutz.html">Datenschutz</a>
+</div>
+
+<noscript>
+  <p>Diese Seite benötigt JavaScript.</p>
+  <p><a href="/datenschutz.html">Datenschutz</a></p>
+</noscript>
+```
+
+It is in the markup before any script runs, it survives a script that fails, and it appears again
+in the `<noscript>` state — three independent routes to the same URL, which is what *ständig
+verfügbar* actually asks for. Its label is not CV prose and is not in `copy.json`, so it stays
+German in both languages and creates no duplication.
+
+`datenschutz.html` itself loads no JavaScript and fetches no JSON. **It cannot fail in any of the
+ways the CV page can** — which is the property that matters: the legal information stays readable
+precisely when the rest of the site is not.
 
 ---
 
@@ -458,10 +510,20 @@ the four static files. **Named as a deviation from a literal reading of §2.2** 
 result is identical, the request count is not. IBM Plex Mono ships static 400 and 500. Three font
 files, ~66 KB total, all preloaded.
 
-**Portrait.** The supplied `content/media/photo_square.jpg` is 796 × 796, 261 KB, and **carries
-EXIF naming a Canon EOS 550D, Adobe Photoshop CS3, and a capture date of 7 March 2019.** None of
-that should be published; on a page whose whole legal posture rests on collecting nothing, quietly
-shipping camera metadata is the wrong note. Strip it and produce two widths:
+**Portrait.** The supplied `content/media/photo_square.jpg` is 796 × 796, 261 KB, of which
+**19,167 bytes (7.2%) is metadata** — two EXIF/XMP blocks, a Photoshop resource block and an ICC
+profile — naming a Canon EOS 550D, Adobe Photoshop CS3, and a capture date of 7 March 2019.
+
+**This has nothing to do with the Datenschutzerklärung.** An earlier draft of this section implied
+it did; that was wrong and is corrected here. The privacy notice governs *visitors'* personal data,
+which is the IP addresses GitHub logs. EXIF in the owner's own portrait, on a page already
+publishing his name, face and employment history, is not covered by Art. 13 DSGVO, and stripping it
+changes the legal position by nothing.
+
+The reasons to strip are real but small, and should be weighed as small: 19 KB of dead weight on
+the largest asset, and a capture date advertising that the portrait is seven years old. `-strip`
+costs nothing because the file is being re-encoded to two widths anyway. Strip it — but not for
+legal reasons:
 
 ```
 magick content/media/photo_square.jpg -strip -resize 800x800 -quality 82 content/media/photo_square_800.jpg
@@ -540,7 +602,7 @@ without a build step, so **Jekyll stays enabled** and there is no `.nojekyll`:
 
 ```yaml
 exclude:
-  - docs/
+  - docs/            # includes 03-copy-provenance.json
   - .claude/
   - content/inspiration/
   - content/media/README.md

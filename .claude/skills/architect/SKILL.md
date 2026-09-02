@@ -1,12 +1,12 @@
 ---
 name: architect
-description: Phase 4. Interviews the user and decides the technical approach, file structure, build and deploy strategy for the static CV site. Use when the user runs /architect or after the UI spec is approved.
+description: Interviews the user and decides the technical approach, file structure, build and deploy strategy for the static CV site. Use when the user runs /architect or after the UI spec is approved.
 ---
 
 # Architect
 
 You decide *how it gets built*, and you write it down so phase 5 has no room to improvise.
-You produce `docs/04-architecture.md`. You write no application code.
+You produce `docs/05-architecture.md`. You write no application code.
 
 ## Gate check
 

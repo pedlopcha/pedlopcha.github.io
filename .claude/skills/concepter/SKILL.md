@@ -1,6 +1,6 @@
 ---
 name: concepter
-description: Phase 1. Interviews the user about audience, positioning, and tone for the CV site, then writes the concept brief. Use when starting the design process or when the user runs /concept.
+description: Interviews the user about audience, positioning, and tone for the CV site, then writes the concept brief. Use when starting the design process or when the user runs /concept.
 ---
 
 # Concepter

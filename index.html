@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- The four head strings are duplicated from content/copy.json (meta.pageTitle,
+     metaDescription, ogTitle, ogDescription) so that crawlers and link unfurlers,
+     which do not execute scripts, see them. copy.json stays the source a human edits;
+     i18n.js keeps these in sync on language switch. See 05-architecture.md. -->
+<title>Pedro López Chao — Product Management Professional</title>
+<meta name="description" content="Ich nehme unklare Probleme, durchdringe die Technik dahinter und mache ein Produkt daraus. Vom Industriedesign über das Wirtschaftsingenieurwesen zum Product Owner – heute verantworte ich die ganze Strecke vom Design bis zur Architektur.">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Pedro López Chao – aus unklaren Problemen werden Produkte">
+<meta property="og:description" content="Technisch-wirtschaftlicher Generalist: Industriedesign, Wirtschaftsingenieurwesen, Product Ownership. Vom Design bis zur Architektur.">
+<meta property="og:locale" content="de_DE">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Both JSON fetches start during head parse rather than after main.js runs.
+     This is what turns the HTML -> JS -> JSON waterfall into a parallel one. -->
+<link rel="preload" href="/content/cv.json" as="fetch" type="application/json" crossorigin>
+<link rel="preload" href="/content/copy.json" as="fetch" type="application/json" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-mono-500-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="/assets/site.css">
+<script type="module" src="/assets/js/main.js"></script>
+</head>
+
+<body>
+
+<!-- Mount points. Every string inside them comes from content/copy.json and
+     content/cv.json at run time; there is no CV prose in this file. -->
+<a class="skip-link" href="#inhalt" data-copy="microcopy.skipLink">Zum Inhalt springen</a>
+
+<header class="masthead" id="masthead"></header>
+<main id="inhalt">
+  <noscript>
+    <div class="fallback">
+      <h1 class="fallback__lead">Diese Seite benötigt JavaScript, um den Lebenslauf anzuzeigen.</h1>
+      <p><a href="https://www.linkedin.com/in/pedlopcha/">LinkedIn-Profil</a></p>
+      <p><a href="https://www.xing.com/profile/Pedro_LopezChao/">Xing-Profil</a></p>
+      <p><a href="/datenschutz.html">Datenschutz</a></p>
+    </div>
+  </noscript>
+
+  <!-- Same markup as <noscript>, reached when a fetch fails or the data is
+       malformed. Revealed by main.js; never shown beside a half-built page,
+       because validation completes before anything is appended. Both live inside
+       <main> so that in every state all content sits within a landmark. -->
+  <div class="fallback" id="fehler" hidden>
+    <h1 class="fallback__lead">Diese Seite konnte nicht geladen werden.</h1>
+    <p><a href="https://www.linkedin.com/in/pedlopcha/">LinkedIn-Profil</a></p>
+    <p><a href="https://www.xing.com/profile/Pedro_LopezChao/">Xing-Profil</a></p>
+    <p><a href="/datenschutz.html">Datenschutz</a></p>
+  </div>
+</main>
+
+<footer class="footer" id="footer">
+  <div id="footer-inhalt"></div>
+
+  <!-- Static, outside the render mount, so the legal link survives a script that
+       never runs and a script that fails. It sits inside the contentinfo landmark
+       so no page content is outside a landmark. Its label is not CV prose and
+       stays German in both languages. UX spec interaction 6. -->
+  <div class="legal-strip">
+    <a href="/datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+
+<div class="visually-hidden" id="ansage" role="status" aria-live="polite"></div>
+
+</body>
+</html>

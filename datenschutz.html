@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datenschutzerklärung — Pedro López Chao</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* This page inherits the CV page's type and colour but needs none of its
+     structure — no radar, no timeline, no portrait. A heading, running text,
+     and a link back. It loads no JavaScript and fetches no JSON, so it cannot
+     fail in any of the ways the CV page can: the legal information stays
+     readable precisely when the rest of the site is not. */
+  .legal { max-width: 68ch; margin-inline: auto; padding-inline: var(--gutter); padding-block: clamp(40px, 8vw, 88px); }
+  .legal h1 { font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+  .legal h2 { font-size: var(--t-h2); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+              margin-top: 48px; padding-top: 22px; border-top: 1px solid var(--rule); }
+  .legal p, .legal li { font-size: 17px; line-height: 1.65; margin-top: 14px; text-wrap: pretty; }
+  .legal ul { margin-top: 10px; }
+  .legal ul li { padding-left: 18px; position: relative; }
+  .legal ul li::before { content: "—"; position: absolute; left: 0; color: var(--ink-ghost); }
+  .legal__back { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--ink);
+                 font-family: var(--mono); font-size: var(--t-mono-note); }
+  .legal__updated { font-family: var(--mono); font-size: var(--t-mono-note); color: var(--ink-faint); margin-top: 8px; }
+  .todo { background: #FFF3C4; border-left: 3px solid #B0121F; padding: 12px 14px; margin-top: 16px;
+          font-family: var(--mono); font-size: 13px; line-height: 1.5; color: var(--ink); }
+</style>
+</head>
+<body>
+
+<main class="legal">
+
+<h1>Datenschutzerklärung</h1>
+<p class="legal__updated">Stand: <!-- TODO --><span>[Datum eintragen]</span></p>
+
+<div class="todo">
+  <strong>TODO — vor dem Livegang ersetzen.</strong>
+  Dieses Dokument ist ein Gerüst. Es benennt die fünf Punkte, die die Seite abdecken
+  muss, enthält aber bewusst keinen fertigen Rechtstext. Der Text muss aus einem
+  aktuellen Generator oder von einer Fachanwältin bzw. einem Fachanwalt für IT-Recht
+  stammen. Siehe <code>docs/02-ux-spec.md</code>, Abschnitt „Legal posture".
+</div>
+
+<h2>Verantwortlicher</h2>
+<p>Pedro López Chao</p>
+<div class="todo">
+  TODO — Postanschrift und <strong>eine E-Mail-Adresse</strong> ergänzen. Empfohlen ist
+  ein eigener Alias, kein privates Postfach. Dies ist die einzige Kontaktangabe auf der
+  gesamten Seite.
+</div>
+
+<h2>Hosting</h2>
+<p>
+  Diese Seite wird von GitHub Pages bereitgestellt, einem Dienst der GitHub, Inc.,
+  einer Tochtergesellschaft der Microsoft Corporation.
+</p>
+<div class="todo">
+  TODO — Abschnitt ausformulieren: Auftragsverarbeitung, die damit verbundene
+  <strong>Übermittlung in die USA</strong> und deren Rechtsgrundlage.
+</div>
+
+<h2>Server-Logdaten</h2>
+<p>
+  Beim Aufruf dieser Seite werden durch den Hoster automatisch Daten verarbeitet,
+  darunter die IP-Adresse, Datum und Uhrzeit des Zugriffs, der User-Agent und der
+  Referrer.
+</p>
+<div class="todo">
+  TODO — Zweck, Rechtsgrundlage (Art. 6 DSGVO) und Speicherdauer ergänzen.
+</div>
+
+<h2>Keine Cookies, keine Analyse, keine Drittanbieter</h2>
+<p>
+  Diese Seite setzt keine Cookies, bindet keine Analyse- oder Tracking-Dienste ein und
+  fordert beim Aufruf keine Ressourcen von Dritten an. Schriftarten und Bilder werden
+  von diesem Server ausgeliefert, nicht von einem externen Dienst. Es findet keine
+  Profilbildung statt.
+</p>
+
+<h2>Ihre Rechte</h2>
+<p>Ihnen stehen gegenüber dem Verantwortlichen die folgenden Rechte zu:</p>
+<ul>
+  <li>Auskunft über die verarbeiteten Daten (Art. 15 DSGVO)</li>
+  <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+  <li>Löschung (Art. 17 DSGVO)</li>
+  <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+  <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+  <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+</ul>
+<p>
+  Darüber hinaus haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu
+  beschweren.
+</p>
+<div class="todo">
+  TODO — zuständige Aufsichtsbehörde mit Anschrift benennen.
+</div>
+
+<p class="legal__back"><a href="/">← Zurück zum Lebenslauf</a></p>
+
+</main>
+</body>
+</html>

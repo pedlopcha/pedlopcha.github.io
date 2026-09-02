@@ -1,6 +1,6 @@
 ---
 name: copywriter
-description: Phase 3. Rewrites the raw CV text into web copy — headline, section intros, role descriptions, microcopy — working within the density budget set by the UX spec. Use when the user runs /copy or after the UX spec is approved.
+description: Rewrites the raw CV text into web copy — headline, section intros, role descriptions, microcopy — working within the density budget set by the UX spec. Use when the user runs /copy or after the UX spec is approved.
 ---
 
 # Copywriter

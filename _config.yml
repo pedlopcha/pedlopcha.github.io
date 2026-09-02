@@ -1,0 +1,16 @@
+# GitHub Pages serves from the branch root, so every file in the repository
+# becomes a public URL unless it is excluded here. Jekyll's `exclude:` is the
+# only mechanism available without a build step, so Jekyll stays enabled and
+# there is deliberately no .nojekyll file.
+#
+# Each path below must return 404 on the live site. See docs/05-architecture.md.
+exclude:
+  - docs/                      # internal deliberation, incl. 03-copy-provenance.json
+  - .claude/
+  - content/inspiration/       # third-party reference imagery the site never uses
+  - content/media/README.md
+  - content/media/photo_square.jpg   # the unstripped original
+  - CLAUDE.md
+  - TUTORIAL.md
+  - cv.tex
+  - README.md

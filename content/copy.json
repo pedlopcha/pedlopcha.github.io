@@ -1,58 +1,30 @@
 {
-  "_note": "Phase 3 output (/copy), revision 5. Phrasing only — every fact lives in content/cv.json and is never duplicated here. Each text entry carries { de, en }: 'de' is what ships (primary market), 'en' is the toggle, drafted by Claude for Pedro to review and correct. 'original' quotes the phase-0 German extraction this entry rewrites, where one exists. 'source': rewrite = reworded from cv.json; new = did not exist in the CV; interview = fact or phrasing supplied by Pedro in the phase-3 interview and NOT yet independently verified (see interviewFacts).",
-  "_revision": "Rev. 5 (2026-08-31) is a clarity fix on the Range section only, prompted by Pedro testing the page with real readers: they could not tell what „Beide Enden\" contained. Heading „Beide Enden\" -> „Fähigkeiten\" / \"Skills\"; intro rewritten from layout commentary to a plain statement of content plus one point; radarDescription lost its closing sentence, which the new intro now carries. Nothing else changed — no role bullet, headline, statement or other heading. Rev. 4 (2026-08-31) adds the keys the UI needs and fixes three typos; it rewords nothing. New: sections.arc.timelineAxisLabel, laneStudies, laneWork and timelineBands (ten band labels, which are editorial and cannot be derived from cv.json organisation names); sections.range.skillLabels (English for the two skill names that are German prose in cv.json) and radarLabels (eight shortened spoke labels); institutionLabel on kit-exchange and kit-assistant; microcopy.layerHighlighted. Without these the English page rendered two German skill names and two German institution names, and roughly a dozen strings had no home at all. Same bug class rev. 3 fixed for the languages block. Rev. 3 is a repair pass, not a rewrite. docs/02-ux-spec.md rev. 4 restructured two sections after this file was written, and this revision serves the new structure: the headline is now the page display-scale line (so it drops the category label the opening statement already carries), the Range section is three groups from cv.json own categories plus a radar on self-assessed levels, and the arc two sub-lists are labelled. Also fixed: the languages block was German-only in cv.json with no English mirror, so the English page ended its Range section in German. Rev. 2 (unchanged by this pass) reframed the page around the generalist claim: ambiguous problem -> understand the technology -> find the opportunity -> ship a product that solves a real business or user problem. The design/architecture span is the EVIDENCE for that claim, not the claim itself.",
-  "_pairing": "roles.<key> pairs to content/cv.json experience[] by company: gls=[0], zuhlke=[1], fahrrad-xxl=[2], cobi=[3]. education.<key> and earlierStations.<key> pair to cv.json education[] and earlierStations[] in the same reverse-chronological order. languages.<key> pairs to cv.json meta.languages[] in order: spanish=[0], german=[1], english=[2], french=[3]. sections.range.group* pair to cv.json skills.technical[] by category: groupProduct=Produkt & Fuehrung, groupTechnical=Technisch, groupMethods=Methoden plus Tools merged. cv.json has no id fields yet; phase 5 (architecture) should add matching ids or pair by index.",
   "meta": {
     "headline": {
-      "source": "rewrite",
-      "original": "Product Owner mit technischer Tiefe | Auf dem Weg zur Head of Product",
       "de": "Vom unscharfen Problem zum ausgelieferten Produkt",
-      "en": "From a fuzzy problem to a shipped product",
-      "_alternatives": [
-        {
-          "de": "Technisch-business Generalist — Vom unscharfen Problem zum ausgelieferten Produkt",
-          "en": "Technical-business generalist — From a fuzzy problem to a shipped product"
-        },
-        {
-          "de": "Product Owner, der unklare Probleme in Produkte übersetzt",
-          "en": "A product owner who translates ambiguous problems into products"
-        },
-        {
-          "de": "Technisch-business Generalist – ich mache aus unklaren Problemen Produkte",
-          "en": "I turn ambiguous problems into products"
-        }
-      ],
-      "_note": "Rev. 3: the category label was removed. UX spec rev. 4 renders this string at display scale directly above meta.openingStatement, which opens „Ich bin technisch-wirtschaftlicher Generalist“ — so the label appeared twice, two lines apart, in two spellings („business“ vs „wirtschaftlicher“). Dropping it here fixes the echo and the spelling inconsistency at once: the display line states the method, the statement one line below names the category. Pedro decision, phase 3 rev. 3 interview."
+      "en": "From a fuzzy problem to a shipped product"
     },
     "openingStatement": {
-      "source": "rewrite",
-      "original": "Produktexperte mit über 8 Jahren Erfahrung in Requirements Engineering, Product Ownership und Produktmanagement in Industrien wie IoT, MedTech, E-Mobility und Sondermaschinenbau. Kombiniert End-to-End-Produktverantwortung (UX/UI-Design, Requirements, Nutzerkontakt) mit technischer Tiefe: eigenständige Erstellung von C4-Architekturdiagrammen, SQL-basierte Datenanalysen und Diskussionen auf Augenhöhe mit Entwicklern zu API-Design und Architektur-Trade-offs. Fachliche Führung cross-funktionaler Teams sowie Kommunikation von Produktentscheidungen bis auf Director- und C-Level-Ebene. Nächstes Ziel: Verantwortung für eine größere Produktorganisation als Head of Product.",
       "de": "Ich bin technisch-wirtschaftlicher Generalist: Ich nehme unklare Probleme, durchdringe die Technik dahinter, erkenne die Chance, und mache ein Produkt daraus. Eines, das ein echtes Problem löst, für die Nutzer wie fürs Business.\n\nAngefangen habe ich im Industriedesign, weitergemacht im Wirtschaftsingenieurwesen, und seitdem in vier Branchen gebaut. Heute als Product Owner verantworte ich die ganze Strecke – vom Design bis zur Architektur.",
-      "en": "I'm a technical-business generalist: I take problems nobody has framed yet, get to the bottom of the technology underneath them, find the opportunity and turn it into a product. One that solves a real problem, for the people using it and for the business.\n\nI started in industrial design, went on to industrial engineering and management, and have been building across four industries since. Today, as a product owner, I own the whole distance — from design through to architecture.",
-      "_flag": "61 words (de). Fits the relaxed above-the-fold rule in docs/02-ux-spec.md Rev. 2: phase 4 sets the first paragraph at display scale and the second at a reading size. The paragraph break is deliberate — the display-scale portion ends at 'fürs Business.'"
+      "en": "I'm a technical-business generalist: I take problems nobody has framed yet, get to the bottom of the technology underneath them, find the opportunity and turn it into a product. One that solves a real problem, for the people using it and for the business.\n\nI started in industrial design, went on to industrial engineering and management, and have been building across four industries since. Today, as a product owner, I own the whole distance — from design through to architecture."
     },
     "pageTitle": {
-      "source": "new",
       "de": "Pedro López Chao — Product Management Professional",
       "en": "Pedro López Chao — Product Management Professional"
     },
     "metaDescription": {
-      "source": "new",
       "de": "Ich nehme unklare Probleme, durchdringe die Technik dahinter und mache ein Produkt daraus. Vom Industriedesign über das Wirtschaftsingenieurwesen zum Product Owner – heute verantworte ich die ganze Strecke vom Design bis zur Architektur.",
       "en": "I take ambiguous problems, get to the bottom of the technology, and turn them into products. From industrial design through industrial engineering and management to product ownership — today I own the whole distance from design through to architecture."
     },
     "ogTitle": {
-      "source": "new",
       "de": "Pedro López Chao – aus unklaren Problemen werden Produkte",
       "en": "Pedro López Chao — ambiguous problems, turned into products"
     },
     "ogDescription": {
-      "source": "new",
       "de": "Technisch-wirtschaftlicher Generalist: Industriedesign, Wirtschaftsingenieurwesen, Product Ownership. Vom Design bis zur Architektur.",
       "en": "Technical-business generalist: industrial design, industrial engineering and management, product ownership. From design through to architecture."
     },
     "photoAlt": {
-      "source": "new",
       "de": "Porträtfoto von Pedro López Chao",
       "en": "Portrait photo of Pedro López Chao"
     }
@@ -60,300 +32,202 @@
   "sections": {
     "work": {
       "heading": {
-        "source": "new",
         "de": "Woran ich gearbeitet habe",
-        "en": "What I've worked on",
-        "_alternatives": [
-          {
-            "de": "Was daraus geworden ist",
-            "en": "What came of it"
-          },
-          {
-            "de": "Die Arbeit",
-            "en": "The work"
-          }
-        ]
+        "en": "What I've worked on"
       }
     },
     "arc": {
       "heading": {
-        "source": "new",
         "de": "Wie ich hierher kam",
-        "en": "How I got here",
-        "_alternatives": [
-          {
-            "de": "Der Weg",
-            "en": "The path"
-          },
-          {
-            "de": "Woher der Generalist kommt",
-            "en": "Where the generalist comes from"
-          }
-        ]
+        "en": "How I got here"
       },
       "intro": {
-        "source": "interview",
-        "original": "Design, dann Wirtschaftsingenieurwesen, dann Produkt – die Reihenfolge ist der Grund, warum ich beide Enden bedienen kann.",
         "de": "Drei Denkweisen, aus denen ich schöpfe. Zwei kommen aus dem Studium, eine nicht.",
         "en": "Three ways of thinking I draw on. Two came from my studies; one didn't."
       },
       "attribution": {
-        "_note": "Pedro's own attribution, given in the phase 3 interview. It REPLACES the earlier claim that the sequence of degrees is what produced the range — that claim was false and must not reappear anywhere. Phase 4 lays these out as three short labelled lines beneath the arc heading.",
         "items": [
           {
-            "source": "interview",
             "de": "Industriedesign – Produkt- und Nutzerdenken",
             "en": "Industrial design — product and user thinking"
           },
           {
-            "source": "interview",
             "de": "Wirtschaftsingenieurwesen – Business-, Prozess- und Systemdenken",
             "en": "Industrial engineering and management — business, process and systems thinking"
           },
           {
-            "source": "interview",
             "de": "Technologie – aus Erfahrung und Neugier, nicht aus dem Hörsaal",
             "en": "Technology — from experience and curiosity, not from a lecture hall"
           }
         ]
       },
       "timelineAxisLabel": {
-        "source": "new",
-        "_note": "Label on the year rail in the opening section (UI spec section 3). Not a heading.",
         "de": "Zeitachse",
         "en": "Timeline"
       },
       "laneStudies": {
-        "source": "new",
-        "_note": "Accessible name and visible label for the upper timeline lane. UX spec requires each lane to be a single focusable element with an accessible name.",
         "de": "Studium",
         "en": "Studies"
       },
       "laneWork": {
-        "source": "new",
-        "_note": "Accessible name and visible label for the lower timeline lane.",
         "de": "Beruf",
         "en": "Work"
       },
       "timelineBands": {
-        "_note": "Timeline band labels. These are NOT the organisation names — cv.json holds those ('Universidad de Sevilla', 'Karlsruher Institut fuer Technologie (KIT)'). A band label is editorial: it must survive at 12px inside a bar a few percent wide, so it names the thing the reader needs at a glance. Rendered text, therefore per language. Keys are the existing copy.json keys, so a band pairs to the same entry as its role/education/station text: education.* for the three study bands, earlierStations.* and roles.* for the seven work bands. Every band in the diagram needs an entry here; a missing one is a build error, not a fallback to the cv.json name.",
         "sevilla-diplomatura": {
-          "source": "new",
           "de": "Industriedesign, Sevilla",
           "en": "Industrial design, Seville"
         },
         "cadiz-licenciatura": {
-          "source": "new",
           "de": "Wirtschaftsingenieurwesen, Cádiz",
           "en": "Industrial engineering, Cádiz"
         },
         "kit-exchange": {
-          "source": "new",
           "de": "KIT-Austauschjahr",
           "en": "KIT exchange year"
         },
         "movand": {
-          "source": "new",
           "de": "Movand",
           "en": "Movand"
         },
         "kit-assistant": {
-          "source": "new",
           "de": "KIT",
           "en": "KIT"
         },
         "bosch-mobility-media": {
-          "source": "new",
           "de": "Bosch",
           "en": "Bosch"
         },
         "cobi": {
-          "source": "new",
           "de": "COBI",
           "en": "COBI"
         },
         "fahrrad-xxl": {
-          "source": "new",
           "de": "Fahrrad XXL",
           "en": "Fahrrad XXL"
         },
         "zuhlke": {
-          "source": "new",
           "de": "Zühlke",
           "en": "Zühlke"
         },
         "gls": {
-          "source": "new",
           "de": "GLS",
           "en": "GLS"
         }
       },
       "educationLabel": {
-        "source": "new",
         "de": "Ausbildung",
         "en": "Education"
       },
       "earlierStationsLabel": {
-        "source": "new",
         "de": "Frühere Stationen",
         "en": "Earlier stations"
       }
     },
     "range": {
-      "_note": "Rev. 5. The skill items themselves are facts and stay in cv.json (skills.technical[].items); only their group labels are prose and live here. The two-pole regrouping this section used to carry (poleDesignLabel / poleTechnicalLabel / poleSpanningLabel) was dropped in UX spec rev. 4 — the groups are now cv.json own four categories with Methoden and Tools merged, so no skill can go unassigned. Rev. 5 replaced the heading „Beide Enden“ with „Fähigkeiten“ after user testing: readers could not tell what the section contained, because neither the heading nor the intro named it. „Beide Enden“ was Pedro's rev. 3 decision and is kept in _alternatives.",
       "heading": {
-        "source": "rewrite",
         "de": "Fähigkeiten",
-        "en": "Skills",
-        "_alternatives": [
-          {
-            "de": "Beide Enden",
-            "en": "Both ends",
-            "_note": "Rev. 3 heading, Pedro decision. Dropped in rev. 5 on user-testing evidence: it carries the concept brief's \"range at both ends\" but does not tell a reader what is in the section."
-          },
-          {
-            "de": "Womit ich arbeite",
-            "en": "What I work with"
-          }
-        ],
-        "original": "Beide Enden",
-        "_note": "Rev. 5. Plainest of the three options tested. The concept brief's \"both ends\" idea now rests entirely on the intro line and the radar, not on the heading."
+        "en": "Skills"
       },
       "intro": {
-        "source": "rewrite",
-        "original": "Dieselbe Spannweite, nur als Liste: womit ich Probleme durchdringe und plane – und womit ich sie technisch selbst bearbeite.",
         "de": "In drei Gruppen. Keine davon ist leer.",
-        "en": "In three groups. None of them is empty.",
-        "_note": "Rev. 5. The rev. 3 line („Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie weit es in jede reicht.\") failed user testing on three counts: „Dieselbe Spannweite\" refers back across a section boundary to the arc; „nur als Liste – und als Form\" is commentary on the layout rather than the content; and „wie weit es in jede reicht\" has no clear referent for „es\". It also explained the diagram a second time, duplicating radarDescription. Rev. 5 names the content and makes one point. Pedro chose „Meine Fähigkeiten in drei Gruppen. Keine davon ist leer.\"; the noun was dropped because the heading directly above now supplies it."
-      },
-      "groupProduct": {
-        "source": "new",
-        "original": "Produkt & Führung",
-        "de": "Produkt & Führung",
-        "en": "Product & leadership"
-      },
-      "groupTechnical": {
-        "source": "new",
-        "original": "Technisch",
-        "de": "Technisch",
-        "en": "Technical"
-      },
-      "groupMethods": {
-        "source": "new",
-        "original": "Methoden / Tools",
-        "de": "Methoden & Werkzeug",
-        "en": "Methods & tools",
-        "_note": "Merges cv.json skills.technical[2] (Methoden) and [3] (Tools). The Tools items are not radar spokes — they render as toolsLine inside this group, per UX spec rev. 4."
+        "en": "In three groups. None of them is empty."
       },
       "skillLabels": {
-        "_note": "English for skill names that are German prose in cv.json. Only these two exist; the other sixteen names are already language-neutral and are rendered straight from cv.json skills.technical[].items[].name, NOT duplicated here. Keyed by that exact cv.json name. If phase 5 gives skills ids, re-key to the id — the string key is the fragile part. A skill whose name is not a key here renders its cv.json name unchanged in both languages, which is correct for 'SQL' and wrong for any new German name, so adding a German-named skill means adding an entry here.",
-        "Teamführung": {
-          "source": "rewrite",
-          "original": "Teamführung",
+        "teamfuhrung": {
           "de": "Teamführung",
           "en": "Team leadership"
         },
-        "C4-Modell / Architekturdiagramme": {
-          "source": "rewrite",
-          "original": "C4-Modell / Architekturdiagramme",
+        "c4-modell": {
           "de": "C4-Modell / Architekturdiagramme",
           "en": "C4 model / architecture diagrams"
         }
       },
       "radarTitle": {
-        "source": "new",
         "de": "Spannweite im Überblick",
-        "en": "The range at a glance",
-        "_note": "Accessible name for the radar. The three group labels are the chart focusable controls."
+        "en": "The range at a glance"
       },
       "radarDescription": {
-        "source": "rewrite",
         "de": "Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort.",
-        "en": "The further the shape reaches in a direction, the more sits there.",
-        "original": "Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort. Bei mir reicht sie in alle drei.",
-        "_note": "Rev. 5 dropped the second sentence („Bei mir reicht sie in alle drei.\" / \"Mine reaches into all three.\") because the rev. 5 intro now makes that point four lines above. This string teaches how to read the shape; the intro states the finding. Still the accessible description of the chart — a screen-reader user meets the intro first, so the finding is not lost."
+        "en": "The further the shape reaches in a direction, the more sits there."
       },
       "radarLabels": {
-        "_note": "Shortened spoke labels for the radar only. Eighteen full names do not fit around the circle at 15px without colliding, so eight are abbreviated. The lists beside the chart always show the full name — the UX spec requires the text equivalent to be complete, and these short forms never replace it. Keyed by the cv.json name, same fragility note as skillLabels. A skill with no entry here uses its full name on the spoke, which is correct for the ten that already fit.",
-        "Product Management": {
-          "source": "new",
+        "product-management": {
           "de": "Product Mgmt",
           "en": "Product Mgmt"
         },
-        "Requirements Engineering": {
-          "source": "new",
+        "requirements-engineering": {
           "de": "Requirements Eng.",
           "en": "Requirements Eng."
         },
-        "Teamführung": {
-          "source": "new",
+        "teamfuhrung": {
           "de": "Teamführung",
           "en": "Team leadership"
         },
-        "Stakeholder Management": {
-          "source": "new",
+        "stakeholder-management": {
           "de": "Stakeholder Mgmt",
           "en": "Stakeholder Mgmt"
         },
-        "Agile Development (Scrum)": {
-          "source": "new",
+        "agile-development-scrum": {
           "de": "Scrum",
           "en": "Scrum"
         },
-        "User Story Mapping": {
-          "source": "new",
+        "user-story-mapping": {
           "de": "Story Mapping",
           "en": "Story Mapping"
         },
-        "Product Roadmapping": {
-          "source": "new",
+        "product-roadmapping": {
           "de": "Roadmapping",
           "en": "Roadmapping"
         },
-        "C4-Modell / Architekturdiagramme": {
-          "source": "new",
+        "c4-modell": {
           "de": "C4 / Architektur",
           "en": "C4 / Architecture"
         }
       },
       "levelScaleNote": {
-        "source": "new",
         "de": "Selbsteinschätzung, 1 bis 5.",
-        "en": "Self-assessment, 1 to 5.",
-        "_note": "Required. UX spec rev. 4: the levels are self-assessment, not measurement, and the page must not imply otherwise."
-      },
-      "toolsLine": {
-        "source": "rewrite",
-        "original": "Tools: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite",
-        "de": "Werkzeug: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite inkl. Copilot mit Agenten",
-        "en": "Tooling: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite incl. Copilot with Agents",
-        "_note": "Rev. 4 typo pass: 'tlassian' -> 'Atlassian' (en), 'Microsoft Suite Office' -> 'Microsoft Office Suite' (both, matching cv.json), trailing full stop removed from en to match de. Wording unchanged. The tool names duplicate cv.json skills.technical[3] — see docs/04-ui-spec.md G1; resolving that duplication is a phase 5 data-contract call, not a copy change."
+        "en": "Self-assessment, 1 to 5."
       },
       "languagesLabel": {
-        "source": "new",
         "de": "Sprachen",
         "en": "Languages"
+      },
+      "groups": {
+        "product": {
+          "de": "Produkt & Führung",
+          "en": "Product & leadership"
+        },
+        "methods": {
+          "de": "Methoden & Werkzeug",
+          "en": "Methods & tools"
+        },
+        "technical": {
+          "de": "Technisch",
+          "en": "Technical"
+        }
+      },
+      "toolsLabel": {
+        "de": "Werkzeug",
+        "en": "Tooling"
+      },
+      "toolLabels": {
+        "microsoft-office-copilot": {
+          "de": "Microsoft Office Suite inkl. Copilot mit Agenten",
+          "en": "Microsoft Office Suite incl. Copilot with Agents"
+        }
       }
     },
     "footer": {
       "heading": {
-        "source": "new",
         "de": "Nebenbei",
-        "en": "Off the clock",
-        "_alternatives": [
-          {
-            "de": "Sonst noch",
-            "en": "Also"
-          }
-        ]
+        "en": "Off the clock"
       },
       "interestsLabel": {
-        "source": "new",
         "de": "Interessiert mich",
         "en": "What holds my attention"
       },
       "hobbiesLabel": {
-        "source": "new",
         "de": "Und sonst",
         "en": "And otherwise"
       }
@@ -362,46 +236,31 @@
   "roles": {
     "gls": {
       "summary": {
-        "source": "interview",
-        "original": "Fachliche Führung eines cross-funktionalen Teams aus Entwicklern und Testern (5 FTEs) und Verantwortung für Produktvision sowie strategische Ausrichtung der IT-Tools im Bereich Nahverkehr.",
         "de": "Ich führe ein cross-funktionales Team aus Entwicklung und Test fachlich und trage die volle Produktverantwortung für die IT-Tools im Nahverkehr – von der Analyse unklarer operativer Probleme bis zur ausgelieferten Lösung.",
-        "en": "I'm the product lead for a cross-functional team of developers and testers, with full product responsibility for the IT tools in local delivery operations — from picking apart a fuzzy operational problem to the solution actually shipping.",
-        "_factInProse": "Team size (5 FTE) is a fact and is deliberately NOT written into this string. Phase 5 should add a teamSize field to cv.json and have the template slot it in. See docs/03-copy.md Assumptions."
+        "en": "I'm the product lead for a cross-functional team of developers and testers, with full product responsibility for the IT tools in local delivery operations — from picking apart a fuzzy operational problem to the solution actually shipping."
       },
       "bullets": [
         {
-          "source": "interview",
-          "original": "Ergebnis: Nutzungsrate eines zentralen Tools verdoppelt; deutlich verbesserte Prozesstransparenz mit positivem Effekt auf die Kundenzufriedenheit",
           "de": "Die Nutzung eines neuen internen Tools habe ich verdoppelt: per SQL-Analysen und Gesprächen mit den Nutzern herausgefunden, woran die Akzeptanz tatsächlich scheiterte – und die Roadmap konsequent darauf ausgerichtet.",
           "en": "I doubled adoption of a new internal tool: SQL analysis and conversations with the people using it showed me what was actually blocking uptake, and I pointed the roadmap squarely at that."
         },
         {
-          "source": "interview",
-          "original": "Eigenständige SQL-basierte Datenanalysen zur datengetriebenen Identifikation organisatorischer Probleme und Priorisierung von Features",
           "de": "Unscharfe organisatorische Probleme aus dem operativen Nahverkehr übersetze ich eigenständig in priorisierte Produktentscheidungen – datengetrieben statt auf Zuruf.",
           "en": "I turn the fuzzy organisational problems that come out of daily delivery operations into prioritised product decisions myself — driven by data, not by whoever asked loudest."
         },
         {
-          "source": "rewrite",
-          "original": "Alleinige End-to-End-Produktverantwortung ohne dedizierten Business Analysten: UX/UI-Design (Figma), Requirements, kontinuierlicher Nutzerkontakt und Support",
           "de": "Produktvision und Scope verantworte ich allein – es gibt keine dedizierte BA-Rolle im Team: Nutzerkontakt, Requirements, UX/UI-Design in Figma und Support liegen in einer Hand.",
           "en": "Product vision and scope are mine alone — there's no dedicated BA role on the team: user contact, requirements, UX/UI design in Figma and support all sit in one pair of hands."
         },
         {
-          "source": "interview",
-          "original": "Erstellung von C4-Architekturdiagrammen (System Context, Container, Business) zur Abbildung von Systemgrenzen und Abhängigkeiten / Technische Diskussionen auf Augenhöhe mit Entwicklern zu API-Design, Datenquellen und Architektur-Trade-offs",
           "de": "Architektur- und API-Entscheidungen treffe ich gemeinsam mit den Entwicklern; Systemgrenzen und Abhängigkeiten mache ich per C4-Modellierung sichtbar und kläre Integrationsrisiken, bevor die Umsetzung startet.",
           "en": "Architecture and API decisions I make together with the engineers; I make system boundaries and dependencies visible through C4 modelling, and settle integration risks before implementation starts."
         },
         {
-          "source": "rewrite",
-          "original": "Kommunikation und Verantwortung von Produktentscheidungen gegenüber Nutzern, Director- und teilweise C-Level-Ebene; Vorbereitung von Budgetfreigaben",
           "de": "Produktentscheidungen und Budgetbedarfe vertrete ich gegenüber Director- und C-Level-Ebene – und setze sie dort durch.",
           "en": "I take product decisions and budget needs to director and C-level — and carry them through there."
         },
         {
-          "source": "rewrite",
-          "original": "deutlich verbesserte Prozesstransparenz mit positivem Effekt auf die Kundenzufriedenheit",
           "de": "Die Prozesstransparenz im Nahverkehr habe ich deutlich erhöht, mit positivem Effekt auf die Kundenzufriedenheit – und damit den Grundstein für den Umbau kritischer Abläufe gelegt.",
           "en": "I substantially raised process transparency in delivery operations, with a positive effect on customer satisfaction — and laid the groundwork for reworking critical workflows."
         }
@@ -409,39 +268,27 @@
     },
     "zuhlke": {
       "summary": {
-        "source": "rewrite",
-        "original": "Requirements Engineering und Product-Ownership-Rollen mit Schwerpunkt Anforderungserhebung und Kundenschnittstelle in verschiedenen branchenübergreifenden Projekten:",
         "de": "Als Berater bei Zühlke war ich meist am Anfang im Projekt – dort, wo das Produkt noch unscharf ist: Anforderungen erheben, das Produkt definieren, die Schnittstelle zum Kunden halten. Quer durch die Branchen.",
         "en": "As a consultant at Zühlke I was usually there at the start — where the product is still out of focus: gathering requirements, defining the product, holding the client relationship. Across very different industries."
       },
       "bullets": [
         {
-          "source": "interview",
-          "original": "Product Owner für die IoT-Erneuerung der Maschinensoftware eines führenden Sondermaschinenbau-Unternehmens – erfolgreich im Markt gelauncht",
           "de": "Als Product Owner habe ich die IoT-Neuentwicklung der Maschinensoftware eines Sondermaschinenbauers verantwortet – von der Anforderungserhebung bis zum erfolgreichen Marktstart.",
           "en": "As product owner I ran the IoT rebuild of a special-machinery maker's machine software — from gathering requirements through to a successful market launch."
         },
         {
-          "source": "rewrite",
-          "original": "Product-Team-Lead in der Machbarkeitsphase eines vernetzten Medizingeräts – Koordination eines 5-köpfigen Teams, intensiver Kundenkontakt bis teilweise Director-Ebene",
           "de": "Für ein vernetztes Medizingerät habe ich das Produktteam durch die Machbarkeitsphase geführt – die Frage war, ob aus der Idee überhaupt ein Produkt werden kann. Den Kunden habe ich dabei bis auf Director-Ebene begleitet.",
           "en": "I led the product team through the feasibility phase of a connected medical device — the question being whether the idea could become a product at all. I carried the client relationship up to director level."
         },
         {
-          "source": "rewrite",
-          "original": "Requirements Engineering und API-Spezifikation für ein MDM-System (führende Hersteller von Haushaltsgeräten) nach den Prinzipien \"API-First\" und \"API-as-a-Product\"",
           "de": "Anforderungen und API-Spezifikation für das Stammdatensystem eines großen Hausgeräteherstellers – konsequent nach „API-First\" und „API-as-a-Product\", also mit der Schnittstelle selbst als Produkt.",
           "en": "Requirements and API specification for a major appliance maker's master-data system — built strictly on \"API-First\" and \"API-as-a-Product\", treating the interface itself as the product."
         },
         {
-          "source": "interview",
-          "original": "Produktdefinition und Lastenheft-Erstellung für eine smarte Matratze (führender Matratzenhersteller)",
           "de": "Aus einer vagen Produktidee habe ich für einen führenden Matratzenhersteller eine spezifizierte smarte Matratze gemacht – Produktdefinition und Lastenheft; sie hat einen kleinen Marktstart erreicht.",
           "en": "I turned a vague product idea into a specified smart mattress for a leading mattress maker — product definition and requirements spec; it went on to a small market launch."
         },
         {
-          "source": "rewrite",
-          "original": "Requirements Engineering und Coaching des Projektteams für ein Personaleinsatzplanungssystem einer Fluggesellschaft – durchgehend hohe Kundenzufriedenheit trotz komplexer Anforderungslage",
           "de": "Für das Personaleinsatzplanungssystem einer Fluggesellschaft habe ich die Anforderungen erhoben und das Projektteam gecoacht – trotz komplexer Anforderungslage durchgehend hohe Kundenzufriedenheit.",
           "en": "For an airline's crew-scheduling system I ran requirements and coached the project team — consistently high client satisfaction despite a genuinely complex requirements picture."
         }
@@ -449,21 +296,15 @@
     },
     "fahrrad-xxl": {
       "summary": {
-        "source": "rewrite",
-        "original": "Management des Produktentwicklungsprozesses für den gesamten E-Bike-Bereich:",
         "de": "Ich habe den Produktentwicklungsprozess für den gesamten E-Bike-Bereich verantwortet – und damit zum ersten Mal Produkt und Kommerz in einer Rolle.",
         "en": "I owned the product-development process for the entire E-Bike category — product and commercial sitting in one role."
       },
       "bullets": [
         {
-          "source": "interview",
-          "original": "Erstellung der Entwicklungs-Roadmap sowie Definition der Produktanforderungen in Zusammenarbeit mit der Engineering-Abteilung / Erstellung der Produktpalette und Preisstrategie in Abstimmung mit der Geschäftsführung",
           "de": "Roadmap und Produktanforderungen für eine Palette von unter 20 E-Bike-Modellen habe ich mit dem Engineering erstellt; Sortiment und Preisstrategie mit der Geschäftsführung festgelegt.",
           "en": "I built the roadmap and product requirements for a range of fewer than 20 E-Bike models with engineering, and set the range and pricing strategy with the management team."
         },
         {
-          "source": "rewrite",
-          "original": "Leitung des Zertifizierungsprozesses nach EMV-Richtlinien / Marktbeobachtung und Marktanalyse",
           "de": "Den Zertifizierungsprozess nach EMV-Richtlinien habe ich geleitet und den Markt laufend beobachtet und analysiert – die Grundlage für die Roadmap.",
           "en": "I ran EMC regulatory certification for the range, and kept a continuous read on the market — the basis the roadmap was built on."
         }
@@ -472,8 +313,6 @@
     "cobi": {
       "bullets": [
         {
-          "source": "interview",
-          "original": "Ansprechpartner für nationale und internationale E-Bike-Antriebshersteller / Projektleitung im Rahmen verschiedener Integrationsprojekte von COBI mit E-Bike-Systemen / Zusammenarbeit mit der Embedded-Systems-Abteilung für die Weiterentwicklung des Produkts",
           "de": "Ich war Ansprechpartner für zwei bis drei E-Bike-Antriebshersteller und habe die Projekte geleitet, die ihre Systeme mit COBI integriert haben – eng mit der Embedded-Abteilung. Business Development hieß hier: die technische Integration und die Partnerschaft gleichzeitig verantworten.",
           "en": "I was the point of contact for two to three E-Bike drive-system makers and led the projects integrating their systems with COBI's, working closely with the embedded team. Business development here meant owning the technical integration and the partnership at the same time."
         }
@@ -481,182 +320,130 @@
     }
   },
   "education": {
-    "_note": "Facts (institution, dates, credential type, location) stay in cv.json. These entries carry only the German field/credential names verbatim (de) and an English gloss (en). Borderline fact/prose — phase 5 data-contract call. Keyed by institution + level in cv.json education[] order: [0]=cadiz-licenciatura, [1]=kit-exchange, [2]=sevilla-diplomatura.",
     "cadiz-licenciatura": {
       "fieldLabel": {
-        "source": "new",
         "de": "Wirtschaftsingenieurwesen",
         "en": "Industrial Engineering & Management"
       },
       "credentialLabel": {
-        "source": "rewrite",
-        "original": "Licenciatura (Master-Äquivalent)",
         "de": "Licenciatura (Master-Äquivalent)",
         "en": "Licenciatura (master's equivalent)"
       }
     },
     "kit-exchange": {
       "fieldLabel": {
-        "source": "new",
         "de": "Wirtschaftsingenieurwesen",
         "en": "Industrial Engineering & Management"
       },
       "institutionLabel": {
-        "source": "rewrite",
-        "original": "Karlsruher Institut für Technologie (KIT)",
-        "_note": "The institution's own official English name. cv.json keeps the German as the fact; this is the rendered English form.",
         "de": "Karlsruher Institut für Technologie (KIT)",
         "en": "Karlsruhe Institute of Technology (KIT)"
       },
       "credentialLabel": {
-        "source": "rewrite",
-        "original": "Austauschprogramm im Rahmen der Licenciatura",
         "de": "Austauschprogramm im Rahmen der Licenciatura",
         "en": "exchange year during the Licenciatura"
       }
     },
     "sevilla-diplomatura": {
       "fieldLabel": {
-        "source": "new",
         "de": "Industriedesign-Ingenieurwesen",
         "en": "Industrial Design Engineering"
       },
       "credentialLabel": {
-        "source": "rewrite",
-        "original": "Diplomatura (Bachelor-Äquivalent)",
         "de": "Diplomatura (Bachelor-Äquivalent)",
         "en": "Diplomatura (bachelor's equivalent)"
       }
     }
   },
   "earlierStations": {
-    "_note": "Organisations and dates stay in cv.json. Only the role titles are translated here. cv.json earlierStations[] order: [0]=bosch-mobility-media, [1]=kit-assistant, [2]=movand.",
     "bosch-mobility-media": {
       "roleLabel": {
-        "source": "rewrite",
-        "original": "Praktikant / Werkstudent Sales",
         "de": "Praktikant / Werkstudent Sales",
         "en": "Sales intern / working student"
       }
     },
     "kit-assistant": {
       "roleLabel": {
-        "source": "rewrite",
-        "original": "Wissenschaftliche Hilfskraft",
         "de": "Wissenschaftliche Hilfskraft",
         "en": "Research assistant"
       },
       "institutionLabel": {
-        "source": "rewrite",
-        "original": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
-        "_note": "Official English names for both the university and the wbk institute.",
         "de": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
         "en": "Karlsruhe Institute of Technology – Institute of Production Science"
       }
     },
     "movand": {
       "roleLabel": {
-        "source": "rewrite",
-        "original": "Praktikum",
         "de": "Praktikum",
         "en": "Internship"
       }
     }
   },
   "languages": {
-    "_note": "Language names and proficiency levels are rendered text, so they duplicate per language and belong here; the list itself and its order stay in cv.json meta.languages[]. Before rev. 3 they existed only as German strings in cv.json, so the English page closed its Range section in German.",
     "spanish": {
       "name": {
-        "source": "rewrite",
-        "original": "Spanisch",
         "de": "Spanisch",
         "en": "Spanish"
       },
       "level": {
-        "source": "rewrite",
-        "original": "Muttersprache",
         "de": "Muttersprache",
         "en": "Native speaker"
       }
     },
     "german": {
       "name": {
-        "source": "rewrite",
-        "original": "Deutsch",
         "de": "Deutsch",
         "en": "German"
       },
       "level": {
-        "source": "rewrite",
-        "original": "fließend",
         "de": "fließend",
         "en": "Fluent"
       }
     },
     "english": {
       "name": {
-        "source": "rewrite",
-        "original": "Englisch",
         "de": "Englisch",
         "en": "English"
       },
       "level": {
-        "source": "rewrite",
-        "original": "fließend",
         "de": "fließend",
         "en": "Fluent"
       }
     },
     "french": {
       "name": {
-        "source": "rewrite",
-        "original": "Französisch",
         "de": "Französisch",
         "en": "French"
       },
       "level": {
-        "source": "rewrite",
-        "original": "Grundkenntnisse",
         "de": "Grundkenntnisse",
         "en": "Basic"
       }
     }
   },
   "interests": {
-    "_note": "cv.json interests[] order preserved.",
     "items": [
       {
-        "source": "rewrite",
-        "original": "Nachhaltige Produktentwicklung und Design",
         "de": "Nachhaltige Produktentwicklung und Design",
         "en": "Sustainable product development and design"
       },
       {
-        "source": "rewrite",
-        "original": "Neue Technologien und Wissenschaft",
         "de": "Neue Technologien und Wissenschaft",
         "en": "New technology and science"
       }
     ]
   },
   "hobbies": {
-    "_note": "cv.json hobbies[] order preserved.",
     "items": [
       {
-        "source": "rewrite",
-        "original": "Triathlon",
         "de": "Triathlon",
         "en": "Triathlon"
       },
       {
-        "source": "rewrite",
-        "original": "Musik",
         "de": "Musik",
         "en": "Music"
       },
       {
-        "source": "rewrite",
-        "original": "Kunst",
         "de": "Kunst",
         "en": "Art"
       }
@@ -664,80 +451,44 @@
   },
   "microcopy": {
     "skipLink": {
-      "source": "new",
       "de": "Zum Inhalt springen",
       "en": "Skip to content"
     },
     "langToggleDe": {
-      "source": "new",
       "de": "Deutsch",
       "en": "German"
     },
     "langToggleEn": {
-      "source": "new",
       "de": "Englisch",
       "en": "English"
     },
     "langToggleAriaLabel": {
-      "source": "new",
       "de": "Sprache wählen",
       "en": "Choose language"
     },
     "currentRoleDateSuffix": {
-      "source": "new",
       "de": "heute",
-      "en": "present",
-      "_note": "For the open-ended current role, e.g. '11/2023 – heute'. UX spec also allows a bare em dash; phase 4 picks."
+      "en": "present"
     },
     "linkXing": {
-      "source": "new",
       "de": "Xing",
       "en": "Xing"
     },
     "linkLinkedIn": {
-      "source": "new",
       "de": "LinkedIn",
-      "en": "LinkedIn",
-      "_note": "Include only if a profile exists (concept-brief Assumption 2). Otherwise the build omits it and Xing stands alone."
+      "en": "LinkedIn"
     },
     "levelFormat": {
-      "source": "new",
       "de": "{level}/5",
-      "en": "{level}/5",
-      "_note": "Visible text beside each skill name — the radar AA text equivalent. Pedro chose numeric over a word scale."
+      "en": "{level}/5"
     },
     "levelAriaFormat": {
-      "source": "new",
       "de": "{skill}: {level} von 5",
-      "en": "{skill}: {level} out of 5",
-      "_note": "Accessible name for a radar spoke, so the level is never conveyed by geometry alone."
+      "en": "{skill}: {level} out of 5"
     },
     "layerHighlighted": {
-      "source": "new",
-      "_note": "Status text shown when a radar group or a timeline lane is highlighted. Required by UI spec section 6; had no key before rev. 4.",
       "de": "Ebene hervorgehoben",
       "en": "Layer highlighted"
     }
-  },
-  "interviewFacts": [
-    "POSITIONING (rev. 2): Pedro is a technical/business generalist who takes ambiguous problems, understands the technology, identifies opportunities and turns them into products. He is 'definitely a product person' — products exist to solve business or personal problems. 'or businesses' is NOT claimed; the opener says products that solve a real business or user problem.",
-    "ATTRIBUTION (Pedro, phase 3): Industriedesign gave him product and user thinking. Wirtschaftsingenieurwesen gave him business, process and systems thinking — NOT IT or technology. The technology came from experience and curiosity on the job, from neither degree. Any copy implying the sequence of degrees is why he can work both ends is FALSE and was removed. Always name the degree in full: 'Wirtschaftsingenieurwesen' / 'industrial engineering and management', never bare 'Ingenieurwesen' / 'engineering'.",
-    "OPEN (Pedro's direct edit, needs a decision): the headline reads „Technisch-business Generalist\" while the opening statement reads „technisch-wirtschaftlicher Generalist\". Two renderings of the same term on one page, and the headline mixes English into a German compound. See docs/03-copy.md → Headline.",
-    "GLS: the tool whose usage doubled was a NEW internal tool, not a pre-existing one. Kept over the sample's 'zentrales Tool'.",
-    "GLS: adoption failed for reasons Pedro identified via SQL analysis and user contact, and he pointed the roadmap at those reasons. (From Pedro's sample bullets.)",
-    "GLS: he clears integration risks before implementation starts, and makes system boundaries/dependencies visible via C4 modelling. (From Pedro's sample bullets — note this partly reverses the round-1 instruction to de-emphasise C4.)",
-    "GLS: he does not merely present decisions and budget needs at director/C-level, he carries them through ('durchgesetzt'). (From Pedro's sample bullets.)",
-    "GLS: process transparency was raised with a positive effect on customer satisfaction; 'messbar' (measurable) from Pedro's sample was NOT adopted — the CV claims no measurement. Confirm if a measurement exists.",
-    "GLS: groundwork laid for transforming/reworking critical processes.",
-    "GLS: team is 5 FTE (developers and testers). Deliberately kept OUT of the copy string — it is a fact for cv.json.",
-    "Zühlke / special-machinery machine software: confirmed successfully launched in market.",
-    "Zühlke / airline crew-scheduling: Pedro rolled off shortly before rollout — the bullet claims no launch, only the requirements + coaching work and the client-satisfaction outcome.",
-    "Zühlke / smart mattress: reached a small ('tiny') market launch.",
-    "Zühlke / MDM master-data system: production status not confirmed — bullet stays scope-only.",
-    "Fahrrad XXL: the E-Bike range Pedro owned the roadmap for was fewer than 20 models/SKUs.",
-    "COBI: point of contact for 2–3 E-Bike drive-system manufacturers.",
-    "Voice: full first person confirmed and RE-confirmed in rev. 2 — Pedro's sample bullets were about framing and content density, not about switching to third person or participle style.",
-    "Not used: any explicit 'N years of experience' figure — the arc carries the time instead.",
-    "'Expert' is sanctioned by Pedro for use but is not actually used anywhere in the copy; the work is left to carry it."
-  ]
+  }
 }

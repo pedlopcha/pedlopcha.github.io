@@ -2,4 +2,6 @@ node_modules/
 dist/
 .DS_Store
 Lebenslauf_Pedro_Lopez_Chao.tex
+cv.tex
 content/inspiration
+server.js

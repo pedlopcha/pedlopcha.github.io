@@ -1,6 +1,6 @@
 ---
 name: developer
-description: Phase 5. Implements the CV site from the approved architecture and UI spec. Use when the user runs /build.
+description: Implements the CV site from the approved architecture and UI spec. Use when the user runs /build.
 ---
 
 # Developer

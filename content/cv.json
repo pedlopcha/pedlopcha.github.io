@@ -2,65 +2,61 @@
   "meta": {
     "name": "Pedro López Chao",
     "headline": "Product Owner mit technischer Tiefe | Auf dem Weg zur Head of Product",
-    "headlineParts": [
-      "Product Owner mit technischer Tiefe",
-      "Auf dem Weg zur Head of Product"
-    ],
-    "photo": "photo_square.jpg",
     "documentLanguage": "de",
-    "contact": {
-      "email": "deine.private@email.de",
-      "phone": "[Telefonnummer ergänzen]",
-      "location": "[Stadt, Deutschland]"
+    "photo": {
+      "src": "photo_square_800.jpg",
+      "srcset": [
+        {
+          "file": "photo_square_400.jpg",
+          "w": 400
+        },
+        {
+          "file": "photo_square_800.jpg",
+          "w": 800
+        }
+      ],
+      "width": 800,
+      "height": 800
     },
     "links": [
       {
         "label": "Xing",
-        "url": "https://www.xing.com/profile/",
-        "display": "xing.com/profile/…"
+        "url": "https://www.xing.com/profile/Pedro_LopezChao/",
+        "display": "xing.com/profile/Pedro_LopezChao/"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/pedlopcha/",
+        "display": "linkedin.com/in/pedlopcha/"
       }
     ],
     "languages": [
       {
+        "id": "spanish",
         "language": "Spanisch",
         "level": "Muttersprache"
       },
       {
+        "id": "german",
         "language": "Deutsch",
         "level": "fließend"
       },
       {
+        "id": "english",
         "language": "Englisch",
         "level": "fließend"
       },
       {
+        "id": "french",
         "language": "Französisch",
         "level": "Grundkenntnisse"
       }
-    ],
-    "sourceHeadings": [
-      "Profil",
-      "Beruflicher Werdegang",
-      "Frühere Stationen",
-      "Ausbildung",
-      "Besondere Fähigkeiten",
-      "Fachliche Kompetenzen",
-      "Sprachen",
-      "Persönliche Fähigkeiten",
-      "Interessen & Hobbys"
-    ],
-    "placeholders": [
-      "meta.contact.email",
-      "meta.contact.phone",
-      "meta.contact.location",
-      "meta.links[0].url",
-      "meta.links[0].display",
-      "skills.technical[].items[].level — 18 values, rated categories only, 1-5 integers"
     ]
   },
   "summary": "Produktexperte mit über 10 Jahre Erfahrung in Requirements Engineering, Product Ownership und Produktmanagement in Industrien wie IoT, MedTech, E-Mobility und Sondermaschinenbau. Kombiniert End-to-End-Produktverantwortung (UX/UI-Design, Requirements, Nutzerkontakt) mit technischer Tiefe: eigenständige Erstellung von C4-Architekturdiagrammen, SQL-basierte Datenanalysen und Diskussionen auf Augenhöhe mit Entwicklern zu API-Design und Architektur-Trade-offs. Fachliche Führung cross-funktionaler Teams sowie Kommunikation von Produktentscheidungen bis auf Director- und C-Level-Ebene. Nächstes Ziel: Verantwortung für eine größere Produktorganisation als Head of Product.",
   "experience": [
     {
+      "id": "gls",
       "role": "Product Owner",
       "company": "GLS IT Services GmbH",
       "location": {
@@ -70,7 +66,6 @@
       "start": "2023-11",
       "end": null,
       "current": true,
-      "dateRaw": "11/2023 -- heute",
       "summary": "Fachliche Führung eines cross-funktionalen Teams aus Entwicklern und Testern (5 FTEs) und Verantwortung für Produktvision sowie strategische Ausrichtung der IT-Tools im Bereich Nahverkehr.",
       "highlights": [
         "Alleinige End-to-End-Produktverantwortung ohne dedizierten Business Analysten: UX/UI-Design (Figma), Requirements, kontinuierlicher Nutzerkontakt und Support",
@@ -80,9 +75,10 @@
         "Kommunikation und Verantwortung von Produktentscheidungen gegenüber Nutzern, Director- und teilweise C-Level-Ebene; Vorbereitung von Budgetfreigaben",
         "Ergebnis: Nutzungsrate eines zentralen Tools verdoppelt; deutlich verbesserte Prozesstransparenz mit positivem Effekt auf die Kundenzufriedenheit"
       ],
-      "resultHighlightIndex": 5
+      "color": "#0A1FA8"
     },
     {
+      "id": "zuhlke",
       "role": "Expert Business Analyst",
       "company": "Zühlke Engineering GmbH",
       "location": {
@@ -92,7 +88,6 @@
       "start": "2019-03",
       "end": "2023-10",
       "current": false,
-      "dateRaw": "03/2019 -- 10/2023",
       "summary": "Requirements Engineering und Product-Ownership-Rollen mit Schwerpunkt Anforderungserhebung und Kundenschnittstelle in verschiedenen branchenübergreifenden Projekten:",
       "highlights": [
         "Produktdefinition und Lastenheft-Erstellung für eine smarte Matratze (führender Matratzenhersteller)",
@@ -100,9 +95,11 @@
         "Requirements Engineering und API-Spezifikation für ein MDM-System (führende Hersteller von Haushaltsgeräten) nach den Prinzipien \"API-First\" und \"API-as-a-Product\"",
         "Product-Team-Lead in der Machbarkeitsphase eines vernetzten Medizingeräts – Koordination eines 5-köpfigen Teams, intensiver Kundenkontakt bis teilweise Director-Ebene",
         "Requirements Engineering und Coaching des Projektteams für ein Personaleinsatzplanungssystem einer Fluggesellschaft – durchgehend hohe Kundenzufriedenheit trotz komplexer Anforderungslage"
-      ]
+      ],
+      "color": "#7A2A86"
     },
     {
+      "id": "fahrrad-xxl",
       "role": "Produktmanager E-Bike",
       "company": "Fahrrad XXL Group GmbH",
       "location": {
@@ -112,7 +109,6 @@
       "start": "2017-01",
       "end": "2019-02",
       "current": false,
-      "dateRaw": "01/2017 -- 02/2019",
       "summary": "Management des Produktentwicklungsprozesses für den gesamten E-Bike-Bereich:",
       "highlights": [
         "Erstellung der Entwicklungs-Roadmap sowie Definition der Produktanforderungen in Zusammenarbeit mit der Engineering-Abteilung",
@@ -120,9 +116,11 @@
         "Erstellung der Produktspezifikationen und Anpassung im Rahmen des Preisfindungsprozesses",
         "Leitung des Zertifizierungsprozesses nach EMV-Richtlinien",
         "Marktbeobachtung und Marktanalyse"
-      ]
+      ],
+      "color": "#8C1A0B"
     },
     {
+      "id": "cobi",
       "role": "Account Manager Business Development",
       "company": "COBI GmbH",
       "location": {
@@ -132,18 +130,19 @@
       "start": "2016-01",
       "end": "2016-12",
       "current": false,
-      "dateRaw": "01/2016 -- 12/2016",
       "summary": null,
       "highlights": [
         "Ansprechpartner für nationale und internationale E-Bike-Antriebshersteller",
         "Projektleitung im Rahmen verschiedener Integrationsprojekte von COBI mit E-Bike-Systemen",
         "Zusammenarbeit mit der Embedded-Systems-Abteilung für die Weiterentwicklung des Produkts",
         "Mitarbeit an der Erstellung zukünftiger Mobilitätskonzepte"
-      ]
+      ],
+      "color": "#0079A8"
     }
   ],
   "earlierStations": [
     {
+      "id": "bosch-mobility-media",
       "organization": "Mobility Media GmbH – Bosch Group",
       "role": "Praktikant / Werkstudent Sales",
       "location": {
@@ -152,9 +151,10 @@
       },
       "start": "2015-01",
       "end": "2015-09",
-      "dateRaw": "01/2015 -- 09/2015"
+      "color": "#D0000F"
     },
     {
+      "id": "kit-assistant",
       "organization": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
       "role": "Wissenschaftliche Hilfskraft",
       "location": {
@@ -163,9 +163,10 @@
       },
       "start": "2014-02",
       "end": "2014-12",
-      "dateRaw": "02/2014 -- 12/2014"
+      "color": "#00786A"
     },
     {
+      "id": "movand",
       "organization": "Movand S.A.",
       "role": "Praktikum",
       "location": {
@@ -174,11 +175,12 @@
       },
       "start": "2012-03",
       "end": "2012-06",
-      "dateRaw": "03/2012 -- 06/2012"
+      "color": "#6E6A5F"
     }
   ],
   "education": [
     {
+      "id": "cadiz-licenciatura",
       "field": "Wirtschaftsingenieurwesen",
       "credential": "Licenciatura (Master-Äquivalent)",
       "title": "Wirtschaftsingenieurwesen – Licenciatura (Master-Äquivalent)",
@@ -189,13 +191,14 @@
       },
       "start": "2012-03",
       "end": "2015-10",
-      "dateRaw": "03/2012 -- 10/2015",
       "highlights": [
         "Schwerpunkte: Produktionsplanung, Qualitätssicherung, Projektmanagement",
         "Abschlussarbeit: Entwicklung eines Fahrrades und dessen Produktionsprozess durch Anwendung von Lean-Manufacturing-Methoden"
-      ]
+      ],
+      "color": "#005A9C"
     },
     {
+      "id": "kit-exchange",
       "field": "Wirtschaftsingenieurwesen",
       "credential": "Austauschprogramm im Rahmen der Licenciatura",
       "title": "Wirtschaftsingenieurwesen – Austauschprogramm im Rahmen der Licenciatura",
@@ -206,12 +209,13 @@
       },
       "start": "2013-10",
       "end": "2014-10",
-      "dateRaw": "10/2013 -- 10/2014",
       "highlights": [
         "Schwerpunkte: Management neuer Technologien, Innovationsmanagement, Operations Research"
-      ]
+      ],
+      "color": "#00786A"
     },
     {
+      "id": "sevilla-diplomatura",
       "field": "Industriedesign Ingenieurwesen",
       "credential": "Diplomatura (Bachelor-Äquivalent)",
       "title": "Industriedesign Ingenieurwesen – Diplomatura (Bachelor-Äquivalent)",
@@ -222,116 +226,141 @@
       },
       "start": "2007-09",
       "end": "2011-12",
-      "dateRaw": "09/2007 -- 12/2011",
       "highlights": [
         "Schwerpunkte: CAD, CAM, CAE, Produktentwicklung, Materialwissenschaft",
         "Abschlussarbeit: Design und Entwicklung eines Stadtfahrrads basierend auf der Analyse verschiedener Städte"
-      ]
+      ],
+      "color": "#B0121F"
     }
   ],
   "skills": {
     "technical": [
       {
+        "id": "product",
         "category": "Produkt & Führung",
         "rated": true,
         "items": [
           {
+            "id": "product-management",
             "name": "Product Management",
             "level": 5
           },
           {
+            "id": "product-ownership",
             "name": "Product Ownership",
             "level": 5
           },
           {
+            "id": "requirements-engineering",
             "name": "Requirements Engineering",
             "level": 5
           },
           {
+            "id": "teamfuhrung",
             "name": "Teamführung",
             "level": 4
           },
           {
+            "id": "strategic-planning",
             "name": "Strategic Planning",
             "level": 4
           },
           {
+            "id": "stakeholder-management",
             "name": "Stakeholder Management",
             "level": 4
           }
         ]
       },
       {
-        "category": "Technisch",
-        "rated": true,
-        "items": [
-          {
-            "name": "C4-Modell / Architekturdiagramme",
-            "level": 3
-          },
-          {
-            "name": "SQL",
-            "level": 3
-          },
-          {
-            "name": "Python",
-            "level": 2
-          },
-          {
-            "name": "Data Analysis",
-            "level": 4
-          },
-          {
-            "name": "Business Analytics",
-            "level": 4
-          },
-          {
-            "name": "API-Design",
-            "level": 2
-          },
-          {
-            "name": "Figma",
-            "level": 3
-          }
-        ]
-      },
-      {
+        "id": "methods",
         "category": "Methoden",
         "rated": true,
         "items": [
           {
+            "id": "agile-development-scrum",
             "name": "Agile Development (Scrum)",
             "level": 5
           },
           {
+            "id": "user-story-mapping",
             "name": "User Story Mapping",
             "level": 5
           },
           {
+            "id": "design-thinking",
             "name": "Design Thinking",
             "level": 3
           },
           {
+            "id": "business-model-canvas",
             "name": "Business Model Canvas",
             "level": 3
           },
           {
+            "id": "product-roadmapping",
             "name": "Product Roadmapping",
             "level": 5
           }
         ]
       },
       {
+        "id": "technical",
+        "category": "Technisch",
+        "rated": true,
+        "items": [
+          {
+            "id": "c4-modell",
+            "name": "C4-Modell / Architekturdiagramme",
+            "level": 3
+          },
+          {
+            "id": "sql",
+            "name": "SQL",
+            "level": 3
+          },
+          {
+            "id": "python",
+            "name": "Python",
+            "level": 2
+          },
+          {
+            "id": "data-analysis",
+            "name": "Data Analysis",
+            "level": 4
+          },
+          {
+            "id": "business-analytics",
+            "name": "Business Analytics",
+            "level": 4
+          },
+          {
+            "id": "api-design",
+            "name": "API-Design",
+            "level": 2
+          },
+          {
+            "id": "figma",
+            "name": "Figma",
+            "level": 3
+          }
+        ]
+      },
+      {
+        "id": "tools",
         "category": "Tools",
         "rated": false,
         "items": [
           {
+            "id": "atlassian-stack",
             "name": "Atlassian Stack (Jira, Confluence)"
           },
           {
+            "id": "miro",
             "name": "Miro"
           },
           {
+            "id": "microsoft-office-copilot",
             "name": "Microsoft Office Suite and Copilot with Agents"
           }
         ]
@@ -352,7 +381,5 @@
     "Triathlon",
     "Musik",
     "Kunst"
-  ],
-  "projects": [],
-  "publications": []
+  ]
 }

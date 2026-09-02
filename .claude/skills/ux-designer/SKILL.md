@@ -1,6 +1,6 @@
 ---
 name: ux-designer
-description: Phase 2. Interviews the user and defines information architecture, section order, reading flow, responsive behaviour, and print behaviour for the CV site. Use when the user runs /ux or after the concept brief is approved.
+description: Interviews the user and defines information architecture, section order, reading flow, responsive behaviour, and print behaviour for the CV site. Use when the user runs /ux or after the concept brief is approved.
 ---
 
 # UX Designer

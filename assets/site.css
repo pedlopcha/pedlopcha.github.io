@@ -1,0 +1,727 @@
+/* Pedro López Chao — CV site.
+   One stylesheet, five cascade layers. Values come from docs/04-ui-spec.md §2;
+   the corrections in §8.2 are applied here as token values so they cannot be
+   missed downstream. No CV content appears in this file. */
+
+@layer tokens, base, layout, components, state;
+
+/* ------------------------------------------------------------------ tokens */
+@layer tokens {
+  :root {
+    /* Ink and paper. Contrast ratios against --paper are in 04-ui-spec.md §8.1. */
+    --paper:          #FAF9F6;
+    --ink:            #171716;  /* 17.04:1 */
+    --ink-bullet:     #2A2822;  /* 14.00:1 */
+    --ink-secondary:  #3B3931;  /* 10.99:1 */
+    --ink-meta:       #4E4B44;  /*  8.26:1 */
+    --ink-faint:      #5C594F;  /*  6.66:1 */
+    --ink-ghost:      #8A867A;  /*  3.46:1 — decorative glyphs only */
+
+    --rule:           #DAD7CF;
+    --rule-dotted:    #C6C2B6;
+    --rule-faint:     #E4E1D8;
+
+    /* A5: the outer ring and the 1/5 ticks carry the scale, so they go to 3:1.
+       A6: the idle toggle underline was #C0BCB0 at 1.80:1. */
+    --rule-scale:     #8A867A;
+    --control-idle:   #8A867A;
+
+    --band-dim-fill:   #EAE7DE;
+    --band-dim-stroke: #D2CEC2;
+
+    /* Group tones. Near-equiluminant by design — they separate by hue, and never
+       carry meaning alone (see A11: each wedge is labelled in place). */
+    --tone-product:   #956451;  /* 4.73:1 */
+    --tone-methods:   #3B7F78;  /* 4.44:1 */
+    --tone-technical: #645B8D;  /* 5.83:1 */
+
+    /* Type */
+    --sans: Archivo, Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --t-body:      18px;
+    --t-h1:        clamp(42px, 6.6vw, 88px);
+    --t-h2:        15px;
+    --t-h3-sub:    13px;
+    --t-role:      clamp(22px, 2.4vw, 29px);
+    --t-statement: clamp(19px, 1.5vw, 21px);
+    --t-intro:     clamp(19px, 1.8vw, 24px);
+    --t-summary:   19px;
+    --t-bullet:    17px;
+    --t-list:      16px;
+    --t-mono-date: 17px;
+    --t-mono-note: 13px;
+    --t-mono-lane: 12px;
+    --t-mono-rail: 10px;
+
+    /* Space and measure */
+    --max:         1240px;
+    --gutter:      clamp(20px, 5vw, 56px);
+    --gap-section: clamp(48px, 7vw, 88px);
+    --gap-arc:     clamp(24px, 4vw, 48px);
+    --gap-role:    clamp(32px, 4vw, 48px);
+    --rule-to-heading: 26px;
+
+    /* A2: the timeline's lanes were 132px / 96px / 780px. In rem they grow with
+       browser text-only zoom, which is what made the fixed values overflow. */
+    --lane-studies: 8.25rem;
+    --lane-work:    6rem;
+    --lane-column:  112px;
+    --rail-column:  104px;
+    --timeline-vertical: 48rem;
+
+    --dur: 140ms;
+  }
+
+  /* Wide-gamut tones where the browser supports them. */
+  @supports (color: oklch(0.5 0.1 200)) {
+    :root {
+      --tone-product:   oklch(0.55 0.07 42);
+      --tone-methods:   oklch(0.55 0.07 186);
+      --tone-technical: oklch(0.5 0.08 292);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------- base */
+@layer base {
+  @font-face {
+    font-family: Archivo;
+    src: url("/assets/fonts/archivo-latin.woff2") format("woff2");
+    font-weight: 400 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/assets/fonts/plex-mono-400-latin.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    src: url("/assets/fonts/plex-mono-500-latin.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: swap;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* Author display rules outbid the UA sheet's [hidden], so state this once
+     and let every hidden mount — the error state, an absent role summary —
+     stay hidden. */
+  [hidden] { display: none !important; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--paper);
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--t-body);
+    line-height: 1.6;
+    font-synthesis-weight: none;
+    overflow-wrap: break-word;
+  }
+
+  h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+
+  a { color: inherit; text-underline-offset: 0.18em; }
+  a:hover { color: var(--ink-meta); }
+
+  button {
+    font: inherit;
+    color: inherit;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* A8: ordinary focus CSS. The design's left:-9999px plus a `style-focus`
+     attribute was a Claude Design canvas artefact with no browser meaning. */
+  :focus-visible {
+    outline: 2px solid var(--ink);   /* 17.04:1 */
+    outline-offset: 3px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -100vw;
+    top: 0;
+    z-index: 10;
+  }
+  .skip-link:focus-visible {
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :root { --dur: 0s; }
+    *, *::before, *::after {
+      animation-duration: 0s !important;
+      transition-duration: 0s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ layout */
+@layer layout {
+  .masthead,
+  .footer,
+  .fallback,
+  .section {
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  main { display: block; }
+
+  .section + .section { margin-top: var(--gap-section); }
+  .section--opening  { margin-top: var(--gap-section); }
+
+  /* Opening: year rail + content, then text + portrait. */
+  .opening {
+    display: grid;
+    grid-template-columns: var(--rail-column) minmax(0, 1fr);
+  }
+  .opening__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(180px, 21vw, 272px);
+    grid-template-rows: auto auto;
+    column-gap: clamp(24px, 4vw, 56px);
+    row-gap: clamp(20px, 3vw, 32px);
+    align-items: start;
+    margin-left: 10px;
+  }
+  .opening__headline  { grid-column: 1; grid-row: 1; }
+  .opening__statement { grid-column: 1; grid-row: 2; }
+  .opening__portrait  { grid-column: 2; grid-row: 1 / span 2; }
+  /* A missing portrait is a cosmetic absence, not a data error: the grid
+     collapses to one column rather than reserving an empty one. */
+  .opening__body:not(:has(.opening__portrait)) { grid-template-columns: minmax(0, 1fr); }
+
+  /* A role: mono date column, then the prose. */
+  .role {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    column-gap: clamp(16px, 3vw, 48px);
+  }
+
+  /* Range: the three grouped lists beside the radar. */
+  .range__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.72fr) minmax(560px, 1.28fr);
+    column-gap: clamp(28px, 4vw, 56px);
+    row-gap: var(--gap-arc);
+    align-items: start;
+  }
+
+  .arc__lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  .footer__dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: clamp(24px, 4vw, 56px);
+  }
+
+  /* -- 1080px: the radar column can no longer hold its 560px minimum beside
+        the lists. Radar moves above its groups. UX spec 270-273. */
+  @media (max-width: 1079px) {
+    .range__grid { grid-template-columns: minmax(0, 1fr); }
+    .range__radar  { order: 1; }
+    .range__groups { order: 2; }
+  }
+
+  /* -- 900px: the year rail goes, and the timeline flips to vertical. Both are
+        geometry, not preference — see 04-ui-spec.md §7. */
+  @media (max-width: 899px) {
+    .opening { grid-template-columns: minmax(0, 1fr); }
+    .rail { display: none; }
+  }
+
+  /* -- 640px: the phone tier. */
+  @media (max-width: 639px) {
+    :root {
+      --t-body: 17px;
+      --t-statement: 17px;
+    }
+    .opening__body {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: start;
+    }
+    .opening__portrait { width: 120px; }
+    .role { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+    .arc__lists, .footer__dl { grid-template-columns: minmax(0, 1fr); }
+  }
+}
+
+/* -------------------------------------------------------------- components */
+@layer components {
+
+  /* --- masthead ------------------------------------------------------- */
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 22px 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .masthead__name {
+    font-size: var(--t-h2);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* --- language toggle ------------------------------------------------ */
+  .lang { display: flex; gap: 14px; align-items: baseline; }
+  .lang__btn {
+    font-size: var(--t-mono-note);
+    font-family: var(--mono);
+    letter-spacing: 0.04em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--control-idle);   /* A6 */
+    color: var(--ink-meta);
+    transition: color var(--dur) ease, border-color var(--dur) ease;
+  }
+  .lang__btn[aria-pressed="true"] {
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  /* --- section furniture ---------------------------------------------- */
+  .section__head { border-top: 1px solid var(--rule); padding-top: var(--rule-to-heading);}
+  .section__heading {
+    font-size: var(--t-h2);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding-bottom: 5px;
+  }
+  .section__intro {
+    margin-top: 20px;
+    font-size: var(--t-intro);
+    line-height: 1.5;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+  .section--range .section__intro { max-width: 56ch; }
+
+  .subheading {
+    font-size: var(--t-h3-sub);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-secondary);
+  }
+
+  .mono { font-family: var(--mono); }
+
+  /* --- opening -------------------------------------------------------- */
+  .headline {
+    font-size: var(--t-h1);
+    font-weight: 700;
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    max-width: 22ch;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+  .statement { max-width: 70ch; text-wrap: pretty; }
+  .statement p { font-size: var(--t-statement); line-height: 1.5; }
+  .statement p + p { margin-top: 0.8em; color: var(--ink-secondary); }
+
+  .opening__portrait img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+  /* --- year rail ------------------------------------------------------ */
+  .rail {
+    position: relative;
+    border-right: 1px solid var(--rule);
+    padding-right: 16px;
+    min-height: 22rem;
+  }
+  .rail__label {
+    font-family: var(--mono);
+    font-size: var(--t-mono-rail);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .rail__mark {
+    position: absolute;
+    right: 16px;
+    top: var(--mark-top);
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+    color: var(--ink-faint);
+    padding-top: 4px;
+    border-top: 1px solid var(--rule);
+    width: 4.5em;
+    text-align: right;
+  }
+  .rail__mark--now { color: var(--ink); border-top-color: var(--ink); }
+
+  /* --- work ----------------------------------------------------------- */
+  .role { padding-bottom: var(--gap-role); }
+  .role + .role { border-top: 1px solid var(--rule); padding-top: var(--gap-role); }
+  .role__date {
+    font-family: var(--mono);
+    font-size: var(--t-mono-date);
+    line-height: 1.4;
+    color: var(--ink-meta);
+  }
+  .role__title {
+    font-size: var(--t-role);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .role__company { font-weight: 400; color: var(--ink-meta); }
+  .role__summary {
+    margin-top: 14px;
+    font-size: var(--t-summary);
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+  .role__bullets { margin-top: 18px; display: grid; gap: 12px; }
+  .role__bullet {
+    display: grid;
+    grid-template-columns: 16px minmax(0, 1fr);
+    font-size: var(--t-bullet);
+    line-height: 1.6;
+    color: var(--ink-bullet);
+  }
+  .role__bullet::before {
+    content: "—";
+    color: var(--ink-ghost);
+  }
+
+  /* --- the arc: attribution ------------------------------------------- */
+  .attribution { margin-top: var(--gap-arc); display: grid; }
+  .attribution li {
+    font-size: var(--t-list);
+    line-height: 1.5;
+    padding-block: 10px;
+    border-bottom: 1px dotted var(--rule-dotted);
+  }
+
+  /* --- the arc: timeline ---------------------------------------------- */
+  .timeline { margin-top: var(--gap-arc); }
+  .timeline__lane {
+    display: grid;
+    grid-template-columns: var(--lane-column) minmax(0, 1fr);
+    column-gap: 20px;
+    align-items: start;
+  }
+  .timeline__lane-label {
+    font-family: var(--mono);
+    font-size: var(--t-mono-lane);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-meta);
+    padding-top: 8px;
+    text-align: left;
+    transition: color var(--dur) ease;
+  }
+  .timeline__track { position: relative; }
+  .timeline__lane--studies .timeline__track { height: var(--lane-studies); }
+  .timeline__lane--work    .timeline__track { height: var(--lane-work); }
+
+  /* Geometry arrives as custom properties only; CSS decides what they mean.
+     A1: there is no viewport read anywhere in the JavaScript. */
+  .band {
+    position: absolute;
+    left: var(--band-start);
+    width: var(--band-len);
+    min-width: 5px;
+    top: calc(var(--band-row) * 2.75rem);
+    height: 16px;
+    background: var(--band-color);
+    border: 1px solid var(--band-color);
+    transition: background var(--dur) ease, border-color var(--dur) ease;
+  }
+  .band__label {
+    position: absolute;
+    left: var(--band-start);
+    top: calc(var(--band-row) * 2.75rem + var(--label-offset, -1.15rem));
+    font-family: var(--mono);
+    font-size: var(--t-mono-lane);
+    line-height: 1.3;
+    color: var(--ink-meta);
+    white-space: nowrap;
+    transition: color var(--dur) ease;
+  }
+
+  .timeline__axis { border-top: 1px solid var(--ink); margin-top: 10px; position: relative; height: 2rem; }
+  .timeline__tick {
+    position: absolute;
+    left: var(--tick-at);
+    top: 6px;
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+    color: var(--ink-faint);
+    transform: translateX(-50%);
+  }
+  .timeline__tick--first { transform: none; }
+  .timeline__tick--last  { transform: translateX(-100%); }
+
+  /* Below 900px the same two numbers drive a vertical axis. No JS branch. */
+  @media (max-width: 899px) {
+    .timeline__lanes {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      column-gap: 14px;
+      height: var(--timeline-vertical);
+    }
+    .timeline__lane { display: block; height: 100%; }
+    .timeline__lane--studies { text-align: right; }
+    .timeline__rule { background: var(--ink); }
+    .timeline__lane .timeline__track { height: 100%; }
+    .band {
+      left: auto; width: auto; min-width: 0;
+      top: var(--band-start);
+      height: var(--band-len);
+      min-height: 5px;
+      inset-inline-end: 0;
+      width: 14px;
+    }
+    .timeline__lane--work .band { inset-inline-start: 0; inset-inline-end: auto; }
+    .band__label {
+      left: auto; top: var(--band-start);
+      inset-inline-end: 20px;
+      white-space: normal;
+      max-width: 12ch;
+    }
+    .timeline__lane--work .band__label { inset-inline-start: 20px; inset-inline-end: auto; }
+    .timeline__axis { display: none; }
+  }
+
+  /* --- the arc: education and earlier stations ------------------------ */
+  .arc__lists { margin-top: var(--gap-section); }
+  .arc__list { margin-top: 16px; display: grid; }
+  .arc__list li {
+    font-size: var(--t-list);
+    line-height: 1.5;
+    padding-block: 12px;
+    border-bottom: 1px dotted var(--rule-dotted);
+  }
+  .arc__date {
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+    color: var(--ink-meta);
+    display: block;
+  }
+  .arc__institution { color: var(--ink-secondary); }
+
+  /* --- range: lists --------------------------------------------------- */
+  .skillgroup + .skillgroup { margin-top: 28px; }
+  .skillgroup__btn {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    width: 100%;
+    text-align: left;
+  }
+  .skillgroup__swatch {
+    width: 13px; height: 13px;
+    flex: none;
+    background: var(--group-tone);
+  }
+  .skillgroup__status {
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+    color: var(--ink-faint);
+    margin-left: auto;
+    opacity: 0;
+    transition: opacity var(--dur) ease;
+  }
+  .skillgroup__list { margin-top: 10px; display: grid; }
+  .skill {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: var(--t-list);
+    line-height: 1.5;
+    padding-block: 9px;
+    border-bottom: 1px dotted var(--rule-dotted);
+  }
+  .skill__level { font-family: var(--mono); color: var(--ink-meta); flex: none; }
+
+  .tools { margin-top: 18px; font-size: var(--t-list); color: var(--ink-secondary); }
+  .tools__label { font-family: var(--mono); font-size: var(--t-mono-note); }
+
+  .languages { margin-top: 28px; border-top: 1px dotted var(--rule-dotted); padding-top: 18px; }
+  .languages__list { margin-top: 10px; display: grid; }
+  .language {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: var(--t-list);
+    padding-block: 8px;
+  }
+  .language__level { color: var(--ink-secondary); }
+
+  .levelnote {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+    color: var(--ink-faint);
+  }
+
+  /* --- range: radar ---------------------------------------------------- */
+  /* A9: SVG text scales with the viewBox, so below the radar's 560px minimum a
+     17-unit spoke label drops under 15 CSS px. §7 keeps the radar at every
+     width, so instead of shrinking it past legibility the chart keeps its
+     minimum and scrolls inside its own container — the page never does. */
+  .range__radar { overflow-x: auto; overscroll-behavior-x: contain; }
+  /* The minimum is refined at run time by fitRadar() once the frame is known;
+     this is the floor before that measurement lands. */
+  .radar { width: 100%; min-width: 560px; height: auto; display: block; }
+  .radar__ring       { fill: none; stroke: var(--rule-faint); }
+  .radar__ring--edge { stroke: var(--rule-scale); }        /* A5 */
+  .radar__spoke      { stroke: var(--rule-faint); }
+  .radar__tick {
+    font-family: var(--mono);
+    font-size: 13px;
+    fill: var(--ink-faint);
+  }
+  .radar__wedge {
+    fill: var(--group-tone);
+    stroke: var(--group-tone);
+    fill-opacity: 0.22;
+    stroke-width: 1.25;
+    stroke-opacity: 1;
+    stroke-linejoin: round;
+    transition: fill-opacity var(--dur) ease, stroke-width var(--dur) ease;
+  }
+  /* A9: 17 user units, so the label clears 15 CSS px at the 560px column
+     minimum where the radar is smallest. */
+  .radar__label { font-family: var(--sans); font-size: 17px; fill: var(--ink); }
+  .radar__label-level { font-family: var(--mono); fill: var(--ink-meta); }
+  /* A11: the group's own name at its wedge mid-angle, so the link between a
+     list and its arc survives with colour removed. */
+  .radar__grouplabel {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    fill: var(--group-tone);
+    /* A paper halo behind the glyphs, so the name stays legible where it crosses
+       a ring or a wedge fill. */
+    stroke: var(--paper);
+    stroke-width: 3.5;
+    paint-order: stroke fill;
+  }
+
+  /* --- human footer ---------------------------------------------------- */
+  .footer {
+    margin-top: var(--gap-section);
+    padding-bottom: clamp(56px, 8vw, 96px);
+  }
+  /* The only full-weight rule on the page, and what makes the footer read as the
+     end. It belongs to the rendered content, so an unrendered footer shows no
+     stray rule above the legal link. */
+  .footer .section__head {
+    border-top: 1px solid var(--ink);
+    padding-top: var(--rule-to-heading);
+  }
+  .footer__dl { margin-top: 24px; }
+  .footer__list { margin-top: 10px; display: grid; }
+  .footer__list li {
+    font-size: var(--t-list);
+    padding-block: 8px;
+    border-bottom: 1px dotted var(--rule-dotted);
+  }
+  .footer__links { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 20px; }
+  .footer__links a { font-family: var(--mono); font-size: var(--t-mono-note); }
+  .footer__bottom {
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  /* --- legal strip and fallbacks --------------------------------------- */
+  .legal-strip {
+    margin-top: 28px;
+    font-family: var(--mono);
+    font-size: var(--t-mono-note);
+  }
+  .legal-strip a { color: var(--ink-meta); }
+
+  .fallback { padding-block: clamp(48px, 12vh, 120px); display: grid; gap: 14px; }
+  .fallback__lead { font-size: var(--t-intro); font-weight: 400; line-height: 1.4; max-width: 40ch; text-wrap: pretty; }
+  .fallback a { font-family: var(--mono); font-size: var(--t-mono-note); }
+}
+
+/* ------------------------------------------------------------------- state */
+@layer state {
+  /* A3 / A7: hover, focus and a sticky pressed state all reach the same styles,
+     so a keyboard or touch user gets the interaction a mouse user gets. */
+  .range__groups[data-highlight] .skillgroup:not([data-active]) .skill,
+  .range__groups[data-highlight] .skillgroup:not([data-active]) .skillgroup__btn {
+    color: var(--ink-faint);            /* A4: dimmed text floors at 6.66:1 */
+  }
+  .range__groups[data-highlight] .skillgroup:not([data-active]) .skill__level {
+    color: var(--ink-faint);
+  }
+  .skillgroup[data-active] .skillgroup__status { opacity: 1; }
+
+  .radar[data-highlight] .radar__wedge:not([data-active]) {
+    fill-opacity: 0.05;
+    stroke-opacity: 0.55;               /* A4: was 0.22 */
+  }
+  .radar[data-highlight] .radar__wedge[data-active] {
+    fill-opacity: 0.40;
+    stroke-width: 2.5;
+  }
+  .radar[data-highlight] .radar__label:not([data-active]),
+  .radar[data-highlight] .radar__grouplabel:not([data-active]) {
+    fill: var(--ink-faint);
+  }
+  .radar[data-highlight] .radar__label-level:not([data-active]) { fill: var(--ink-faint); }
+
+  .timeline[data-highlight] .timeline__lane:not([data-active]) .band {
+    background: var(--band-dim-fill);
+    border-color: var(--band-dim-stroke);
+  }
+  .timeline[data-highlight] .timeline__lane:not([data-active]) .band__label,
+  .timeline[data-highlight] .timeline__lane:not([data-active]) .timeline__lane-label {
+    color: var(--ink-faint);
+  }
+}
