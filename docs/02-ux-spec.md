@@ -6,6 +6,38 @@ Phase 2. Derived from `docs/01-concept-brief.md` and the real content in `conten
 `content/copy.json`. Decides what goes where and in what order. No colour, type or visual style
 — that is phase 4 (UI).
 
+**Revision 2 — 2026-08-31.** Set back to `DRAFT` at the user's instruction to amend the
+JavaScript-disabled requirement. Revision 1 required both diagrams to render with JS off, which
+forced their geometry to be computed at build time. The user's decision is that the computation
+happens in the browser at page load, so the axis is always current without a rebuild, and that no
+scheduled build exists. The affected passages are marked **[rev. 2]** below. Downstream:
+`docs/04-ui-spec.md` §5.0, §5.1 and §7 are stale until this is approved. The bilingual consequence is resolved in
+*Interactions*, item 1: language switching is a browser script, and a visitor without JavaScript
+reads German.
+
+**Revision 3 — 2026-08-31.** Adds the *Legal posture* section below, a second static page for the
+Datenschutzerklärung, a footer link to it, and an amendment to the out-of-scope line on contact
+details. Prompted by the user asking whether an Impressum is required. Decision: **privacy notice
+yes, Impressum no**, on the conditions recorded in *Legal posture* — which are now binding on the
+site, not background reasoning.
+
+**Revision 6 — 2026-09-02.** The page is rendered **entirely in the browser** from
+`content/cv.json` and `content/copy.json`, which GitHub Pages serves as ordinary static assets.
+Revision 2 removed the build step but still required the German prose to ship inside the markup;
+those two things cannot both be true, because the only ways to get prose into markup are to
+generate it or to hardcode it, and `CLAUDE.md` forbids the second. The user's decision resolves it
+in favour of no build step: **nothing but the document shell ships in the markup, and with
+JavaScript disabled the page renders no CV content at all.** Amended below: *Interactions* item 1,
+*Interactions* item 6, the JS-disabled edge case, and assumptions 12–14. Approved directly at the
+user's explicit instruction in the same message, which is why this document moves from `DRAFT` to
+`APPROVED` without a separate approval turn.
+
+**Note on revision numbering.** Two sequences collided in this file. The inline `[rev. 2]` and
+`[rev. 3]` markers refer to the two 2026-08-31 notes above, **not** to the `## Revision 4` and
+`## Revision 5` sections further down, which belong to an earlier and unrelated numbering. New
+markers are written `[rev. 6]`. Nothing is renumbered, because the inline markers are load-bearing
+for phase 6 and a global renumber would silently break them.
+
 **Note on the skill template.** `.claude/skills/ux-designer/SKILL.md` mandates a "Print
 behaviour" section and an interview question about the PDF. `CLAUDE.md` puts print out of
 scope and publishes no PDF. `CLAUDE.md` wins, so that section is absent by design, not by
@@ -97,7 +129,8 @@ showing.
 | 3 | Work | Section heading, then the four principal roles, reverse chronological, with the bullet budget below. | `experience[]` dated facts — employer, title, dates (cv.json); `sections.work.heading`, `roles.*.summary`, `roles.*.bullets[]` (copy.json) | Must |
 | 4 | The arc | Heading, the three-line attribution block, the two-lane timeline, and beneath it the compact education and early-stations lists it indexes. | `education[]`, `earlierStations[]`, `experience[]` dated facts (cv.json); `sections.arc.*` incl. `educationLabel` and `earlierStationsLabel`, `education.*.fieldLabel`, `earlierStations.*.roleLabel` (copy.json) | Must |
 | 5 | Range | The three skill groups and the radar, closing with the tooling line and languages. | `skills.technical[]` items and category keys, `meta.languages[]` (cv.json); `sections.range.*` incl. the three group labels, `languages.*` names and levels, `microcopy.level*` (copy.json) | Should |
-| 6 | Human footer | Hobbies, interests, outbound links, language toggle repeated. | `hobbies[]`, `interests[]`, `meta.links[]` (cv.json); `sections.footer.*`, `microcopy.link*` (copy.json) | Should |
+| 6 | Human footer | Hobbies, interests, outbound links, the legal link, language toggle repeated. | `hobbies[]`, `interests[]`, `meta.links[]` (cv.json); `sections.footer.*`, `microcopy.link*` (copy.json) | Should |
+| 7 | **Datenschutzerklärung** *(separate page)* | The Art. 13 DSGVO privacy notice. Not part of the CV page and not in its scroll. Reached by a footer link. | **Neither content file.** See *Legal posture* | Must |
 
 Sections 3, 4, 5 and 6 each carry a visible heading from `copy.json`. Sections 1 and 2 do not —
 the name and the headline are the heading.
@@ -107,6 +140,11 @@ holds language-neutral facts (dates, company and institution names, links) once;
 `content/copy.json` holds the per-language prose and is what phase 4 (UI) and phase 6 (build)
 consume for shipped text. Phase 5 (architecture) owns the final data contract; it may rename or
 restructure freely so long as no fact is duplicated across languages.
+
+**Section 7 is a second HTML document**, not a section of the scroll. It is the only page on the
+site besides the CV. It carries no CV content, so it does not touch the `cv.json` / `copy.json`
+single-source rule — its text is legal boilerplate that belongs to neither file. German only:
+the duty arises under German law and German is the primary market. See *Legal posture*.
 
 **Not present as sections:** contact details (cut by the brief), personal skills (cut),
 education sub-bullets (cut), projects and publications (empty and unsourced).
@@ -210,14 +248,37 @@ of a long page is not sent back to the top.
   equivalent that is not colour-dependent, per the AA floor.
 - Keyboard: two ordinary focusable controls, visible focus, activated by Enter or Space.
 - Changing language changes the document `lang` attribute.
-- Without JS it must still work — which pushes phase 5 (architecture) toward two documents and
-  plain links.
+- **[rev. 2] The switch happens in the browser. With JS disabled the page is German.** Revision 1
+  required the toggle to work without JS, which pushed phase 5 toward two generated documents and
+  plain links; generating those needs the build step rev. 2 removes, and hand-authoring two HTML
+  files would put CV text into markup against `CLAUDE.md`'s single-source rule. So the toggle is
+  a script, and a visitor without JavaScript reads the German page.
+- **What this costs, stated plainly.** German is the primary market, so the JS-off visitor gets
+  the language the page would have chosen for them anyway — but an English-only reader without
+  JavaScript cannot reach English at all. That is a real reduction from revision 1, accepted
+  deliberately rather than overlooked.
+- **[rev. 6, amended] What it therefore requires.** Revision 2 required the German copy to ship
+  inside the markup. Revision 6 withdraws that: **no CV prose is in the markup in either
+  language.** Both are fetched from `copy.json` and the script renders one of them. What survives
+  from revision 2 is the part that was really about the visitor's experience rather than about
+  delivery, and it is now the binding form of this requirement:
+  - `lang="de"` is the document's **authored** value in the HTML, set before any script runs, and
+    the script changes it on switch. It is never written by the renderer on first paint.
+  - **German renders on the first pass. There is no flash of English and no re-render** — the
+    script picks the language before it writes any node, not after.
+  - **No empty elements, no placeholder text, no skeleton and no spinner are ever visible.** The
+    page shows the shell until the content is ready and then shows the content. A visitor must
+    never see a half-built page.
+  - The toggle is part of the rendered content, so with scripting off it is **absent**, not
+    present-and-inert. An inert control is worse than no control.
 - Justification: a hard constraint from the brief. Bilingual is non-optional.
 
 **2. Timeline lane highlight.** Hover or keyboard focus on a lane emphasises it and
 de-emphasises the other; nothing is ever hidden.
-- Both lanes are fully visible at rest and remain so with JS disabled. The highlight is an
-  enhancement, never the means of reading the diagram.
+- Both lanes are fully visible at rest. The highlight is an enhancement, never the means of
+  reading the diagram. **[rev. 2]** The lanes themselves are positioned by script at load; with
+  JS disabled the diagram is absent and the dates it visualises are read from the work list and
+  the education list, which state every one of them in text.
 - Keyboard: each lane is a single focusable element with an accessible name, in DOM order —
   studies, then work. Not each segment; that would flood the tab order.
 - Touch: no hover exists. Tap highlights, tapping elsewhere clears.
@@ -243,6 +304,23 @@ destination legible. No icons standing alone. LinkedIn renders only if a profile
 
 **5. Skip link.** To the main content, first in the tab order. Required for keyboard users on a
 single long page.
+
+**6. The legal link.** „Datenschutz" in the human footer, to the second page. An ordinary link —
+not a modal, not a disclosure toggle. §5 DDG's standard for legal information is *leicht
+erkennbar, unmittelbar erreichbar und ständig verfügbar*; the same standard is the sensible bar
+for the privacy notice, and a plain footer link on a single-page site meets it where a JavaScript
+toggle would not. It must therefore work with JS disabled.
+- **[rev. 6] This is now the sharpest constraint on the page, and it inverts.** Under revision 2
+  the link was one of a few things that could not depend on script. Under revision 6 it is the
+  **only** part of the page's body that cannot — everything else is rendered. *Ständig verfügbar*
+  is not satisfied by a link that exists only once JavaScript has run. Therefore: the footer's
+  „Datenschutz" link, and its label, are **authored directly in `index.html`** and are never
+  produced by the renderer. The label is not CV prose and is not in `copy.json`, so this creates
+  no duplication and does not touch the single-source rule.
+- **[rev. 6] The Datenschutz page itself carries no JavaScript and no JSON.** It is hand-authored
+  static HTML. It holds no CV content — see the section inventory, row 7 — so hardcoding its prose
+  is not a single-source violation, and it must remain readable when the CV page is not.
+- Justification: a legal duty, not a design choice. See *Legal posture*.
 
 ### Explicitly rejected interactions
 
@@ -365,9 +443,11 @@ and the brief's content priority 5. Requirements:
   floor without a hidden `alt` doing the work.
 - **No meaning by colour alone.** Arcs are distinguished by their labels and their position,
   not only by fill.
-- **Generated at build time from `cv.json`.** A static SVG, drawn from the same records as the
-  lists. No runtime JS is required to draw it; the highlight interaction is progressive
-  enhancement on top. With JS disabled the chart and the lists both render.
+- **[rev. 2] Drawn in the browser from `cv.json`.** An SVG composed at load from the same
+  records as the lists, so no build step and no rebuild schedule stand between a change to
+  `cv.json` and a correct chart. With JS disabled the chart is absent; the grouped lists above
+  are not, and they carry every skill and every level in text. The highlight interaction remains
+  enhancement on top.
 - **Dropped, not scrolled, when it stops being legible** — below the width at which eighteen
   spoke labels fit, and at text sizes where labels collide. The lists carry the same
   information, so this is removing a redundant view, not hiding content.
@@ -408,16 +488,89 @@ text and duplicate per language; before phase 3 rev. 3 they existed only as Germ
 | Group with 4 items vs 9 | The three groups are visibly unequal (6 / 7 / 9) and that is fine. No fixed-height columns, and the radar's arcs are proportional to their item counts, not forced equal. |
 | Photo missing or slow | The opening is never blocked by it and never reflows around its arrival. Reserved space, `meta.photoAlt` from `copy.json`. |
 | A new role added, or a date changed | One edit to `cv.json` for the dates, one per language in `copy.json` for the prose. The work list, the diagram geometry and the axis all follow. Nothing about page position is hand-tuned per entry. |
-| JS disabled | Everything is readable. Both timeline lanes visible, the radar drawn, all three skill groups listed, both languages reachable, no hidden content. |
+| JS disabled | **[rev. 6, replaces rev. 2]** The page renders **no CV content**. Revision 2's promise — every fact still readable, only the diagrams absent — required the prose to be in the markup, and revision 6 removes it from the markup. What the visitor gets instead is a deliberate, designed state, not a failure: a `<noscript>` block carrying a short German sentence saying the page needs JavaScript, the „Datenschutz" link, and the profile link. No blank page, no broken layout, no spinner, no empty frames, no error. **This is the accepted cost of having no build step, and it is the largest single concession in this document.** |
+| A JSON fetch fails or is malformed | Same visible outcome as JS disabled, reached by a different route, and it must be handled explicitly rather than left to an uncaught exception. The page shows the same `<noscript>`-equivalent message in the shell. It must never show a partially rendered page, a raw key, `undefined`, or a stack trace. Phase 5 specifies where this is caught. |
 | Fifteen roles instead of four | Out of scope as a design target, but the diagram must not assume exactly four work entries. |
+
+## Legal posture
+
+**Decided 2026-08-31: a Datenschutzerklärung, no Impressum.** The conditions below are the basis
+for that decision, so they are **binding constraints on the site**, not commentary. If one stops
+being true, the decision has to be retaken.
+
+*This section records a decision and its reasoning. It is not legal advice, and nobody on this
+project is a lawyer. For a binding answer, a Fachanwalt für IT-Recht or the local IHK.*
+
+### Why the privacy notice is required
+
+Art. 13 DSGVO, triggered by processing personal data. GitHub Pages logs visitor IP addresses, so
+processing happens on every request. This applies whatever is decided about the Impressum, and it
+is not contested.
+
+### Why the Impressum is not
+
+§5 Abs. 1 DDG — the **Digitale-Dienste-Gesetz**, which replaced the TMG on 14 May 2024, so any
+source still citing „§5 TMG" predates the change — applies to *geschäftsmäßige, in der Regel
+gegen Entgelt angebotene digitale Dienste*. Two elements, both required. *Geschäftsmäßig* is
+broad and needs no profit motive. *In der Regel gegen Entgelt angeboten* is the narrow one, and
+it is where a personal CV page sits outside: pages of this kind are not a service anyone charges
+for. Services serving *ausschließlich persönliche oder familiäre Zwecke* are exempt.
+
+**There is no bright line for a jobseeker's CV page and no case law squarely deciding it.** The
+conservative reading treats career self-marketing as *geschäftsmäßig*. This project takes the
+narrower second element as decisive. That is a judgement, not a certainty, and the residual risk
+is accepted: an Abmahnung requires a *Mitbewerber*, which a jobseeker's page does not have, and
+since §13 Abs. 4 Nr. 1 UWG (Dec 2020) an abmahnender party cannot recover costs for internet
+information duties.
+
+### The six conditions — binding
+
+The decision holds only while **all** of these are true. Phase 4 and phase 6 must not break them,
+and any future change to the site is measured against them.
+
+| # | Condition | What breaks it |
+|---|---|---|
+| 1 | **No offer of services.** Seeking employment is not offering a service | „Verfügbar für Projekte", rates, a consulting pitch. „Ich suche eine neue Rolle" is fine |
+| 2 | **No monetisation of any kind** | Ads, affiliate links, sponsors, donations, a Patreon |
+| 3 | **No analytics or marketing tracking** | Any analytics script. Already out of scope below; this is now a second, independent reason |
+| 4 | **No business identity** | A company name, a logo, a USt-IdNr, anything presenting the operator as an *Unternehmen* |
+| 5 | **A personal domain** | `pedlopcha.github.io` reads as personal. A domain like `lopezchao-consulting.de` changes the reading even with identical content |
+| 6 | **Profile links only** | Xing and LinkedIn are personal profiles, not offers. A link to a business would break it |
+
+The content as specified passes all six: there is no offer anywhere on the page.
+
+**The day condition 1 or 2 stops being true, an Impressum becomes mandatory** — with a
+*ladungsfähige Anschrift*, which is a real street address, not a Postfach. That is the trigger to
+watch, and it is why this is written down rather than remembered.
+
+### What the Datenschutz page must cover
+
+Structure only — the text itself must come from a current generator or a lawyer, not from this
+project:
+
+- Controller identity: name and **one email address**, a dedicated alias rather than a personal
+  inbox. This is the only contact detail anywhere on the site.
+- Hosting on GitHub Pages, and the **transfer to the USA** that implies, GitHub being Microsoft.
+- Server log data — IP address, timestamp, user agent, referrer — and its purpose and retention.
+- **No cookies, no analytics, no third-party requests.** This is worth stating positively,
+  because it is unusually true here: the fonts are self-hosted (UI spec §10 Q2), so the page
+  makes no external request at all. A page with nothing to disclose should say so.
+- Data-subject rights under Art. 15–21 and the right to complain to a supervisory authority.
+
+The page inherits the CV page's type and colour but needs none of its structure — no radar, no
+timeline, no portrait. It is a heading, running text, and a link back.
 
 ## Out of scope
 
 Phase 4 (UI) must not reintroduce these.
 
 - **Print stylesheets and any PDF.** Out of scope per `CLAUDE.md`.
-- Contact details of any kind — email, phone, postal location. Including the placeholders still
-  sitting in `cv.json`'s `meta.contact`.
+- **[rev. 3, amended]** Contact details on **the CV page** — email, phone, postal location.
+  Including the placeholders still sitting in `cv.json`'s `meta.contact`, which must never
+  render anywhere. The absolute form of this rule could not survive: Art. 13 DSGVO requires the
+  controller's identity and contact details, so **one email address appears on the
+  Datenschutz page** and nowhere else. Use a dedicated alias, not a personal inbox. No phone
+  number and no postal address appear anywhere on the site.
 - A call-to-action, a hero button, feature cards, testimonial blocks — the startup-landing-page
   anti-reference.
 - Dark background with a saturated neon accent — named anti-reference.
@@ -454,5 +607,26 @@ Inferred rather than asked. Correct any that are wrong.
    Assumption 5.
 8. **The photo is a single square image.** `meta.photo` names one file and the LaTeX source
    used it as a portrait.
-9. **The headline renders identically in both languages' layouts.** German is 9 words, English
+9. **[rev. 3] The Datenschutz page is German only.** The duty arises under German law and German
+   is the primary market. An English visitor reaching it gets German text. If you want it
+   bilingual it is a second file, not a toggle — the language toggle is CV-page state.
+10. **[rev. 3] The email alias exists before launch.** The privacy notice cannot ship without a
+   working address on it, and it is the one piece of contact information on the site.
+11. **The headline renders identically in both languages' layouts.** German is 9 words, English
    11; phase 4 sets the display size against the longer of the two so neither breaks the fold.
+12. **[rev. 6] Search engines and link previews are worth four duplicated strings.** A crawler and
+   a link unfurler read the document without running scripts, so `<title>`, the meta description
+   and the two Open Graph strings must be present in `index.html` itself. They stay in `copy.json`
+   as the source a human edits, and the script updates `document.title` on switch, but the shipped
+   HTML carries the German values literally. This is a **named, deliberate duplication of four
+   strings**, taken because the alternative is that every link to this page — on LinkedIn, Xing,
+   in a chat, in an application email — unfurls blank. If you would rather have zero duplication
+   than a working link preview, say so and the four come out.
+13. **[rev. 6] Discovery does not depend on search.** Nobody finds a personal CV page by
+   searching for it; they arrive from a link the owner sent. That is why priority 3's SEO element
+   survives revision 6 largely intact while the JS-off element does not — the preview card matters
+   and the ranking does not. If this page is ever meant to rank, revision 6 is the wrong decision.
+14. **[rev. 6] Two documents for the two languages is now off the table.** Generating them needs
+   the build step this revision removes, and hand-authoring them puts CV prose in markup twice
+   over. The single document with a script toggle, as approved in revision 2, is the only
+   remaining shape. `hreflang` and separate indexable URLs are given up with it.

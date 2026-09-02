@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Pedro López Chao — Product Management Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: #FAF9F6; }
+  a { color: #171716; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { color: #4E4B44; }
+  :focus-visible { outline: 2px solid #171716; outline-offset: 3px; }
+</style>
+</helmet>
+
+<div style="background:#FAF9F6;color:#171716;font-family:Archivo,Helvetica,Arial,sans-serif;font-size:18px;line-height:1.6">
+
+  <a href="#inhalt" style="position:absolute;left:-9999px;top:0;background:#171716;color:#FAF9F6;padding:12px 18px;font-size:15px;z-index:9" style-focus="left:12px;top:12px;position:fixed">{{ c.skip }}</a>
+
+  <!-- 1 · Masthead -->
+  <header style="border-bottom:1px solid #DAD7CF">
+    <div style="max-width:1240px;margin:0 auto;padding:22px clamp(20px,5vw,56px);display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap">
+      <span style="font-size:15px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase">Pedro López Chao</span>
+      <div role="group" aria-label="{{ c.langAria }}" style="display:flex;gap:16px;align-items:baseline">
+        <button type="button" onClick="{{ setDe }}" aria-pressed="{{ isDe }}" style="{{ deBtn }}">{{ c.de }}</button>
+        <button type="button" onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtn }}">{{ c.en }}</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inhalt">
+
+    <!-- 2 · Opening -->
+    <section style="max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,56px)">
+      <div style="display:grid;grid-template-columns:{{ railCols }};gap:clamp(24px,4vw,56px);align-items:start">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="height:720px;position:relative;border-right:1px solid #DAD7CF;font-family:'IBM Plex Mono',monospace">
+            <div style="position:absolute;top:10px;left:0;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5C594F">{{ c.axis }}</div>
+            <div style="position:absolute;top:34px;left:0;right:16px;font-size:13px;font-weight:500;border-top:1px solid #171716;padding-top:7px">2026</div>
+            <div style="position:absolute;top:138px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2023</div>
+            <div style="position:absolute;top:277px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2019</div>
+            <div style="position:absolute;top:346px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2017</div>
+            <div style="position:absolute;top:381px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2016</div>
+            <div style="position:absolute;top:520px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2012</div>
+            <div style="position:absolute;top:694px;left:0;right:16px;font-size:13px;color:#5C594F;border-top:1px solid #DAD7CF;padding-top:7px">2007</div>
+          </div>
+        </sc-if>
+
+        <div style="{{ openGrid }}">
+          <div style="{{ headCell }}">
+            <h1 style="margin:0;font-weight:700;font-size:clamp(42px,6.6vw,88px);line-height:0.94;letter-spacing:-0.035em;text-wrap:balance;max-width:22ch;overflow-wrap:break-word">{{ c.headline }}</h1>
+          </div>
+          <div style="{{ photoCell }}">
+            <div style="width:100%;aspect-ratio:1;background:repeating-linear-gradient(135deg,#E8E5DC 0 7px,#F1EFE8 7px 14px);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box" role="img" aria-label="{{ c.photoAlt }}">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.06em;color:#5C594F">porträt 1:1</span>
+            </div>
+          </div>
+          <div style="{{ stmtCell }}">
+            <p style="margin:0;line-height:1.5;text-wrap:pretty">{{ c.open1 }}</p>
+            <p style="margin:0;line-height:1.5;color:#3B3931;text-wrap:pretty">{{ c.open2 }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · Work -->
+    <section style="{{ workSec }}">
+      <div style="{{ workInner }}">
+        <h2 style="margin:0 0 clamp(28px,4vw,44px);font-size:15px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase">{{ c.workHeading }}</h2>
+        <sc-for list="{{ roles }}" as="role" hint-placeholder-count="4">
+          <article style="display:grid;grid-template-columns:{{ roleCols }};gap:clamp(16px,3vw,48px);align-items:start;padding-bottom:clamp(32px,4vw,48px);margin-bottom:clamp(32px,4vw,48px);border-bottom:1px solid #DAD7CF">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:17px;line-height:1.4;color:#4E4B44">{{ role.date }}</div>
+            <div style="display:flex;flex-direction:column;gap:14px;min-width:0;max-width:74ch">
+              <h3 style="margin:0;font-size:clamp(22px,2.4vw,29px);line-height:1.2;font-weight:600;letter-spacing:-0.01em;overflow-wrap:break-word">{{ role.role }}<span style="color:#4E4B44;font-weight:400"> · {{ role.company }}</span></h3>
+              <sc-if value="{{ role.summary }}" hint-placeholder-val="{{ true }}">
+                <p style="margin:0;font-size:19px;line-height:1.6;text-wrap:pretty">{{ role.summary }}</p>
+              </sc-if>
+              <ul style="margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px">
+                <sc-for list="{{ role.bullets }}" as="b" hint-placeholder-count="3">
+                  <li style="display:grid;grid-template-columns:16px minmax(0,1fr);gap:10px;font-size:17px;line-height:1.6;color:#2A2822;text-wrap:pretty"><span aria-hidden="true" style="color:#8A867A">—</span><span>{{ b.t }}</span></li>
+                </sc-for>
+              </ul>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 4 · The arc -->
+    <section style="max-width:1240px;margin:clamp(24px,4vw,48px) auto 0;padding:0 clamp(20px,5vw,56px)">
+      <h2 style="margin:0 0 20px;font-size:15px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase">{{ c.arcHeading }}</h2>
+      <p style="margin:0 0 28px;font-size:clamp(19px,1.8vw,24px);line-height:1.5;max-width:52ch;text-wrap:pretty">{{ c.arcIntro }}</p>
+
+      <dl style="margin:0 0 clamp(36px,5vw,56px);display:flex;flex-direction:column;gap:12px;max-width:80ch">
+        <sc-for list="{{ attribution }}" as="a" hint-placeholder-count="3">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:2px;border-top:1px dotted #C6C2B6;padding-top:12px">
+            <dt style="font-size:17px;font-weight:600;overflow-wrap:break-word">{{ a.k }}</dt>
+            <dd style="margin:0;font-size:17px;color:#3B3931;text-wrap:pretty">{{ a.v }}</dd>
+          </div>
+        </sc-for>
+      </dl>
+
+      <!-- Timeline, horizontal -->
+      <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div tabIndex="0" role="group" aria-label="{{ c.laneStudies }}" onMouseEnter="{{ enterStudies }}" onMouseLeave="{{ leaveLane }}" onFocus="{{ enterStudies }}" onBlur="{{ leaveLane }}" style="display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;align-items:start;padding:10px 0">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:{{ studiesFg }};padding-top:2px">{{ c.laneStudies }}</div>
+            <div style="position:relative;height:132px">
+              <sc-for list="{{ studies }}" as="b" hint-placeholder-count="3">
+                <div style="position:absolute;top:{{ b.row }}px;left:{{ b.l }}%;width:{{ b.w }}%;min-width:6px">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.3;color:{{ b.fg }};white-space:nowrap;margin-bottom:4px">{{ b.label }}</div>
+                  <div style="height:16px;background:{{ b.fill }};border:1px solid {{ b.stroke }}"></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div tabIndex="0" role="group" aria-label="{{ c.laneWork }}" onMouseEnter="{{ enterWork }}" onMouseLeave="{{ leaveLane }}" onFocus="{{ enterWork }}" onBlur="{{ leaveLane }}" style="display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;align-items:start;padding:10px 0;border-top:1px solid #DAD7CF">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:{{ workFg }};padding-top:2px">{{ c.laneWork }}</div>
+            <div style="position:relative;height:96px">
+              <sc-for list="{{ works }}" as="b" hint-placeholder-count="7">
+                <div style="position:absolute;top:{{ b.bandTop }};left:{{ b.l }}%;width:{{ b.w }}%;min-width:5px;height:16px;background:{{ b.fill }};border:1px solid {{ b.stroke }}"></div>
+                <div style="position:absolute;top:{{ b.labelTop }};left:{{ b.l }}%;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.3;color:{{ b.fg }};white-space:nowrap">{{ b.label }}</div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:112px minmax(0,1fr);gap:20px;border-top:1px solid #171716;padding-top:8px">
+            <div></div>
+            <div style="position:relative;height:20px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4E4B44">
+              <span style="position:absolute;left:0%">2007</span>
+              <span style="position:absolute;left:25%">2012</span>
+              <span style="position:absolute;left:45%">2016</span>
+              <span style="position:absolute;left:65%">2020</span>
+              <span style="position:absolute;left:95%">2026</span>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- Timeline, vertical (narrow) -->
+      <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative">
+          <div tabIndex="0" role="group" aria-label="{{ c.laneStudies }}" onMouseEnter="{{ enterStudies }}" onMouseLeave="{{ leaveLane }}" onFocus="{{ enterStudies }}" onBlur="{{ leaveLane }}" style="position:relative;height:780px;padding-right:2px">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ studiesFg }};text-align:right">{{ c.laneStudies }}</div>
+            <sc-for list="{{ studies }}" as="b" hint-placeholder-count="3">
+              <div style="position:absolute;top:{{ b.vt }};right:0;height:{{ b.vh }};min-height:6px;width:10px;background:{{ b.fill }};border:1px solid {{ b.stroke }}"></div>
+              <div style="position:absolute;top:{{ b.vt }};right:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.25;color:{{ studiesFg }};text-align:right;max-width:88%">{{ b.label }}</div>
+            </sc-for>
+          </div>
+          <div tabIndex="0" role="group" aria-label="{{ c.laneWork }}" onMouseEnter="{{ enterWork }}" onMouseLeave="{{ leaveLane }}" onFocus="{{ enterWork }}" onBlur="{{ leaveLane }}" style="position:relative;height:780px;padding-left:2px;border-left:1px solid #DAD7CF">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ workFg }}">{{ c.laneWork }}</div>
+            <sc-for list="{{ works }}" as="b" hint-placeholder-count="6">
+              <div style="position:absolute;top:{{ b.vt }};left:0;height:{{ b.vh }};min-height:6px;width:10px;background:{{ b.fill }};border:1px solid {{ b.stroke }}"></div>
+              <div style="position:absolute;top:{{ b.vt }};left:16px;font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.25;color:{{ workFg }};max-width:88%">{{ b.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4E4B44;border-top:1px solid #171716;padding-top:6px;margin-top:8px">
+          <span>2007</span><span>2026</span>
+        </div>
+      </sc-if>
+
+      <div style="margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,4vw,48px)">
+        <div>
+          <h3 style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#3B3931">{{ c.eduLabel }}</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ eduList }}" as="e" hint-placeholder-count="3">
+              <li style="font-size:16px;line-height:1.5;border-top:1px dotted #C6C2B6;padding-top:10px;overflow-wrap:break-word"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4E4B44">{{ e.date }}</span>  {{ e.t }}</li>
+            </sc-for>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#3B3931">{{ c.earlierLabel }}</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{ earlier }}" as="e" hint-placeholder-count="3">
+              <li style="font-size:16px;line-height:1.5;border-top:1px dotted #C6C2B6;padding-top:10px;overflow-wrap:break-word"><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4E4B44">{{ e.date }}</span>  {{ e.t }}</li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Range -->
+    <section style="max-width:1240px;margin:clamp(48px,7vw,88px) auto 0;padding:0 clamp(20px,5vw,56px)">
+      <div style="border-top:1px solid #DAD7CF;padding-top:26px">
+        <h2 style="margin:0 0 20px;font-size:15px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase">{{ c.rangeHeading }}</h2>
+        <p style="margin:0 0 10px;font-size:clamp(19px,1.8vw,24px);line-height:1.5;max-width:56ch;text-wrap:pretty">{{ c.rangeIntro }}</p>
+        <p style="margin:0 0 clamp(28px,4vw,40px);font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4E4B44">{{ c.scaleNote }}</p>
+
+        <div style="display:grid;grid-template-columns:{{ rangeCols }};gap:clamp(28px,4vw,56px);align-items:start">
+          <div style="display:flex;flex-direction:column;gap:28px;min-width:0">
+            <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+              <div style="border-top:1px solid #DAD7CF;padding-top:14px">
+                <button type="button" onMouseEnter="{{ g.enter }}" onMouseLeave="{{ g.leave }}" onFocus="{{ g.enter }}" onBlur="{{ g.leave }}" aria-describedby="radar-desc" style="display:flex;align-items:center;gap:9px;background:none;border:0;padding:0 0 12px;margin:0;font:inherit;font-size:17px;font-weight:600;letter-spacing:0.01em;color:#171716;cursor:pointer;text-align:left" style-hover="text-decoration:underline">
+                  <span aria-hidden="true" style="{{ g.swatch }}"></span>
+                  <span style="overflow-wrap:break-word">{{ g.label }}</span>
+                  <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:400;letter-spacing:0.08em;text-transform:uppercase;color:#4E4B44">{{ g.hint }}</span>
+                </button>
+                <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px">
+                  <sc-for list="{{ g.items }}" as="s" hint-placeholder-count="6">
+                    <li style="font-size:16px;line-height:1.5;display:flex;gap:7px;align-items:baseline"><span style="overflow-wrap:break-word">{{ s.name }}</span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4E4B44;white-space:nowrap">{{ s.lvl }}</span></li>
+                  </sc-for>
+                </ul>
+                <sc-if value="{{ g.tools }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#3B3931;text-wrap:pretty">{{ g.tools }}</p>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <sc-if value="{{ showRadar }}" hint-placeholder-val="{{ true }}">
+            <figure style="margin:0;width:100%">
+              <figcaption style="font-size:15px;font-weight:600;margin-bottom:4px">{{ c.radarTitle }}</figcaption>
+              <p style="margin:0 0 12px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4E4B44">{{ c.scaleNote }}</p>
+              <svg viewBox="-118 -48 636 516" width="100%" role="img" aria-labelledby="radar-title radar-desc" style="display:block;overflow:visible">
+                <title id="radar-title">{{ c.radarTitle }}</title>
+                <desc id="radar-desc">{{ c.radarDesc }}</desc>
+                <circle cx="200" cy="200" r="150" fill="none" stroke="#C6C2B6"></circle>
+                <circle cx="200" cy="200" r="120" fill="none" stroke="#E4E1D8"></circle>
+                <circle cx="200" cy="200" r="90" fill="none" stroke="#E4E1D8"></circle>
+                <circle cx="200" cy="200" r="60" fill="none" stroke="#E4E1D8"></circle>
+                <circle cx="200" cy="200" r="30" fill="none" stroke="#E4E1D8"></circle>
+                <g stroke="#E4E1D8">
+                  <line x1="200" y1="200" x2="200" y2="50"></line>
+                  <line x1="200" y1="200" x2="251.3" y2="59"></line>
+                  <line x1="200" y1="200" x2="296.4" y2="85.1"></line>
+                  <line x1="200" y1="200" x2="329.9" y2="125"></line>
+                  <line x1="200" y1="200" x2="347.7" y2="174"></line>
+                  <line x1="200" y1="200" x2="347.7" y2="226"></line>
+                  <line x1="200" y1="200" x2="329.9" y2="275"></line>
+                  <line x1="200" y1="200" x2="296.4" y2="314.9"></line>
+                  <line x1="200" y1="200" x2="251.3" y2="341"></line>
+                  <line x1="200" y1="200" x2="200" y2="350"></line>
+                  <line x1="200" y1="200" x2="148.7" y2="341"></line>
+                  <line x1="200" y1="200" x2="103.6" y2="314.9"></line>
+                  <line x1="200" y1="200" x2="70.1" y2="275"></line>
+                  <line x1="200" y1="200" x2="52.3" y2="226"></line>
+                  <line x1="200" y1="200" x2="52.3" y2="174"></line>
+                  <line x1="200" y1="200" x2="70.1" y2="125"></line>
+                  <line x1="200" y1="200" x2="103.6" y2="85.1"></line>
+                  <line x1="200" y1="200" x2="148.7" y2="59"></line>
+                </g>
+                <path d="M 200 200 L 174.0 52.3 L 200.0 50.0 L 251.3 59.0 L 296.4 85.1 L 303.9 140.0 L 318.2 179.2 L 318.2 220.8 L 312.8 241.0 Z" fill="{{ fProd }}" fill-opacity="{{ oProd }}" stroke="{{ skProd }}" stroke-width="{{ wProd }}" stroke-opacity="{{ dProd }}" stroke-linejoin="round"></path>
+                <path d="M 200 200 L 341.0 251.3 L 329.9 275.0 L 296.4 314.9 L 230.8 284.6 L 200.0 290.0 L 148.7 341.0 L 125.0 329.9 Z" fill="{{ fMeth }}" fill-opacity="{{ oMeth }}" stroke="{{ skMeth }}" stroke-width="{{ wMeth }}" stroke-opacity="{{ dMeth }}" stroke-linejoin="round"></path>
+                <path d="M 200 200 L 155.0 277.9 L 142.1 268.9 L 122.1 245.0 L 140.9 210.4 L 81.8 179.2 L 96.1 140.0 L 161.4 154.0 L 169.2 115.4 L 184.4 111.4 Z" fill="{{ fTech }}" fill-opacity="{{ oTech }}" stroke="{{ skTech }}" stroke-width="{{ wTech }}" stroke-opacity="{{ dTech }}" stroke-linejoin="round"></path>
+                <circle cx="200.0" cy="50.0" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="251.3" cy="59.0" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="296.4" cy="85.1" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="303.9" cy="140.0" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="318.2" cy="179.2" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="318.2" cy="220.8" r="3.5" fill="{{ skProd }}" fill-opacity="{{ dProd }}"></circle>
+                <circle cx="329.9" cy="275.0" r="3.5" fill="{{ skMeth }}" fill-opacity="{{ dMeth }}"></circle>
+                <circle cx="296.4" cy="314.9" r="3.5" fill="{{ skMeth }}" fill-opacity="{{ dMeth }}"></circle>
+                <circle cx="230.8" cy="284.6" r="3.5" fill="{{ skMeth }}" fill-opacity="{{ dMeth }}"></circle>
+                <circle cx="200.0" cy="290.0" r="3.5" fill="{{ skMeth }}" fill-opacity="{{ dMeth }}"></circle>
+                <circle cx="148.7" cy="341.0" r="3.5" fill="{{ skMeth }}" fill-opacity="{{ dMeth }}"></circle>
+                <circle cx="142.1" cy="268.9" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="122.1" cy="245.0" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="140.9" cy="210.4" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="81.8" cy="179.2" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="96.1" cy="140.0" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="161.4" cy="154.0" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <circle cx="169.2" cy="115.4" r="3.5" fill="{{ skTech }}" fill-opacity="{{ dTech }}"></circle>
+                <g font-family="IBM Plex Mono, monospace" font-size="15">
+                  <text x="200.0" y="38.0" text-anchor="middle" fill="{{ tProd }}">Product Mgmt<tspan dx="5" fill="{{ nProd }}">5/5</tspan></text>
+                  <text x="255.4" y="47.8" text-anchor="start" fill="{{ tProd }}">Product Ownership<tspan dx="5" fill="{{ nProd }}">5/5</tspan></text>
+                  <text x="304.1" y="75.9" text-anchor="start" fill="{{ tProd }}">Requirements Eng.<tspan dx="5" fill="{{ nProd }}">5/5</tspan></text>
+                  <text x="340.3" y="119.0" text-anchor="start" fill="{{ tProd }}">{{ c.vTeam }}<tspan dx="5" fill="{{ nProd }}">4/5</tspan></text>
+                  <text x="359.5" y="171.9" text-anchor="start" fill="{{ tProd }}">Strategic Planning<tspan dx="5" fill="{{ nProd }}">4/5</tspan></text>
+                  <text x="359.5" y="228.1" text-anchor="start" fill="{{ tProd }}">Stakeholder Mgmt<tspan dx="5" fill="{{ nProd }}">4/5</tspan></text>
+                  <text x="340.3" y="281.0" text-anchor="start" fill="{{ tMeth }}">Scrum<tspan dx="5" fill="{{ nMeth }}">5/5</tspan></text>
+                  <text x="304.1" y="324.1" text-anchor="start" fill="{{ tMeth }}">Story Mapping<tspan dx="5" fill="{{ nMeth }}">5/5</tspan></text>
+                  <text x="255.4" y="352.2" text-anchor="start" fill="{{ tMeth }}">Design Thinking<tspan dx="5" fill="{{ nMeth }}">3/5</tspan></text>
+                  <text x="200.0" y="366.0" text-anchor="middle" fill="{{ tMeth }}">Business Model Canvas<tspan dx="5" fill="{{ nMeth }}">3/5</tspan></text>
+                  <text x="144.6" y="352.2" text-anchor="end" fill="{{ tMeth }}">Roadmapping<tspan dx="5" fill="{{ nMeth }}">5/5</tspan></text>
+                  <text x="95.9" y="324.1" text-anchor="end" fill="{{ tTech }}">C4 / {{ c.vArch }}<tspan dx="5" fill="{{ nTech }}">3/5</tspan></text>
+                  <text x="59.7" y="281.0" text-anchor="end" fill="{{ tTech }}">SQL<tspan dx="5" fill="{{ nTech }}">3/5</tspan></text>
+                  <text x="40.5" y="228.1" text-anchor="end" fill="{{ tTech }}">Python<tspan dx="5" fill="{{ nTech }}">2/5</tspan></text>
+                  <text x="40.5" y="171.9" text-anchor="end" fill="{{ tTech }}">Data Analysis<tspan dx="5" fill="{{ nTech }}">4/5</tspan></text>
+                  <text x="59.7" y="119.0" text-anchor="end" fill="{{ tTech }}">Business Analytics<tspan dx="5" fill="{{ nTech }}">4/5</tspan></text>
+                  <text x="95.9" y="75.9" text-anchor="end" fill="{{ tTech }}">API-Design<tspan dx="5" fill="{{ nTech }}">2/5</tspan></text>
+                  <text x="144.6" y="47.8" text-anchor="end" fill="{{ tTech }}">Figma<tspan dx="5" fill="{{ nTech }}">3/5</tspan></text>
+                </g>
+                <text x="206" y="195" font-family="IBM Plex Mono, monospace" font-size="14" fill="#5C594F">1</text>
+                <text x="206" y="64" font-family="IBM Plex Mono, monospace" font-size="14" fill="#5C594F">5</text>
+              </svg>
+            </figure>
+          </sc-if>
+        </div>
+
+        <div style="margin-top:clamp(32px,4vw,48px);border-top:1px solid #DAD7CF;padding-top:14px">
+          <h3 style="margin:0 0 10px;font-size:13px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#3B3931">{{ c.langLabel }}</h3>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 24px;font-size:16px">
+            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="4">
+              <li><span style="font-weight:600">{{ l.name }}</span> <span style="color:#3B3931">— {{ l.lvl }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Human footer -->
+    <footer style="max-width:1240px;margin:clamp(48px,7vw,88px) auto 0;padding:0 clamp(20px,5vw,56px) clamp(56px,8vw,96px)">
+      <div style="border-top:1px solid #171716;padding-top:26px">
+        <h2 style="margin:0 0 24px;font-size:15px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase">{{ c.footerHeading }}</h2>
+        <dl style="margin:0 0 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px clamp(24px,4vw,48px)">
+          <div>
+            <dt style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4E4B44;margin-bottom:6px">{{ c.interestsLabel }}</dt>
+            <dd style="margin:0;font-size:17px;line-height:1.5;text-wrap:pretty">{{ c.interests }}</dd>
+          </div>
+          <div>
+            <dt style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#4E4B44;margin-bottom:6px">{{ c.hobbiesLabel }}</dt>
+            <dd style="margin:0;font-size:17px;line-height:1.5">{{ c.hobbies }}</dd>
+          </div>
+        </dl>
+        <div style="display:flex;flex-wrap:wrap;gap:20px 40px;align-items:baseline;justify-content:space-between;border-top:1px dotted #C6C2B6;padding-top:18px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px 24px;font-size:17px">
+            <a href="https://www.xing.com/profile/" rel="me">Xing</a>
+            <a href="https://www.linkedin.com/" rel="me">LinkedIn</a>
+          </div>
+          <div role="group" aria-label="{{ c.langAria }}" style="display:flex;gap:16px;align-items:baseline">
+            <button type="button" onClick="{{ setDe }}" aria-pressed="{{ isDe }}" style="{{ deBtn }}">{{ c.de }}</button>
+            <button type="button" onClick="{{ setEn }}" aria-pressed="{{ isEn }}" style="{{ enBtn }}">{{ c.en }}</button>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1200}}">
+const BANDS = {
+  sev:{l:3.33,w:21.25,row:0,c:"#B0121F"}, cad:{l:25.83,w:17.92,row:44,c:"#005A9C"}, kit:{l:33.75,w:5.00,row:88,c:"#00786A"},
+  mov:{l:25.83,w:1.25,tier:"up",c:"#6E6A5F"}, kith:{l:35.42,w:4.17,tier:"down",c:"#00786A"}, bos:{l:40.00,w:3.33,tier:"up",c:"#D0000F"},
+  cobi:{l:45.00,w:4.58,tier:"down",c:"#0079A8"}, fxxl:{l:50.00,w:10.42,tier:"up",c:"#8C1A0B"},
+  zuh:{l:60.83,w:22.92,tier:"down",c:"#7A2A86"}, gls:{l:84.17,w:14.17,tier:"up",c:"#0A1FA8"}
+};
+
+const COPY = {
+  de: {
+    skip:"Zum Inhalt springen", de:"Deutsch", en:"Englisch", langAria:"Sprache wählen", axis:"Zeitachse",
+    headline:"Vom unscharfen Problem zum ausgelieferten Produkt",
+    open1:"Ich bin technisch-wirtschaftlicher Generalist: Ich nehme unklare Probleme, durchdringe die Technik dahinter, erkenne die Chance, und mache ein Produkt daraus. Eines, das ein echtes Problem löst, für die Nutzer wie fürs Business.",
+    open2:"Angefangen habe ich im Industriedesign, weitergemacht im Wirtschaftsingenieurwesen, und seitdem in vier Branchen gebaut. Heute als Product Owner verantworte ich die ganze Strecke – vom Design bis zur Architektur.",
+    photoAlt:"Porträtfoto von Pedro López Chao",
+    workHeading:"Woran ich gearbeitet habe",
+    arcHeading:"Wie ich hierher kam",
+    arcIntro:"Drei Denkweisen, aus denen ich schöpfe. Zwei kommen aus dem Studium, eine nicht.",
+    laneStudies:"Studium", laneWork:"Beruf",
+    eduLabel:"Ausbildung", earlierLabel:"Frühere Stationen",
+    rangeHeading:"Beide Enden",
+    rangeIntro:"Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie weit es in jede reicht.",
+    scaleNote:"Selbsteinschätzung, 1 bis 5.",
+    radarTitle:"Spannweite im Überblick",
+    radarDesc:"Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort. Bei mir reicht sie in alle drei.",
+    vTeam:"Teamführung", vArch:"Architektur", layerOn:"Ebene hervorgehoben",
+    langLabel:"Sprachen",
+    footerHeading:"Nebenbei",
+    interestsLabel:"Interessiert mich", hobbiesLabel:"Und sonst",
+    interests:"Nachhaltige Produktentwicklung und Design · Neue Technologien und Wissenschaft",
+    hobbies:"Triathlon · Musik · Kunst",
+    attribution:[
+      {k:"Industriedesign", v:"Produkt- und Nutzerdenken"},
+      {k:"Wirtschaftsingenieurwesen", v:"Business-, Prozess- und Systemdenken"},
+      {k:"Technologie", v:"aus Erfahrung und Neugier, nicht aus dem Hörsaal"}
+    ],
+    roles:[
+      {date:"11/2023 – heute", role:"Product Owner", company:"GLS IT Services GmbH",
+       summary:"Ich führe ein cross-funktionales Team aus Entwicklung und Test fachlich und trage die volle Produktverantwortung für die IT-Tools im Nahverkehr – von der Analyse unklarer operativer Probleme bis zur ausgelieferten Lösung.",
+       bullets:[
+        {t:"Die Nutzung eines neuen internen Tools habe ich verdoppelt: per SQL-Analysen und Gesprächen mit den Nutzern herausgefunden, woran die Akzeptanz tatsächlich scheiterte – und die Roadmap konsequent darauf ausgerichtet."},
+        {t:"Unscharfe organisatorische Probleme aus dem operativen Nahverkehr übersetze ich eigenständig in priorisierte Produktentscheidungen – datengetrieben statt auf Zuruf."},
+        {t:"Produktvision und Scope verantworte ich allein – es gibt keine dedizierte BA-Rolle im Team: Nutzerkontakt, Requirements, UX/UI-Design in Figma und Support liegen in einer Hand."},
+        {t:"Architektur- und API-Entscheidungen treffe ich gemeinsam mit den Entwicklern; Systemgrenzen und Abhängigkeiten mache ich per C4-Modellierung sichtbar und kläre Integrationsrisiken, bevor die Umsetzung startet."},
+        {t:"Produktentscheidungen und Budgetbedarfe vertrete ich gegenüber Director- und C-Level-Ebene – und setze sie dort durch."},
+        {t:"Die Prozesstransparenz im Nahverkehr habe ich deutlich erhöht, mit positivem Effekt auf die Kundenzufriedenheit – und damit den Grundstein für den Umbau kritischer Abläufe gelegt."}
+       ]},
+      {date:"03/2019 – 10/2023", role:"Expert Business Analyst", company:"Zühlke Engineering GmbH",
+       summary:"Als Berater bei Zühlke war ich meist am Anfang im Projekt – dort, wo das Produkt noch unscharf ist: Anforderungen erheben, das Produkt definieren, die Schnittstelle zum Kunden halten. Quer durch die Branchen.",
+       bullets:[
+        {t:"Als Product Owner habe ich die IoT-Neuentwicklung der Maschinensoftware eines Sondermaschinenbauers verantwortet – von der Anforderungserhebung bis zum erfolgreichen Marktstart."},
+        {t:"Für ein vernetztes Medizingerät habe ich das Produktteam durch die Machbarkeitsphase geführt – die Frage war, ob aus der Idee überhaupt ein Produkt werden kann. Den Kunden habe ich dabei bis auf Director-Ebene begleitet."},
+        {t:"Anforderungen und API-Spezifikation für das Stammdatensystem eines großen Hausgeräteherstellers – konsequent nach „API-First“ und „API-as-a-Product“, also mit der Schnittstelle selbst als Produkt."},
+        {t:"Aus einer vagen Produktidee habe ich für einen führenden Matratzenhersteller eine spezifizierte smarte Matratze gemacht – Produktdefinition und Lastenheft; sie hat einen kleinen Marktstart erreicht."},
+        {t:"Für das Personaleinsatzplanungssystem einer Fluggesellschaft habe ich die Anforderungen erhoben und das Projektteam gecoacht – trotz komplexer Anforderungslage durchgehend hohe Kundenzufriedenheit."}
+       ]},
+      {date:"01/2017 – 02/2019", role:"Produktmanager E-Bike", company:"Fahrrad XXL Group GmbH",
+       summary:"Ich habe den Produktentwicklungsprozess für den gesamten E-Bike-Bereich verantwortet – und damit zum ersten Mal Produkt und Kommerz in einer Rolle.",
+       bullets:[
+        {t:"Roadmap und Produktanforderungen für eine Palette von unter 20 E-Bike-Modellen habe ich mit dem Engineering erstellt; Sortiment und Preisstrategie mit der Geschäftsführung festgelegt."},
+        {t:"Den Zertifizierungsprozess nach EMV-Richtlinien habe ich geleitet und den Markt laufend beobachtet und analysiert – die Grundlage für die Roadmap."}
+       ]},
+      {date:"01/2016 – 12/2016", role:"Account Manager Business Development", company:"COBI GmbH", summary:null,
+       bullets:[
+        {t:"Ich war Ansprechpartner für zwei bis drei E-Bike-Antriebshersteller und habe die Projekte geleitet, die ihre Systeme mit COBI integriert haben – eng mit der Embedded-Abteilung. Business Development hieß hier: die technische Integration und die Partnerschaft gleichzeitig verantworten."}
+       ]}
+    ],
+    bands:{sev:"Industriedesign, Sevilla", cad:"Wirtschaftsingenieurwesen, Cádiz", kit:"KIT-Austauschjahr",
+           mov:"Movand", kith:"KIT", bos:"Bosch", cobi:"COBI", fxxl:"Fahrrad XXL", zuh:"Zühlke", gls:"GLS"},
+    eduList:[
+      {date:"03/2012 – 10/2015", t:"Wirtschaftsingenieurwesen – Licenciatura (Master-Äquivalent), Universidad de Cádiz"},
+      {date:"10/2013 – 10/2014", t:"Wirtschaftsingenieurwesen – Austauschprogramm im Rahmen der Licenciatura, Karlsruher Institut für Technologie (KIT)"},
+      {date:"09/2007 – 12/2011", t:"Industriedesign-Ingenieurwesen – Diplomatura (Bachelor-Äquivalent), Universidad de Sevilla"}
+    ],
+    earlier:[
+      {date:"01/2015 – 09/2015", t:"Praktikant / Werkstudent Sales, Mobility Media GmbH – Bosch Group"},
+      {date:"02/2014 – 12/2014", t:"Wissenschaftliche Hilfskraft, Karlsruher Institut für Technologie – Institut für Produktionstechnik"},
+      {date:"03/2012 – 06/2012", t:"Praktikum, Movand S.A."}
+    ],
+    groupLabels:["Produkt & Führung","Methoden & Werkzeug","Technisch"],
+    skillNames:{"Teamführung":"Teamführung","C4":"C4-Modell / Architekturdiagramme"},
+    tools:"Werkzeug: Jira, Confluence, Miro, Office inkl. Copilot mit Agenten, Snowflake.",
+    langs:[{name:"Spanisch",lvl:"Muttersprache"},{name:"Deutsch",lvl:"fließend"},{name:"Englisch",lvl:"fließend"},{name:"Französisch",lvl:"Grundkenntnisse"}]
+  },
+  en: {
+    skip:"Skip to content", de:"German", en:"English", langAria:"Choose language", axis:"Timeline",
+    headline:"From a fuzzy problem to a shipped product",
+    open1:"I'm a technical-business generalist: I take problems nobody has framed yet, get to the bottom of the technology underneath them, find the opportunity and turn it into a product. One that solves a real problem, for the people using it and for the business.",
+    open2:"I started in industrial design, went on to industrial engineering and management, and have been building across four industries since. Today, as a product owner, I own the whole distance — from design through to architecture.",
+    photoAlt:"Portrait photo of Pedro López Chao",
+    workHeading:"What I've worked on",
+    arcHeading:"How I got here",
+    arcIntro:"Three ways of thinking I draw on. Two came from my studies; one didn't.",
+    laneStudies:"Studies", laneWork:"Work",
+    eduLabel:"Education", earlierLabel:"Earlier stations",
+    rangeHeading:"Both ends",
+    rangeIntro:"The same range, as a list — and as a shape: three groups, and the diagram shows how far it reaches into each.",
+    scaleNote:"Self-assessment, 1 to 5.",
+    radarTitle:"The range at a glance",
+    radarDesc:"The further the shape reaches in a direction, the more sits there. Mine reaches into all three.",
+    vTeam:"Team leadership", vArch:"Architecture", layerOn:"Layer highlighted",
+    langLabel:"Languages",
+    footerHeading:"Off the clock",
+    interestsLabel:"What holds my attention", hobbiesLabel:"And otherwise",
+    interests:"Sustainable product development and design · New technology and science",
+    hobbies:"Triathlon · Music · Art",
+    attribution:[
+      {k:"Industrial design", v:"product and user thinking"},
+      {k:"Industrial engineering and management", v:"business, process and systems thinking"},
+      {k:"Technology", v:"from experience and curiosity, not from a lecture hall"}
+    ],
+    roles:[
+      {date:"11/2023 – present", role:"Product Owner", company:"GLS IT Services GmbH",
+       summary:"I'm the product lead for a cross-functional team of developers and testers, with full product responsibility for the IT tools in local delivery operations — from picking apart a fuzzy operational problem to the solution actually shipping.",
+       bullets:[
+        {t:"I doubled adoption of a new internal tool: SQL analysis and conversations with the people using it showed me what was actually blocking uptake, and I pointed the roadmap squarely at that."},
+        {t:"I turn the fuzzy organisational problems that come out of daily delivery operations into prioritised product decisions myself — driven by data, not by whoever asked loudest."},
+        {t:"Product vision and scope are mine alone — there's no dedicated BA role on the team: user contact, requirements, UX/UI design in Figma and support all sit in one pair of hands."},
+        {t:"Architecture and API decisions I make together with the engineers; I make system boundaries and dependencies visible through C4 modelling, and settle integration risks before implementation starts."},
+        {t:"I take product decisions and budget needs to director and C-level — and carry them through there."},
+        {t:"I substantially raised process transparency in delivery operations, with a positive effect on customer satisfaction — and laid the groundwork for reworking critical workflows."}
+       ]},
+      {date:"03/2019 – 10/2023", role:"Expert Business Analyst", company:"Zühlke Engineering GmbH",
+       summary:"As a consultant at Zühlke I was usually there at the start — where the product is still out of focus: gathering requirements, defining the product, holding the client relationship. Across very different industries.",
+       bullets:[
+        {t:"As product owner I ran the IoT rebuild of a special-machinery maker's machine software — from gathering requirements through to a successful market launch."},
+        {t:"I led the product team through the feasibility phase of a connected medical device — the question being whether the idea could become a product at all. I carried the client relationship up to director level."},
+        {t:"Requirements and API specification for a major appliance maker's master-data system — built strictly on “API-First” and “API-as-a-Product”, treating the interface itself as the product."},
+        {t:"I turned a vague product idea into a specified smart mattress for a leading mattress maker — product definition and requirements spec; it went on to a small market launch."},
+        {t:"For an airline's crew-scheduling system I ran requirements and coached the project team — consistently high client satisfaction despite a genuinely complex requirements picture."}
+       ]},
+      {date:"01/2017 – 02/2019", role:"Product Manager E-Bike", company:"Fahrrad XXL Group GmbH",
+       summary:"I owned the product-development process for the entire E-Bike category — product and commercial sitting in one role.",
+       bullets:[
+        {t:"I built the roadmap and product requirements for a range of fewer than 20 E-Bike models with engineering, and set the range and pricing strategy with the management team."},
+        {t:"I ran EMC regulatory certification for the range, and kept a continuous read on the market — the basis the roadmap was built on."}
+       ]},
+      {date:"01/2016 – 12/2016", role:"Account Manager Business Development", company:"COBI GmbH", summary:null,
+       bullets:[
+        {t:"I was the point of contact for two to three E-Bike drive-system makers and led the projects integrating their systems with COBI's, working closely with the embedded team. Business development here meant owning the technical integration and the partnership at the same time."}
+       ]}
+    ],
+    bands:{sev:"Industrial design, Seville", cad:"Industrial engineering, Cádiz", kit:"KIT exchange year",
+           mov:"Movand", kith:"KIT", bos:"Bosch", cobi:"COBI", fxxl:"Fahrrad XXL", zuh:"Zühlke", gls:"GLS"},
+    eduList:[
+      {date:"03/2012 – 10/2015", t:"Industrial Engineering & Management – Licenciatura (master's equivalent), Universidad de Cádiz"},
+      {date:"10/2013 – 10/2014", t:"Industrial Engineering & Management – exchange year during the Licenciatura, Karlsruhe Institute of Technology (KIT)"},
+      {date:"09/2007 – 12/2011", t:"Industrial Design Engineering – Diplomatura (bachelor's equivalent), Universidad de Sevilla"}
+    ],
+    earlier:[
+      {date:"01/2015 – 09/2015", t:"Sales intern / working student, Mobility Media GmbH – Bosch Group"},
+      {date:"02/2014 – 12/2014", t:"Research assistant, Karlsruhe Institute of Technology – Institute of Production Science"},
+      {date:"03/2012 – 06/2012", t:"Internship, Movand S.A."}
+    ],
+    groupLabels:["Product & leadership","Methods & tools","Technical"],
+    skillNames:{"Teamführung":"Team leadership","C4":"C4 model / architecture diagrams"},
+    tools:"Tooling: Jira, Confluence, Miro, Office incl. Copilot with Agents, Snowflake.",
+    langs:[{name:"Spanish",lvl:"Native speaker"},{name:"German",lvl:"Fluent"},{name:"English",lvl:"Fluent"},{name:"French",lvl:"Basic"}]
+  }
+};
+
+const TONE = { prod:"oklch(0.55 0.07 42)", meth:"oklch(0.55 0.07 186)", tech:"oklch(0.5 0.08 292)" };
+
+const GROUPS = [
+  {key:"prod", names:["Product Management","Product Ownership","Requirements Engineering","Teamführung","Strategic Planning","Stakeholder Management"], levels:[5,5,5,4,4,4]},
+  {key:"meth", names:["Agile Development (Scrum)","User Story Mapping","Design Thinking","Business Model Canvas","Product Roadmapping"], levels:[5,5,3,3,5]},
+  {key:"tech", names:["C4","SQL","Python","Data Analysis","Business Analytics","API-Design","Figma"], levels:[3,3,2,4,4,2,3]}
+];
+
+class Component extends DCLogic {
+  state = { lang:"de", lane:null, group:null, w: typeof window !== "undefined" ? window.innerWidth : 1440 };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener("resize", this._onResize);
+    document.documentElement.lang = this.state.lang;
+  }
+  componentDidUpdate(p) {
+    if (p && this.state.lang !== undefined) document.documentElement.lang = this.state.lang;
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onResize); }
+
+  band(key, c, mine) {
+    const b = BANDS[key];
+    const other = this.state.lane !== null && this.state.lane !== mine;
+    return {
+      label: c.bands[key], l: b.l, w: b.w, row: b.row,
+      vt: b.l + "%", vh: b.w + "%",
+      fill: other ? "#EAE7DE" : b.c,
+      stroke: other ? "#D2CEC2" : b.c,
+      fg: other ? "#5C594F" : "#171716",
+      bandTop: "42px",
+      labelTop: b.tier === "down" ? "64px" : "20px"
+    };
+  }
+
+  renderVals() {
+    const { lang, lane, group, w } = this.state;
+    const c = COPY[lang];
+    const narrow = w < 1080;
+    const btn = (on) => "background:none;border:0;padding:2px 0;margin:0;font:inherit;font-size:15px;cursor:pointer;color:#171716;border-bottom:" +
+      (on ? "2px solid #171716" : "1px solid #C0BCB0") + ";font-weight:" + (on ? 600 : 400);
+    const dim = (isOn, other) => other !== null && !isOn;
+
+    const laneStyle = (mine) => {
+      const other = lane !== null && lane !== mine;
+      return {
+        fg: other ? "#4E4B44" : "#171716",
+        band: other ? "#E8E5DC" : (lane === mine ? "#171716" : "#CFCBBF"),
+        bd: other ? "#DAD7CF" : "#171716"
+      };
+    };
+    const st = laneStyle("studies"), wk = laneStyle("work");
+
+    const groups = GROUPS.map((g, i) => ({
+      label: c.groupLabels[i],
+      swatch: "width:13px;height:13px;flex:none;border:1px solid #171716;background:" + TONE[g.key] +
+        ";opacity:" + (group === null || group === g.key ? 1 : 0.3),
+      hint: group === g.key ? c.layerOn : "",
+      items: g.names.map((n, j) => ({ name: c.skillNames[n] || n, lvl: g.levels[j] + "/5" })),
+      tools: g.key === "meth" ? c.tools : null,
+      enter: () => this.setState({ group: g.key }),
+      leave: () => this.setState({ group: null })
+    }));
+    const layer = (k) => {
+      const on = group === k, off = group !== null && !on;
+      return {
+        f: TONE[k], sk: TONE[k],
+        o: off ? 0.05 : (on ? 0.4 : 0.22),
+        w: on ? 2.5 : 1.25,
+        d: off ? 0.22 : 1,
+        t: off ? "#8A867A" : "#171716",
+        n: off ? "#9A968A" : "#4E4B44"
+      };
+    };
+    const P = layer("prod"), M = layer("meth"), T = layer("tech");
+
+    return {
+      c, isDe: lang === "de", isEn: lang === "en", narrow, wide: !narrow, showRadar: !narrow,
+      railCols: narrow ? "minmax(0,1fr)" : "104px minmax(0,1fr)",
+      openGrid: narrow
+        ? "padding-top:20px;display:flex;flex-direction:column;gap:18px"
+        : "padding-top:clamp(36px,6vw,64px);display:grid;grid-template-columns:minmax(0,1fr) clamp(180px,21vw,272px);gap:clamp(28px,4vw,56px);align-items:start",
+      headCell: narrow ? "min-width:0" : "grid-column:1;grid-row:1;min-width:0",
+      photoCell: narrow ? "width:120px" : "grid-column:2;grid-row:1 / span 2;align-self:start",
+      stmtCell: narrow
+        ? "display:flex;flex-direction:column;gap:13px;font-size:17px"
+        : "grid-column:1;grid-row:2;display:flex;flex-direction:column;gap:16px;max-width:70ch;font-size:clamp(19px,1.5vw,21px);margin-top:clamp(4px,1vw,16px)",
+      workSec: narrow
+        ? "max-width:1240px;margin:22px auto 0;padding:0 20px"
+        : "max-width:1240px;margin:clamp(48px,7vw,88px) auto 0;padding:0 clamp(20px,5vw,56px)",
+      workInner: narrow
+        ? "border-top:1px solid #DAD7CF;padding-top:16px"
+        : "border-top:1px solid #DAD7CF;padding-top:26px",
+      roleCols: narrow ? "minmax(0,1fr)" : "170px minmax(0,1fr)",
+      rangeCols: narrow ? "minmax(0,1fr)" : "minmax(0,0.72fr) minmax(560px,1.28fr)",
+      deBtn: btn(lang === "de"), enBtn: btn(lang === "en"),
+      setDe: () => this.setState({ lang:"de" }), setEn: () => this.setState({ lang:"en" }),
+      attribution: c.attribution, roles: c.roles, eduList: c.eduList, earlier: c.earlier, langs: c.langs,
+      studies: ["sev","cad","kit"].map(k => this.band(k, c, "studies")),
+      works: ["mov","kith","bos","cobi","fxxl","zuh","gls"].map(k => this.band(k, c, "work")),
+      enterStudies: () => this.setState({ lane:"studies" }),
+      enterWork: () => this.setState({ lane:"work" }),
+      leaveLane: () => this.setState({ lane:null }),
+      studiesFg: st.fg, studiesBand: st.band, studiesBd: st.bd,
+      workFg: wk.fg, workBand: wk.band, workBd: wk.bd,
+      groups,
+      fProd:P.f, skProd:P.sk, oProd:P.o, wProd:P.w, dProd:P.d, tProd:P.t, nProd:P.n,
+      fMeth:M.f, skMeth:M.sk, oMeth:M.o, wMeth:M.w, dMeth:M.d, tMeth:M.t, nMeth:M.n,
+      fTech:T.f, skTech:T.sk, oTech:T.o, wTech:T.w, dTech:T.d, tTech:T.t, nTech:T.n,
+      _unused: dim
+    };
+  }
+}
+</script>
+</body>
+</html>

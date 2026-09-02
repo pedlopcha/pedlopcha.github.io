@@ -2,7 +2,7 @@ STATUS: APPROVED
 
 # Copy
 
-Phase 3 (`/copy`), **revision 3.** Rewrites the phase-0 German extraction in `content/cv.json`
+Phase 3 (`/copy`), **revision 5.** Rewrites the phase-0 German extraction in `content/cv.json`
 into the concept brief's voice, in both languages, within the UX spec's density budget.
 Output: `content/copy.json` (the phrasing, `{de, en}` per entry — `de` ships) and this review
 document.
@@ -16,6 +16,131 @@ JSON.** Then check [New facts from interview](#new-facts-from-interview): every 
 > gate protocol. `docs/02-ux-spec.md` also needs one line corrected — see *Where the group
 > labels live* below — so it returns to DRAFT with this one. `docs/01-concept-brief.md` is
 > untouched and stays `APPROVED`.
+
+---
+
+## What changed in revision 5, and why
+
+**Revision 5 is a clarity fix on the Range section only**, prompted by Pedro testing the page
+with real readers. Their report: they could not tell what „Beide Enden" contained. Nothing else
+changed — no role bullet, headline, statement or other heading.
+
+### Why it failed
+
+Neither the heading nor the intro contained a word naming the content. „Beide Enden" carries the
+concept brief's *range at both ends* but does not say *skills*, and the intro that followed
+didn't either:
+
+> „Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie
+> weit es in jede reicht."
+
+Three separate faults. **„Dieselbe Spannweite"** refers back across a section boundary to the arc
+— a reader who scrolled straight here has no antecedent. **„nur als Liste – und als Form"** is
+commentary on the layout, not the content; the reader can already see it is a list and a chart,
+and what they wanted was to know what is *in* it. **„wie weit es in jede reicht"** leaves „es"
+pointing at nothing definite. And structurally the line explained the diagram a second time,
+competing with `radarDescription` directly beneath it. The section had two explanations of the
+picture and none of the subject.
+
+### The change
+
+| | Rev. 3 | Rev. 5 |
+|---|---|---|
+| `heading` | „Beide Enden" / "Both ends" | **„Fähigkeiten" / "Skills"** |
+| `intro` | „Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie weit es in jede reicht." | **„In drei Gruppen. Keine davon ist leer."** / "In three groups. None of them is empty." |
+| `radarDescription` | „Je weiter die Fläche … Bei mir reicht sie in alle drei." | **second sentence dropped** |
+
+Two editorial calls inside Pedro's choices, both reversible:
+
+1. He chose the intro „Meine Fähigkeiten in drei Gruppen. Keine davon ist leer." With the heading
+   now „Fähigkeiten", that repeats the noun in the line directly beneath it, so the noun was
+   dropped. The heading supplies it.
+2. „Keine davon ist leer" and `radarDescription`'s „Bei mir reicht sie in alle drei" make the
+   same point four lines apart. The second was cut. The intro now states the finding; the
+   description only teaches how to read the shape. It remains the chart's accessible
+   description, and a screen-reader user meets the intro first, so nothing is lost.
+
+### What this costs
+
+**„Beide Enden" is gone from the page.** It was Pedro's own rev. 3 decision and it was the last
+place the concept brief's *range at both ends* framing appeared as a heading. That framing now
+rests entirely on the one-line intro and on the radar's shape. „Fähigkeiten" is a category label
+— exactly the kind of default heading the other three sections avoid („Woran ich gearbeitet
+habe", „Wie ich hierher kam"), so this section's heading is now the plainest on the page. That is
+the deliberate trade: **clarity bought with distinctiveness, in the one section where readers
+reported being lost.** Both rejected options are kept in `_alternatives` if it should come back.
+
+> **Gate note, revision 5.** This file is already `STATUS: DRAFT`. `docs/02-ux-spec.md` is `DRAFT`
+> for its own revision 2; the phase-3 gate formally requires it `APPROVED`, and this revision
+> proceeded anyway because the pending UX change concerns JavaScript and the build, not this
+> copy. `docs/04-ui-spec.md` §3 and §4 reference the Range heading and intro and are unaffected
+> by the wording. `docs/01-concept-brief.md` is untouched and stays `APPROVED`.
+
+---
+
+## What changed in revision 4, and why
+
+**Revision 4 adds keys and fixes typos. It rewords nothing.** No role bullet, headline,
+statement, heading or intro changed. It was opened because phase 4 (UI) found that a dozen
+strings the page renders had no home in this file, and two of them made the English page render
+German.
+
+It is the same bug class revision 3 fixed for the `languages` block: **a German string sitting in
+`cv.json` as if it were a language-neutral fact, when it is actually prose.**
+
+### The two that were shipping wrong
+
+`cv.json` holds `"Teamführung"` and `"C4-Modell / Architekturdiagramme"` as skill names. The
+other sixteen skill names — *Product Management*, *SQL*, *Business Model Canvas* — are
+language-neutral and rightly live in `cv.json` alone. These two are German. Rendered as facts,
+the **English** page listed two skills in German, inside the Range section, which is the section
+carrying the whole generalist argument. Same for two institution names: *Karlsruher Institut für
+Technologie (KIT)* and *… – Institut für Produktionstechnik*, both of which have official English
+names.
+
+New: `sections.range.skillLabels` (two entries only) and `institutionLabel` on `education.
+kit-exchange` and `earlierStations.kit-assistant`. Sixteen skill names and the two Spanish
+universities are **not** duplicated here — a name that needs no translation stays a fact.
+
+### The dozen that had no home
+
+The timeline and the radar render text this file never contained:
+
+| Added | What it is | Why it cannot come from `cv.json` |
+|---|---|---|
+| `sections.arc.timelineBands` (10) | The label inside each timeline bar | Editorial, not the organisation name. `cv.json` says *Universidad de Sevilla*; the bar says *Industriedesign, Sevilla*, because it must be legible at 12px in a bar a few percent wide and must say what the reader needs at a glance. |
+| `sections.arc.laneStudies`, `laneWork` | The two lane labels, and their accessible names | Rendered text, no equivalent in `cv.json` |
+| `sections.arc.timelineAxisLabel` | „Zeitachse" on the year rail | Rendered text |
+| `sections.range.radarLabels` (8) | Shortened spoke labels | Eighteen full names collide around the circle at 15px. The lists always show the full name; these never replace it. |
+| `microcopy.layerHighlighted` | Status text when a group or lane is highlighted | Rendered text |
+
+The band labels are keyed with the **existing** `copy.json` keys — `sevilla-diplomatura`,
+`cadiz-licenciatura`, `kit-exchange`, `movand`, `kit-assistant`, `bosch-mobility-media`, `cobi`,
+`fahrrad-xxl`, `zuhlke`, `gls` — so a band pairs to the same entry as its role or education text
+rather than introducing a third naming convention. The design handoff used its own short keys
+(`sev`, `cad`, `zuh`); those are not adopted.
+
+`skillLabels` and `radarLabels` are keyed by the exact `cv.json` skill name, which is the fragile
+part: renaming a skill silently drops its translation. Phase 5 should re-key both to ids when it
+adds them. Noted in both `_note` fields.
+
+### Three typos
+
+| | Was | Now |
+|---|---|---|
+| `toolsLine.en` | "**tlassian** Stack" | "Atlassian Stack" |
+| `toolsLine.de` / `.en` | "Microsoft **Suite Office**" | "Microsoft Office Suite", matching `cv.json` |
+| `toolsLine.en` | trailing full stop | removed, matching `de` |
+
+Not fixed, because it is not a copy problem: `toolsLine` names Jira, Confluence, Miro and Copilot,
+which are also facts in `cv.json skills.technical[3]`. That duplication violates *facts are never
+duplicated into copy.json* and is a phase 5 data-contract call — a template like
+`"Werkzeug: {tools}"` over the `cv.json` list. Recorded as G1 in `docs/04-ui-spec.md`.
+
+> **Gate note, revision 4.** This file returns to `STATUS: DRAFT`. `docs/02-ux-spec.md` is
+> already `DRAFT` for its own revision 2. `docs/04-ui-spec.md` is `DRAFT` and its §4 binding
+> table is updated to reference these keys. `docs/01-concept-brief.md` is untouched and stays
+> `APPROVED`.
 
 ---
 

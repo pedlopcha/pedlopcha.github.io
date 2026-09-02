@@ -1,6 +1,6 @@
 {
-  "_note": "Phase 3 output (/copy), revision 2. Phrasing only — every fact lives in content/cv.json and is never duplicated here. Each text entry carries { de, en }: 'de' is what ships (primary market), 'en' is the toggle, drafted by Claude for Pedro to review and correct. 'original' quotes the phase-0 German extraction this entry rewrites, where one exists. 'source': rewrite = reworded from cv.json; new = did not exist in the CV; interview = fact or phrasing supplied by Pedro in the phase-3 interview and NOT yet independently verified (see interviewFacts).",
-  "_revision": "Rev. 3 is a repair pass, not a rewrite. docs/02-ux-spec.md rev. 4 restructured two sections after this file was written, and this revision serves the new structure: the headline is now the page display-scale line (so it drops the category label the opening statement already carries), the Range section is three groups from cv.json own categories plus a radar on self-assessed levels, and the arc two sub-lists are labelled. Also fixed: the languages block was German-only in cv.json with no English mirror, so the English page ended its Range section in German. Rev. 2 (unchanged by this pass) reframed the page around the generalist claim: ambiguous problem -> understand the technology -> find the opportunity -> ship a product that solves a real business or user problem. The design/architecture span is the EVIDENCE for that claim, not the claim itself.",
+  "_note": "Phase 3 output (/copy), revision 5. Phrasing only — every fact lives in content/cv.json and is never duplicated here. Each text entry carries { de, en }: 'de' is what ships (primary market), 'en' is the toggle, drafted by Claude for Pedro to review and correct. 'original' quotes the phase-0 German extraction this entry rewrites, where one exists. 'source': rewrite = reworded from cv.json; new = did not exist in the CV; interview = fact or phrasing supplied by Pedro in the phase-3 interview and NOT yet independently verified (see interviewFacts).",
+  "_revision": "Rev. 5 (2026-08-31) is a clarity fix on the Range section only, prompted by Pedro testing the page with real readers: they could not tell what „Beide Enden\" contained. Heading „Beide Enden\" -> „Fähigkeiten\" / \"Skills\"; intro rewritten from layout commentary to a plain statement of content plus one point; radarDescription lost its closing sentence, which the new intro now carries. Nothing else changed — no role bullet, headline, statement or other heading. Rev. 4 (2026-08-31) adds the keys the UI needs and fixes three typos; it rewords nothing. New: sections.arc.timelineAxisLabel, laneStudies, laneWork and timelineBands (ten band labels, which are editorial and cannot be derived from cv.json organisation names); sections.range.skillLabels (English for the two skill names that are German prose in cv.json) and radarLabels (eight shortened spoke labels); institutionLabel on kit-exchange and kit-assistant; microcopy.layerHighlighted. Without these the English page rendered two German skill names and two German institution names, and roughly a dozen strings had no home at all. Same bug class rev. 3 fixed for the languages block. Rev. 3 is a repair pass, not a rewrite. docs/02-ux-spec.md rev. 4 restructured two sections after this file was written, and this revision serves the new structure: the headline is now the page display-scale line (so it drops the category label the opening statement already carries), the Range section is three groups from cv.json own categories plus a radar on self-assessed levels, and the arc two sub-lists are labelled. Also fixed: the languages block was German-only in cv.json with no English mirror, so the English page ended its Range section in German. Rev. 2 (unchanged by this pass) reframed the page around the generalist claim: ambiguous problem -> understand the technology -> find the opportunity -> ship a product that solves a real business or user problem. The design/architecture span is the EVIDENCE for that claim, not the claim itself.",
   "_pairing": "roles.<key> pairs to content/cv.json experience[] by company: gls=[0], zuhlke=[1], fahrrad-xxl=[2], cobi=[3]. education.<key> and earlierStations.<key> pair to cv.json education[] and earlierStations[] in the same reverse-chronological order. languages.<key> pairs to cv.json meta.languages[] in order: spanish=[0], german=[1], english=[2], french=[3]. sections.range.group* pair to cv.json skills.technical[] by category: groupProduct=Produkt & Fuehrung, groupTechnical=Technisch, groupMethods=Methoden plus Tools merged. cv.json has no id fields yet; phase 5 (architecture) should add matching ids or pair by index.",
   "meta": {
     "headline": {
@@ -117,6 +117,77 @@
           }
         ]
       },
+      "timelineAxisLabel": {
+        "source": "new",
+        "_note": "Label on the year rail in the opening section (UI spec section 3). Not a heading.",
+        "de": "Zeitachse",
+        "en": "Timeline"
+      },
+      "laneStudies": {
+        "source": "new",
+        "_note": "Accessible name and visible label for the upper timeline lane. UX spec requires each lane to be a single focusable element with an accessible name.",
+        "de": "Studium",
+        "en": "Studies"
+      },
+      "laneWork": {
+        "source": "new",
+        "_note": "Accessible name and visible label for the lower timeline lane.",
+        "de": "Beruf",
+        "en": "Work"
+      },
+      "timelineBands": {
+        "_note": "Timeline band labels. These are NOT the organisation names — cv.json holds those ('Universidad de Sevilla', 'Karlsruher Institut fuer Technologie (KIT)'). A band label is editorial: it must survive at 12px inside a bar a few percent wide, so it names the thing the reader needs at a glance. Rendered text, therefore per language. Keys are the existing copy.json keys, so a band pairs to the same entry as its role/education/station text: education.* for the three study bands, earlierStations.* and roles.* for the seven work bands. Every band in the diagram needs an entry here; a missing one is a build error, not a fallback to the cv.json name.",
+        "sevilla-diplomatura": {
+          "source": "new",
+          "de": "Industriedesign, Sevilla",
+          "en": "Industrial design, Seville"
+        },
+        "cadiz-licenciatura": {
+          "source": "new",
+          "de": "Wirtschaftsingenieurwesen, Cádiz",
+          "en": "Industrial engineering, Cádiz"
+        },
+        "kit-exchange": {
+          "source": "new",
+          "de": "KIT-Austauschjahr",
+          "en": "KIT exchange year"
+        },
+        "movand": {
+          "source": "new",
+          "de": "Movand",
+          "en": "Movand"
+        },
+        "kit-assistant": {
+          "source": "new",
+          "de": "KIT",
+          "en": "KIT"
+        },
+        "bosch-mobility-media": {
+          "source": "new",
+          "de": "Bosch",
+          "en": "Bosch"
+        },
+        "cobi": {
+          "source": "new",
+          "de": "COBI",
+          "en": "COBI"
+        },
+        "fahrrad-xxl": {
+          "source": "new",
+          "de": "Fahrrad XXL",
+          "en": "Fahrrad XXL"
+        },
+        "zuhlke": {
+          "source": "new",
+          "de": "Zühlke",
+          "en": "Zühlke"
+        },
+        "gls": {
+          "source": "new",
+          "de": "GLS",
+          "en": "GLS"
+        }
+      },
       "educationLabel": {
         "source": "new",
         "de": "Ausbildung",
@@ -129,23 +200,31 @@
       }
     },
     "range": {
-      "_note": "Rev. 3. The skill items themselves are facts and stay in cv.json (skills.technical[].items); only their group labels are prose and live here. The two-pole regrouping this section used to carry (poleDesignLabel / poleTechnicalLabel / poleSpanningLabel) was dropped in UX spec rev. 4 — the groups are now cv.json own four categories with Methoden and Tools merged, so no skill can go unassigned. The heading stays „Beide Enden“ by Pedro decision, over three groups rather than two poles.",
+      "_note": "Rev. 5. The skill items themselves are facts and stay in cv.json (skills.technical[].items); only their group labels are prose and live here. The two-pole regrouping this section used to carry (poleDesignLabel / poleTechnicalLabel / poleSpanningLabel) was dropped in UX spec rev. 4 — the groups are now cv.json own four categories with Methoden and Tools merged, so no skill can go unassigned. Rev. 5 replaced the heading „Beide Enden“ with „Fähigkeiten“ after user testing: readers could not tell what the section contained, because neither the heading nor the intro named it. „Beide Enden“ was Pedro's rev. 3 decision and is kept in _alternatives.",
       "heading": {
-        "source": "new",
-        "de": "Beide Enden",
-        "en": "Both ends",
+        "source": "rewrite",
+        "de": "Fähigkeiten",
+        "en": "Skills",
         "_alternatives": [
+          {
+            "de": "Beide Enden",
+            "en": "Both ends",
+            "_note": "Rev. 3 heading, Pedro decision. Dropped in rev. 5 on user-testing evidence: it carries the concept brief's \"range at both ends\" but does not tell a reader what is in the section."
+          },
           {
             "de": "Womit ich arbeite",
             "en": "What I work with"
           }
-        ]
+        ],
+        "original": "Beide Enden",
+        "_note": "Rev. 5. Plainest of the three options tested. The concept brief's \"both ends\" idea now rests entirely on the intro line and the radar, not on the heading."
       },
       "intro": {
-        "source": "new",
+        "source": "rewrite",
         "original": "Dieselbe Spannweite, nur als Liste: womit ich Probleme durchdringe und plane – und womit ich sie technisch selbst bearbeite.",
-        "de": "Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie weit es in jede reicht.",
-        "en": "The same range, as a list — and as a shape: three groups, and the diagram shows how far it reaches into each."
+        "de": "In drei Gruppen. Keine davon ist leer.",
+        "en": "In three groups. None of them is empty.",
+        "_note": "Rev. 5. The rev. 3 line („Dieselbe Spannweite, nur als Liste – und als Form: drei Gruppen, und das Diagramm zeigt, wie weit es in jede reicht.\") failed user testing on three counts: „Dieselbe Spannweite\" refers back across a section boundary to the arc; „nur als Liste – und als Form\" is commentary on the layout rather than the content; and „wie weit es in jede reicht\" has no clear referent for „es\". It also explained the diagram a second time, duplicating radarDescription. Rev. 5 names the content and makes one point. Pedro chose „Meine Fähigkeiten in drei Gruppen. Keine davon ist leer.\"; the noun was dropped because the heading directly above now supplies it."
       },
       "groupProduct": {
         "source": "new",
@@ -166,6 +245,21 @@
         "en": "Methods & tools",
         "_note": "Merges cv.json skills.technical[2] (Methoden) and [3] (Tools). The Tools items are not radar spokes — they render as toolsLine inside this group, per UX spec rev. 4."
       },
+      "skillLabels": {
+        "_note": "English for skill names that are German prose in cv.json. Only these two exist; the other sixteen names are already language-neutral and are rendered straight from cv.json skills.technical[].items[].name, NOT duplicated here. Keyed by that exact cv.json name. If phase 5 gives skills ids, re-key to the id — the string key is the fragile part. A skill whose name is not a key here renders its cv.json name unchanged in both languages, which is correct for 'SQL' and wrong for any new German name, so adding a German-named skill means adding an entry here.",
+        "Teamführung": {
+          "source": "rewrite",
+          "original": "Teamführung",
+          "de": "Teamführung",
+          "en": "Team leadership"
+        },
+        "C4-Modell / Architekturdiagramme": {
+          "source": "rewrite",
+          "original": "C4-Modell / Architekturdiagramme",
+          "de": "C4-Modell / Architekturdiagramme",
+          "en": "C4 model / architecture diagrams"
+        }
+      },
       "radarTitle": {
         "source": "new",
         "de": "Spannweite im Überblick",
@@ -173,9 +267,54 @@
         "_note": "Accessible name for the radar. The three group labels are the chart focusable controls."
       },
       "radarDescription": {
-        "source": "new",
-        "de": "Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort. Bei mir reicht sie in alle drei.",
-        "en": "The further the shape reaches in a direction, the more sits there. Mine reaches into all three."
+        "source": "rewrite",
+        "de": "Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort.",
+        "en": "The further the shape reaches in a direction, the more sits there.",
+        "original": "Je weiter die Fläche in eine Richtung reicht, desto mehr liegt dort. Bei mir reicht sie in alle drei.",
+        "_note": "Rev. 5 dropped the second sentence („Bei mir reicht sie in alle drei.\" / \"Mine reaches into all three.\") because the rev. 5 intro now makes that point four lines above. This string teaches how to read the shape; the intro states the finding. Still the accessible description of the chart — a screen-reader user meets the intro first, so the finding is not lost."
+      },
+      "radarLabels": {
+        "_note": "Shortened spoke labels for the radar only. Eighteen full names do not fit around the circle at 15px without colliding, so eight are abbreviated. The lists beside the chart always show the full name — the UX spec requires the text equivalent to be complete, and these short forms never replace it. Keyed by the cv.json name, same fragility note as skillLabels. A skill with no entry here uses its full name on the spoke, which is correct for the ten that already fit.",
+        "Product Management": {
+          "source": "new",
+          "de": "Product Mgmt",
+          "en": "Product Mgmt"
+        },
+        "Requirements Engineering": {
+          "source": "new",
+          "de": "Requirements Eng.",
+          "en": "Requirements Eng."
+        },
+        "Teamführung": {
+          "source": "new",
+          "de": "Teamführung",
+          "en": "Team leadership"
+        },
+        "Stakeholder Management": {
+          "source": "new",
+          "de": "Stakeholder Mgmt",
+          "en": "Stakeholder Mgmt"
+        },
+        "Agile Development (Scrum)": {
+          "source": "new",
+          "de": "Scrum",
+          "en": "Scrum"
+        },
+        "User Story Mapping": {
+          "source": "new",
+          "de": "Story Mapping",
+          "en": "Story Mapping"
+        },
+        "Product Roadmapping": {
+          "source": "new",
+          "de": "Roadmapping",
+          "en": "Roadmapping"
+        },
+        "C4-Modell / Architekturdiagramme": {
+          "source": "new",
+          "de": "C4 / Architektur",
+          "en": "C4 / Architecture"
+        }
       },
       "levelScaleNote": {
         "source": "new",
@@ -186,8 +325,9 @@
       "toolsLine": {
         "source": "rewrite",
         "original": "Tools: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite",
-        "de": "Werkzeug: Atlassian Stack (Jira, Confluence), Miro, Microsoft Suite Office inkl. Copilot mit Agenten",
-        "en": "Tooling: tlassian Stack (Jira, Confluence), Miro, Microsoft Suite Office incl. Copilot with Agents."
+        "de": "Werkzeug: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite inkl. Copilot mit Agenten",
+        "en": "Tooling: Atlassian Stack (Jira, Confluence), Miro, Microsoft Office Suite incl. Copilot with Agents",
+        "_note": "Rev. 4 typo pass: 'tlassian' -> 'Atlassian' (en), 'Microsoft Suite Office' -> 'Microsoft Office Suite' (both, matching cv.json), trailing full stop removed from en to match de. Wording unchanged. The tool names duplicate cv.json skills.technical[3] — see docs/04-ui-spec.md G1; resolving that duplication is a phase 5 data-contract call, not a copy change."
       },
       "languagesLabel": {
         "source": "new",
@@ -361,6 +501,13 @@
         "de": "Wirtschaftsingenieurwesen",
         "en": "Industrial Engineering & Management"
       },
+      "institutionLabel": {
+        "source": "rewrite",
+        "original": "Karlsruher Institut für Technologie (KIT)",
+        "_note": "The institution's own official English name. cv.json keeps the German as the fact; this is the rendered English form.",
+        "de": "Karlsruher Institut für Technologie (KIT)",
+        "en": "Karlsruhe Institute of Technology (KIT)"
+      },
       "credentialLabel": {
         "source": "rewrite",
         "original": "Austauschprogramm im Rahmen der Licenciatura",
@@ -398,6 +545,13 @@
         "original": "Wissenschaftliche Hilfskraft",
         "de": "Wissenschaftliche Hilfskraft",
         "en": "Research assistant"
+      },
+      "institutionLabel": {
+        "source": "rewrite",
+        "original": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
+        "_note": "Official English names for both the university and the wbk institute.",
+        "de": "Karlsruher Institut für Technologie – Institut für Produktionstechnik",
+        "en": "Karlsruhe Institute of Technology – Institute of Production Science"
       }
     },
     "movand": {
@@ -557,6 +711,12 @@
       "de": "{skill}: {level} von 5",
       "en": "{skill}: {level} out of 5",
       "_note": "Accessible name for a radar spoke, so the level is never conveyed by geometry alone."
+    },
+    "layerHighlighted": {
+      "source": "new",
+      "_note": "Status text shown when a radar group or a timeline lane is highlighted. Required by UI spec section 6; had no key before rev. 4.",
+      "de": "Ebene hervorgehoben",
+      "en": "Layer highlighted"
     }
   },
   "interviewFacts": [
