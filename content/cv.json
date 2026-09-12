@@ -241,14 +241,14 @@
         "rated": true,
         "items": [
           {
-            "id": "product-management",
-            "name": "Product Management",
-            "level": 5
-          },
-          {
             "id": "product-ownership",
             "name": "Product Ownership",
             "level": 5
+          },
+          {
+            "id": "product-discovery",
+            "name": "Product Discovery",
+            "level": 4
           },
           {
             "id": "requirements-engineering",
@@ -293,11 +293,6 @@
             "level": 3
           },
           {
-            "id": "business-model-canvas",
-            "name": "Business Model Canvas",
-            "level": 3
-          },
-          {
             "id": "product-roadmapping",
             "name": "Product Roadmapping",
             "level": 5
@@ -310,8 +305,8 @@
         "rated": true,
         "items": [
           {
-            "id": "c4-modell",
-            "name": "C4-Modell / Architekturdiagramme",
+            "id": "software-architektur",
+            "name": "Software Architektur",
             "level": 3
           },
           {
@@ -325,24 +320,24 @@
             "level": 2
           },
           {
+            "id": "agentic-ai-development",
+            "name": "Agentic AI Development (e.g. Claude Code)",
+            "level": 3
+          },
+          {
             "id": "data-analysis",
             "name": "Data Analysis",
             "level": 4
           },
           {
-            "id": "business-analytics",
-            "name": "Business Analytics",
-            "level": 4
-          },
-          {
             "id": "api-design",
             "name": "API-Design",
-            "level": 2
+            "level": 3
           },
           {
             "id": "figma",
             "name": "Figma",
-            "level": 3
+            "level": 4
           }
         ]
       },

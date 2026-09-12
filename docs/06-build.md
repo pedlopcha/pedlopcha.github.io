@@ -32,7 +32,8 @@ Phase 6 (`/build`). Implements `docs/05-architecture.md` against `docs/04-ui-spe
 ```
 
 The data contract was applied in full: ids and colours on all ten dated entries, ids on the
-four skill categories and all twenty-one skill items, `skills.technical` reordered to
+four skill categories and all twenty-one skill items (twenty since the 2026-09-12 edit below),
+`skills.technical` reordered to
 `product, methods, technical, tools`, ids on the four languages, `meta.photo` as an object,
 the phase-0 scaffolding deleted, `skillLabels`/`radarLabels` re-keyed to ids,
 `group{Product,Methods,Technical}` re-keyed to `groups.<id>`, and `toolsLine` replaced by
@@ -44,10 +45,105 @@ so `04-ui-spec.md` G2 is satisfied by rendering what exists.
 
 ---
 
+## Maintenance pass — 2026-09-12: the radar no longer assumes 18 spokes
+
+**Reported.** After editing `cv.json` and `copy.json` by hand, a gap appeared in the radar
+between Figma and Product Ownership.
+
+**Cause.** `radar.js` exported `STEP_DEG = 20`, a constant that is only correct at exactly
+eighteen spokes. The edit left **seventeen** rated skills — `product-management` and
+`business-model-canvas` removed, `business-analytics` removed, `product-discovery` and
+`agentic-ai-development` added, `c4-modell` renamed `software-architektur` — so the spokes
+spanned 17 × 20° = 340° and left a 20° hole at twelve o'clock. Figma is the last spoke and
+Product Ownership, now first, sits at 0°, which is exactly where the hole opened.
+
+Two further defects rode on the same assumption, both keyed to "index 9 is the bottom spoke",
+true only at eighteen: `labelAnchor()` gave index 9 a `middle` anchor, and `labelPoint()` — plus
+a duplicate of the same expression inside `relaxRadarLabels()` — applied the bottom baseline
+nudge to it. At seventeen spokes index 9 sits at 190.6°, on the **left** of the chart, so it
+would have been centred and nudged for no reason.
+
+**Fix.** `radar.js` now exports `geometry(count)` in place of the loose constants and functions.
+The step is `360 / count`, so the ring closes at any number of skills; the label anchor and the
+baseline nudge derive from each spoke's **angle** rather than from a literal index. `render.js`
+builds one `geometry` per chart — `items.length` in `radar()`, `labels.length` in
+`relaxRadarLabels()` — which also removed the duplicated nudge expression. Adding or removing a
+rated skill is now a `cv.json` edit and nothing else.
+
+**Content fixes in the same pass**, all confirmed with the user beforehand: a German role bullet
+had lost a clause and kept a double space (`allein  Nutzerkontakt`), and its English had kept the
+clause, so the two languages said different things — the space is repaired and the English is
+realigned to the shorter German. `agentic-ai-development` is 41 characters in `cv.json` and had
+no `skillLabels` entry, so the list beside the radar carried the full string; it now has one
+(25 de / 22 en). No fact was copied into `copy.json`.
+
+### Verified this pass
+
+| | Result |
+|---|---|
+| **Ring closure** | 17 spokes × 21.1765° = 360.000000°. The gap from the last spoke (Figma, 338.82°) back to spoke 0 equals one full step, so the hole is gone. |
+| **Wedge closure** | The three group wedges tile the full 360° with no uncovered arc, and all three boundaries share a radial line exactly — including the wrap-around at 349.4118°, which is where the reported gap was. Radii differ across a boundary by design (§5.2: each side closes at *its own* member's radius), so the seam is a radial step, not a hole. |
+| **No regression at n = 18** | Replaying the pre-edit `cv.json` through the new code reproduces §5.2's two verified coordinates **exactly** — the Produkt wedge opens at `174 52.3` and closes at `312.8 241` — and reproduces the spec's anchor rule (middle at i = 0 and i = 9, start 1–8, end 10–17) and its index-9-only nudge, identically. The derived step at n = 18 is exactly 20. Generalising the rule changed no approved coordinate. |
+| **Anchors at n = 17** | Only spoke 0 is centred; 1–8 `start`, 9–16 `end`; no spoke lands on 180°, so nothing is nudged. |
+| **Syntax** | All seven modules pass `node --check`. No references remain to the removed `STEP_DEG`, `R.point`, `R.labelPoint`, `R.labelAnchor`, `R.wedgePath` or `R.groupArcPath`. |
+| **JSON** | Both content files parse. |
+| **Server** | `/`, all three touched modules, both content files and the stylesheet return 200. |
+
+### NOT verified this pass — read this before trusting the above
+
+There is **no headless browser on this machine** (no Puppeteer, Playwright, jsdom or
+happy-dom in `node_modules`), so unlike the original build none of the following was re-measured
+and none of it should be assumed still true:
+
+- **Label collisions.** `relaxRadarLabels()` depends on `getBBox()`. The original build measured
+  four overlapping pairs at r = 162 and pushed two labels out. At seventeen spokes the angular
+  spacing is *wider* (21.18° vs 20°), which should help, but the label set changed too —
+  `Agentic Prototyping` and `Product Discovery` are new strings on new spokes. **Which labels
+  now collide, and whether the relaxation still clears them, is unmeasured.**
+- **`fitRadar()`**, the derived viewBox and the resulting `min-width`, for the same reason.
+- Reflow at 320–1440, text zoom, keyboard order, axe-core, the language switch node count and
+  the JS-disabled state: all unchanged in principle by this edit, none re-run.
+
+The dev server is running at `http://localhost:3000/` for exactly this reason — the visual check
+is yours to make, and it is the one that matters here.
+
+### What the reviewers found
+
+`spec-conformance` and `a11y-auditor` both ran against this pass. Independently confirmed: the
+derived rule reproduces §5.2's coordinates at n = 18 (spec-conformance re-derived them by hand),
+the old index-9 rules are gone cleanly, and all 17 spokes still reach `<desc>`.
+
+Fixed on the spot, all mine: the `<desc>` comment in `render.js` still said "eighteen pairs";
+`05-architecture.md`'s A11 bullet still specified the r = 230 mid-angle placement the code has
+never used, with mid-angles computed at eighteen spokes; `04-ui-spec.md` §5.2 still said the
+radar is **removed** below 1080px, contradicting §7 and the shipped CSS, which keep it and
+reorder it; and this document over-claimed that the old Verified table's geometry rows "still
+hold" when its spoke-level string is the eighteen-skill set.
+
+**Open, and needing the user rather than the build — see the two rows added to the blocking
+table above.** One is that shortening the agentic label removed *"(e.g. Claude Code)"* from the
+page entirely, screen readers included, because the list and the `<desc>` read the same key.
+
+Not caused by this pass and left alone: the sans-serif 17px spoke label departs from §2.2's
+Mono 15px token; `syncRadarScroll` can strip `tabindex` from a container that currently holds
+focus; `aria-labelledby="radar-title radar-desc"` makes a ~550-character accessible *name* where
+`aria-describedby` would give a name plus a description; and `main.js`'s `if (groups && radar)`
+leaves the three list buttons inert if the radar ever fails to render.
+
+---
+
 ## Verified
 
 Measured, not asserted. Headless Chrome 150 over a local server, plus jsdom for the failure
 paths.
+
+**These are the original build's measurements, taken at eighteen spokes and against the skill
+list of the time. Several rows are now stale and are kept as a record of that build, not as a
+claim about the current one.** In particular the Radar geometry row's spoke levels
+`555444 55335 3324423` are the eighteen-skill set; the current seventeen are
+`545444 5535 3323434` (read 2026-09-12 10:15). The 2026-09-12 pass re-derived the geometry — see its own table — but
+every row here that depended on a browser was not re-run. Read the two tables together, and
+prefer the newer one where they disagree.
 
 | | Result |
 |---|---|
@@ -81,24 +177,25 @@ writes `#masthead`, `#inhalt` and `#footer-inhalt` in one synchronous block — 
 partial state, and the legal strip is still outside every render target.
 
 **2. The radar's viewBox is derived, not the §5.2 constant.** At `-118 -48 636 516` the two
-longest right-hand spoke labels clip: "Strategic Planning 5/5" reaches x = 533 against a right
+longest right-hand spoke labels clip: "Strategic Planning 4/5" reaches x = 533 against a right
 edge of 518, while 165 units of height go unused. `fitRadar()` measures the content and frames
 it. **Every coordinate §5.2 verifies is untouched** — only the frame moves — and renaming a
 skill can no longer clip the chart.
 
-**3. Two radar labels move off the constant radius.** §5.2 sets every spoke label at r = 162.
-Measured, four pairs overlap at that radius in both languages at every width — spokes 0/1,
-0/17, 8/9 and 9/10 — because near the vertical axis a 20° step buys only ~10 units of height
-against a ~22-unit label. `relaxRadarLabels()` pushes labels outward **along their own spokes**
-until clear; today that moves exactly two, spoke 0 to r = 183 and spoke 9 to r = 176. Sixteen
-of the eighteen stay at 162, and no label's *angle* — the thing that ties it to its data
-point — ever changes.
+**3. Some radar labels move off the constant radius.** §5.2 sets every spoke label at r = 162.
+Measured at eighteen spokes, four pairs overlapped at that radius in both languages at every
+width — spokes 0/1, 0/17, 8/9 and 9/10 — because near the vertical axis one step of arc buys
+only ~10 units of height against a ~22-unit label. `relaxRadarLabels()` pushes labels outward
+**along their own spokes** until clear; at eighteen that moved exactly two, spoke 0 to r = 183
+and spoke 9 to r = 176. No label's *angle* — the thing that ties it to its data point — ever
+changes. **Which labels move is data-dependent and was not re-measured after the 2026-09-12
+skill-list change**; see that section.
 
 **4. A11 is implemented as arc-set text, not a mid-angle label.** The architecture places each
 group's name horizontally at r = 230 and states it is "68 units clear of the spoke labels".
 That is true radially but not by text extent: measured, "Produkt & Führung" overlaps Product
 Ownership's label and "Technisch" overlaps Data Analysis's, at **every** radius and font size
-that still fits any reasonable frame. Horizontal text cannot clear eighteen radiating labels.
+that still fits any reasonable frame. Horizontal text cannot clear a full ring of radiating labels.
 So A11 takes `04-ui-spec.md`'s *first* stated option — "along the arc" — at r = 132, inside the
 outer ring where only rings and translucent fill live, with a paper halo. Curved text holds a
 constant radius and therefore cannot sweep into a spoke label.
@@ -157,6 +254,22 @@ overlapping radar labels, which I would not.
 | **A dedicated email alias** | The controller section cannot ship without one. It is the only contact detail on the site. |
 | **The supervisory authority** | Named in the last `TODO`. |
 | **Verify the excluded paths return 404** | After the first deploy. `_config.yml` is load-bearing and cannot be tested locally. |
+| **Look at the radar in a browser** | The 2026-09-12 pass could not measure label collisions — no headless browser here. The chart is running at `http://localhost:3000/`. Check both languages and both the wide layout and the 560px minimum. |
+| **Settle `04-ui-spec.md` Q8** | The `strategic-planning` instance is fixed — you added the `radarLabels` duplicate on 2026-09-12. The seam remains: a `skillLabels` translation never reaches a spoke on its own, so every such skill must be written into both keys. Duplicate forever, or chain the fallback. |
+| **„(e.g. Claude Code)" no longer appears anywhere** | Shortening the agentic list label had a consequence I did not foresee and should have: `render.js:350` (the list) and `render.js:448` (the radar's `<desc>`) read the **same** `skillLabels` key, so the parenthetical is now absent for sighted and screen-reader users alike, and `04-ui-spec.md` requires that "the lists always show the full name". Either drop the `skillLabels` entry and let the list carry all 41 characters again, or move the detail somewhere it survives. Your call — I have not reverted it. |
+| **The agentic spoke and list are different phrases** | The list says *Agentic AI Development*, the spoke says *Agentic Prototyping* — not a truncation and sharing no prefix, unlike every other override. With colour removed there is little to pair that spoke with its list row, which is what A11 exists to prevent. *Prototyping* also says something different from *Development*. Editorial, so yours. |
+
+### Approved documents this content change made stale
+
+The user authorised setting `04-ui-spec.md` and `05-architecture.md` back to `DRAFT`; both are
+updated. These were **not** touched and are now wrong in the places listed:
+
+| Document | Status | What is stale |
+|---|---|---|
+| `docs/02-ux-spec.md` | `APPROVED` | "eighteen skills" at lines 296, 357, 451, 465; "**One spoke per skill**, eighteen in total" at 428. The rule is right, the count is not. |
+| `docs/03-copy.md` | `APPROVED` | Lines 93–94 name `C4-Modell / Architekturdiagramme` and "the other sixteen skill names", citing *Product Management* and *Business Model Canvas* — all three skills are gone. The group table at 460–461 lists the old membership. |
+| `docs/03-copy-provenance.json` | sidecar | Still keyed by the old skill **names** (`skillLabels.C4-Modell / Architekturdiagramme`, `radarLabels.Product Management`). Partly pre-existing drift — the build re-keyed these to ids — plus the removed and renamed skills. |
+| `docs/01-concept-brief.md` | `APPROVED` | Discusses C4 as positioning evidence (lines 23, 83, 151); the skill is now `Software Architektur`. Reasoning-of-the-time rather than a contract, so lowest priority. |
 
 Non-blocking: no OG card image, so link previews render text-only. The radar's arc labels
 render at ~11.5 CSS px at the narrowest column — A9's 15 px floor is written about the spoke
@@ -185,3 +298,14 @@ the last commit, it is worth a look before committing.
    row packing is "the only place JavaScript reads layout". These are two more, in the same
    class and for the same reason: text extent is not knowable without measuring it.
 3. **The JS budget should be amended rather than the code cut.** See above.
+4. **Deriving the step from the spoke count is a correction, not a redesign.** `04-ui-spec.md`
+   §5.2 states the step as a literal 20° and the anchors as literal indices, which is the same
+   thing as "eighteen skills forever". `CLAUDE.md` ranks "trivial to update when the CV changes"
+   second, above speed and a11y, and a chart that breaks when a skill is added fails that.
+   Replaying the old data proves the rule reproduces every coordinate the spec verified, so
+   nothing approved was altered — only generalised. If you would rather pin the count, say so
+   and the constant comes back.
+5. **The budget table is now 1.3 KB further out.** Measured: `radar.js` 4,115 → 5,464 bytes
+   (+31 lines, mostly the closure and its comment), `render.js` +15 bytes, JS total 50,043 →
+   51,407 raw. The overrun in the table above was already the open decision; this does not
+   change its shape, but the number is stated rather than left stale.

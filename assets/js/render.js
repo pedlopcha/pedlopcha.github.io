@@ -380,10 +380,11 @@ function languages(cv) {
   ]);
 }
 
-/** The 18-spoke radar, reproduced from cv.json by the rules in 04-ui-spec.md §5.2. */
+/** The radar, reproduced from cv.json by the rules in 04-ui-spec.md §5.2. */
 function radar(cv, copy, lang, refreshers) {
   const { items, groups } = R.spokes(cv.skills.technical);
   const levels = items.map((s) => s.level);
+  const G = R.geometry(items.length);
 
   const label = (s) => resolve(copy, `sections.range.radarLabels.${s.id}`, lang) ?? s.name;
 
@@ -394,21 +395,21 @@ function radar(cv, copy, lang, refreshers) {
     }));
 
   const spokeLines = items.map((_, i) => {
-    const p = R.point(i, 150);
+    const p = G.point(i, 150);
     return svg('line', { class: 'radar__spoke', x1: R.CENTRE, y1: R.CENTRE, x2: p.x.toFixed(1), y2: p.y.toFixed(1) });
   });
 
   const wedges = groups.map((g) =>
     svg('path', {
-      class: 'radar__wedge', d: R.wedgePath(levels, g.from, g.to),
+      class: 'radar__wedge', d: G.wedgePath(levels, g.from, g.to),
       'data-group': g.id, style: `--group-tone: var(--tone-${g.id})`,
     }));
 
   const labels = items.map((s, i) => {
-    const p = R.labelPoint(i);
+    const p = G.labelPoint(i);
     const t = svg('text', {
       class: 'radar__label', x: p.x.toFixed(1), y: p.y.toFixed(1),
-      'text-anchor': R.labelAnchor(i), 'data-group': s.group, 'data-spoke': s.id,
+      'text-anchor': G.labelAnchor(i), 'data-group': s.group, 'data-spoke': s.id,
     }, [document.createTextNode(label(s))]);
     t.append(svg('tspan', { class: 'radar__label-level', dx: '5' }, [
       document.createTextNode(fill(lookup(copy, 'microcopy.levelFormat', lang), { level: s.level })),
@@ -421,7 +422,7 @@ function radar(cv, copy, lang, refreshers) {
   const arcDefs = svg('defs');
   const groupLabels = groups.map((g) => {
     const pathId = `radar-arc-${g.id}`;
-    arcDefs.append(svg('path', { id: pathId, d: R.groupArcPath(g.from, g.to), fill: 'none' }));
+    arcDefs.append(svg('path', { id: pathId, d: G.groupArcPath(g.from, g.to), fill: 'none' }));
     const text = svg('text', {
       class: 'radar__grouplabel', 'data-group': g.id, style: `--group-tone: var(--tone-${g.id})`,
     });
@@ -440,7 +441,7 @@ function radar(cv, copy, lang, refreshers) {
   const title = svg('title', { id: 'radar-title' });
   const desc = svg('desc', { id: 'radar-desc' });
 
-  // G4: levelAriaFormat is used, to build the <desc> from all eighteen pairs.
+  // G4: levelAriaFormat is used, to build the <desc> from every skill/level pair.
   const refresh = (l) => {
     title.textContent = lookup(copy, 'sections.range.radarTitle', l);
     const format = lookup(copy, 'microcopy.levelAriaFormat', l);
@@ -521,11 +522,11 @@ export function setBulletCounts(copy) {
  * Push crowded spoke labels outward along their own spokes until none overlap.
  *
  * 04-ui-spec.md §5.2 sets every label at a constant radius of 162. Near the
- * vertical axis that crowds: spokes 0 and 1 are 20 degrees apart but their
- * labels differ by only 10 units of height, so "Product Mgmt" collides with
- * both "Product Ownership" and "Figma", and the same happens at the bottom.
- * Measured, four pairs overlap at every width, in both languages — it is the
- * geometry, not the scale, and the handoff had it too.
+ * vertical axis that crowds: one step of arc buys almost no vertical
+ * separation there, so the labels either side of twelve o'clock collide, and
+ * the same happens at the bottom. Measured, four pairs overlap at every width,
+ * in both languages — it is the geometry, not the scale, and the handoff had
+ * it too.
  *
  * The constant radius is therefore a starting position rather than a fixed one.
  * A label only ever moves along its own spoke, so its angle — the thing that
@@ -539,12 +540,13 @@ export function relaxRadarLabels(root) {
   // Both measuring passes run inside the language switch, so a environment
   // without SVG layout must not take the whole render down with it.
   if (!labels.length || typeof labels[0].getBBox !== 'function') return;
+  const G = R.geometry(labels.length);
   const radii = labels.map(() => R.LABEL_R);
 
   const place = (i) => {
-    const p = R.point(i, radii[i]);
+    const p = G.point(i, radii[i]);
     labels[i].setAttribute('x', p.x.toFixed(1));
-    labels[i].setAttribute('y', (i === 9 ? p.y + 4 : p.y).toFixed(1));
+    labels[i].setAttribute('y', (p.y + G.labelNudge(i)).toFixed(1));
   };
   labels.forEach((_, i) => place(i));
 
@@ -557,7 +559,7 @@ export function relaxRadarLabels(root) {
 
   // Move the one nearer the vertical axis: that is where pushing outward buys
   // the most vertical separation.
-  const vert = (k) => Math.abs(Math.sin((k * R.STEP_DEG * Math.PI) / 180));
+  const vert = (k) => Math.abs(Math.sin((k * G.step * Math.PI) / 180));
   const MAX_R = R.LABEL_R + 70;
   const boxes = labels.map((t) => t.getBBox());
 

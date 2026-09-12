@@ -1,4 +1,4 @@
-STATUS: APPROVED
+STATUS: DRAFT
 
 # Architecture
 
@@ -147,7 +147,7 @@ by every visitor and readable at their URLs.
 | 2 | **Re-key `sections.range.skillLabels` and `radarLabels` from skill name to skill id.** | Change 5 above. |
 | 3 | **Re-key `sections.range.group{Product,Methods,Technical}` to `sections.range.groups.{product,methods,technical}`.** | Change 4 above. |
 | 4 | **Replace `sections.range.toolsLine` with `sections.range.toolsLabel`** — „Werkzeug" / "Tooling" — and add `sections.range.toolLabels` keyed by tool id, holding only tools whose `cv.json` name is not language-neutral. | **This closes G1**, the one open hard-constraint violation in the project. `toolsLine` currently names Jira, Confluence, Miro and Copilot, which are facts living in `cv.skills.technical[tools]`, and it has already drifted once (Snowflake). The renderer composes `{toolsLabel}: {tools joined by ", "}` from `cv.json`. Today exactly one tool needs a label — "Microsoft Office Suite and Copilot with Agents" carries English connectives — so `toolLabels` holds one entry per language, and the other two render as facts. |
-| 5 | **Keep `microcopy.levelAriaFormat`.** | G4 resolved: it is used, to build the radar's `<desc>` from all eighteen skill/level pairs. Not deleted. |
+| 5 | **Keep `microcopy.levelAriaFormat`.** | G4 resolved: it is used, to build the radar's `<desc>` from every skill/level pair. Not deleted. |
 
 ### `docs/03-copy-provenance.json` — new file
 
@@ -383,23 +383,36 @@ timeline flip, which looked like it needed JavaScript, is a media query over the
 
 ### Radar
 
-Exactly `04-ui-spec.md` §5.2 — centre (200, 200), spoke `i` at `i × 20°` clockwise from twelve
-o'clock, `r = level × 30`, rings at 30/60/90/120/150, wedge paths opening and closing at a
-half-step past the group's first and last member at that member's radius. Spoke order is
-`cv.json` order after the reordering in data-contract change 6. Reproduced from data, never
-transcribed.
+Exactly `04-ui-spec.md` §5.2 — centre (200, 200), one spoke per rated skill with `step = 360° / n`
+and spoke `i` at `i × step` clockwise from twelve o'clock, `r = level × 30`, rings at
+30/60/90/120/150, wedge paths opening and closing at a half-step past the group's first and last
+member at that member's radius. Spoke order is `cv.json` order after the reordering in
+data-contract change 6. Reproduced from data, never transcribed.
+
+**The step derives from the count; it is not a constant.** `radar.js` exported `STEP_DEG = 20`,
+which is correct only at the eighteen skills the spec was written against — at seventeen the
+spokes span 340° and leave a hole at twelve o'clock. `geometry(count)` now closes the ring at any
+count, and the label anchor and the baseline nudge derive from each spoke's angle rather than
+from the literal indices 0 and 9. At n = 18 the derived values reproduce §5.2's verified
+coordinates exactly, so no approved geometry changed.
 
 Three additions this phase owns:
 
 - **A11 — the wedges must not be linked to their lists by colour alone.** Each group's name is
-  drawn at its wedge's mid-angle at **radius 230**, in the group tone, mono, uppercase. Mid-angles
-  are 50°, 160° and 280°; at r = 230 those land at (376, 52), (279, 416) and (−27, 160), all
+  drawn in the group tone, mono, uppercase. **This bullet's original placement did not survive
+  contact with a browser and is superseded** — see `06-build.md` deviation 4. It specified a
+  horizontal label at each wedge's mid-angle at radius 230; measured, that overlaps the spoke
+  labels by text extent at every radius that still fits the frame, so the shipped code sets the
+  name **along its wedge's arc** at r = 132 instead, which is `04-ui-spec.md` A11's own first
+  option. The mid-angles below were also computed at eighteen spokes and do not survive a change
+  to the skill list; nothing in the code reads them. Retained for the record only:
+  mid-angles 50°, 160° and 280°; at r = 230 those land at (376, 52), (279, 416) and (−27, 160), all
   inside the existing `viewBox="-118 -48 636 516"` and 68 units clear of the spoke labels at
   r = 162. Phase 6 verifies no collision at both language's word lengths.
 - **A9 — radar text must not shrink below 15 CSS px.** SVG text scales with the viewBox, and at
   the radar column's 560 px minimum a 15-unit label renders at ≈ 13.2 px. Spoke labels are
   therefore **17 user units**, and phase 6 measures the computed size at the 1080 px breakpoint.
-- **`<desc>`** is generated: `radarDescription`, then all eighteen pairs through
+- **`<desc>`** is generated: `radarDescription`, then every skill/level pair through
   `microcopy.levelAriaFormat`. This is what makes G4's key used rather than deleted.
 
 ### Year rail

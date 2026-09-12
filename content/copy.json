@@ -5,8 +5,8 @@
       "en": "From a fuzzy problem to a shipped product"
     },
     "openingStatement": {
-      "de": "Ich bin technisch-wirtschaftlicher Generalist: Ich nehme unklare Probleme, durchdringe die Technik dahinter, erkenne die Chance, und mache ein Produkt daraus. Eines, das ein echtes Problem löst, für die Nutzer wie fürs Business.\n\nAngefangen habe ich im Industriedesign, weitergemacht im Wirtschaftsingenieurwesen, und seitdem in vier Branchen gebaut. Heute als Product Owner verantworte ich die ganze Strecke – vom Design bis zur Architektur.",
-      "en": "I'm a technical-business generalist: I take problems nobody has framed yet, get to the bottom of the technology underneath them, find the opportunity and turn it into a product. One that solves a real problem, for the people using it and for the business.\n\nI started in industrial design, went on to industrial engineering and management, and have been building across four industries since. Today, as a product owner, I own the whole distance — from design through to architecture."
+      "de": "Ich bin technisch-wirtschaftlicher Generalist: Ich nehme unklare Probleme, durchdringe die Technik dahinter, erkenne die Chance, und mache ein Produkt daraus. Eines, das ein echtes Problem löst, für die Nutzer wie fürs Business.\n\nAngefangen habe ich im Industriedesign, weitergemacht im Wirtschaftsingenieurwesen, und seitdem in eine Vielzahl von Branchen Produkte entwickelt. Heute als Product Owner verantworte ich die ganze Strecke – vom Design bis zur Architektur.",
+      "en": "I'm a technical-business generalist: I take problems nobody has framed yet, get to the bottom of the technology underneath them, find the opportunity and turn it into a product. One that solves a real problem, for the people using it and for the business.\n\nI started in industrial design, went on to industrial engineering and management, and have been developing products across a wide range of industries since. Today, as a product owner, I own the whole distance — from design through to architecture."
     },
     "pageTitle": {
       "de": "Pedro López Chao — Product Management Professional",
@@ -130,17 +130,25 @@
         "en": "Skills"
       },
       "intro": {
-        "de": "In drei Gruppen. Keine davon ist leer.",
-        "en": "In three groups. None of them is empty."
+        "de": "In drei Gruppen.",
+        "en": "In three groups."
       },
       "skillLabels": {
         "teamfuhrung": {
           "de": "Teamführung",
           "en": "Team leadership"
         },
-        "c4-modell": {
-          "de": "C4-Modell / Architekturdiagramme",
-          "en": "C4 model / architecture diagrams"
+        "software-architektur": {
+          "de": "Software Architektur",
+          "en": "Software Architecture"
+        },
+        "strategic-planning":{
+          "de": "Strategische Planung",
+          "en": "Strategic Planning"
+        },
+        "agentic-ai-development": {
+          "de": "Agentische KI-Entwicklung",
+          "en": "Agentic AI Development"
         }
       },
       "radarTitle": {
@@ -152,10 +160,6 @@
         "en": "The further the shape reaches in a direction, the more sits there."
       },
       "radarLabels": {
-        "product-management": {
-          "de": "Product Mgmt",
-          "en": "Product Mgmt"
-        },
         "requirements-engineering": {
           "de": "Requirements Eng.",
           "en": "Requirements Eng."
@@ -180,9 +184,18 @@
           "de": "Roadmapping",
           "en": "Roadmapping"
         },
-        "c4-modell": {
-          "de": "C4 / Architektur",
-          "en": "C4 / Architecture"
+        "software-architektur": {
+          "de": "Software Arch.",
+          "en": "Software Arch."
+        },
+        "agentic-ai-development":{
+          "de": "Agentisches Prototyping",
+          "en": "Agentic Prototyping"
+
+        },
+        "strategic-planning":{
+          "de": "Strategische Planung",
+          "en": "Strategic Planning"
         }
       },
       "levelScaleNote": {
@@ -236,21 +249,21 @@
   "roles": {
     "gls": {
       "summary": {
-        "de": "Ich führe ein cross-funktionales Team aus Entwicklung und Test fachlich und trage die volle Produktverantwortung für die IT-Tools im Nahverkehr – von der Analyse unklarer operativer Probleme bis zur ausgelieferten Lösung.",
+        "de": "Ich führe ein cross-funktionales Team aus Entwicklern und Testern fachlich und trage die volle Produktverantwortung für die IT-Tools im Nahverkehr – von der Analyse unklarer operativer Probleme bis zur ausgelieferten Lösung.",
         "en": "I'm the product lead for a cross-functional team of developers and testers, with full product responsibility for the IT tools in local delivery operations — from picking apart a fuzzy operational problem to the solution actually shipping."
       },
       "bullets": [
         {
-          "de": "Die Nutzung eines neuen internen Tools habe ich verdoppelt: per SQL-Analysen und Gesprächen mit den Nutzern herausgefunden, woran die Akzeptanz tatsächlich scheiterte – und die Roadmap konsequent darauf ausgerichtet.",
-          "en": "I doubled adoption of a new internal tool: SQL analysis and conversations with the people using it showed me what was actually blocking uptake, and I pointed the roadmap squarely at that."
+          "de": "Die Nutzung eines neuen internen Tools habe ich verdoppelt: per SQL-Analysen und Gesprächen mit den Nutzern herausgefunden, welche konkreten Probleme im Arbeitsalltag gelöst werden mussten – und die Roadmap konsequent darauf ausgerichtet.",
+          "en": "I doubled adoption of a new internal tool: SQL analysis and conversations with the people using it showed me which problems needed to be solved, and I pointed the roadmap squarely at that."
         },
         {
-          "de": "Unscharfe organisatorische Probleme aus dem operativen Nahverkehr übersetze ich eigenständig in priorisierte Produktentscheidungen – datengetrieben statt auf Zuruf.",
+          "de": "Unscharfe organisatorische Probleme aus dem operativen Nahverkehr übersetze ich eigenständig in priorisierte Produktentscheidungen. Datengetrieben statt auf Zuruf.",
           "en": "I turn the fuzzy organisational problems that come out of daily delivery operations into prioritised product decisions myself — driven by data, not by whoever asked loudest."
         },
         {
-          "de": "Produktvision und Scope verantworte ich allein – es gibt keine dedizierte BA-Rolle im Team: Nutzerkontakt, Requirements, UX/UI-Design in Figma und Support liegen in einer Hand.",
-          "en": "Product vision and scope are mine alone — there's no dedicated BA role on the team: user contact, requirements, UX/UI design in Figma and support all sit in one pair of hands."
+          "de": "Produktvision und Scope verantworte ich allein – Nutzerkontakt, Requirements, UX/UI-Design in Figma und Support liegen in einer Hand.",
+          "en": "Product vision and scope are mine alone — user contact, requirements, UX/UI design in Figma and support all sit in one pair of hands."
         },
         {
           "de": "Architektur- und API-Entscheidungen treffe ich gemeinsam mit den Entwicklern; Systemgrenzen und Abhängigkeiten mache ich per C4-Modellierung sichtbar und kläre Integrationsrisiken, bevor die Umsetzung startet.",
@@ -273,24 +286,24 @@
       },
       "bullets": [
         {
+          "de": "Für das Personaleinsatzplanungssystem einer Fluggesellschaft habe ich die Anforderungen erhoben und das Projektteam gecoacht – trotz komplexer Anforderungslage durchgehend hohe Kundenzufriedenheit.",
+          "en": "For an airline's crew-scheduling system I ran requirements and coached the project team — consistently high client satisfaction despite a genuinely complex requirements picture."
+        },
+        {
           "de": "Als Product Owner habe ich die IoT-Neuentwicklung der Maschinensoftware eines Sondermaschinenbauers verantwortet – von der Anforderungserhebung bis zum erfolgreichen Marktstart.",
           "en": "As product owner I ran the IoT rebuild of a special-machinery maker's machine software — from gathering requirements through to a successful market launch."
         },
         {
-          "de": "Für ein vernetztes Medizingerät habe ich das Produktteam durch die Machbarkeitsphase geführt – die Frage war, ob aus der Idee überhaupt ein Produkt werden kann. Den Kunden habe ich dabei bis auf Director-Ebene begleitet.",
-          "en": "I led the product team through the feasibility phase of a connected medical device — the question being whether the idea could become a product at all. I carried the client relationship up to director level."
+          "de": "Für ein vernetztes Medizingerät habe ich das Produktteam durch die Machbarkeitsphase geführt. Die Frage war, ob aus der Idee überhaupt ein Produkt werden kann.",
+          "en": "I led the product team through the feasibility phase of a connected medical device. The question being whether the idea could become a product at all."
         },
         {
           "de": "Anforderungen und API-Spezifikation für das Stammdatensystem eines großen Hausgeräteherstellers – konsequent nach „API-First\" und „API-as-a-Product\", also mit der Schnittstelle selbst als Produkt.",
           "en": "Requirements and API specification for a major appliance maker's master-data system — built strictly on \"API-First\" and \"API-as-a-Product\", treating the interface itself as the product."
         },
         {
-          "de": "Aus einer vagen Produktidee habe ich für einen führenden Matratzenhersteller eine spezifizierte smarte Matratze gemacht – Produktdefinition und Lastenheft; sie hat einen kleinen Marktstart erreicht.",
-          "en": "I turned a vague product idea into a specified smart mattress for a leading mattress maker — product definition and requirements spec; it went on to a small market launch."
-        },
-        {
-          "de": "Für das Personaleinsatzplanungssystem einer Fluggesellschaft habe ich die Anforderungen erhoben und das Projektteam gecoacht – trotz komplexer Anforderungslage durchgehend hohe Kundenzufriedenheit.",
-          "en": "For an airline's crew-scheduling system I ran requirements and coached the project team — consistently high client satisfaction despite a genuinely complex requirements picture."
+          "de": "Aus einer vagen Produktidee habe ich für einen führenden Matratzenhersteller eine spezifizierte smarte Matratze gemacht. Produktdefinition und Lastenheft; sie hat einen kleinen Marktstart erreicht.",
+          "en": "I turned a vague product idea into a specified smart mattress for a leading mattress maker. Product definition and requirements spec; it went on to a small market launch."
         }
       ]
     },

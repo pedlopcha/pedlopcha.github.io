@@ -1,4 +1,4 @@
-STATUS: APPROVED
+STATUS: DRAFT
 
 # UI Spec
 
@@ -60,8 +60,8 @@ ticks — is set in monospace, which is what makes the page read as a document r
 marketing site.
 
 The two custom components carry the distinctiveness the concept brief ranked first: a
-**two-lane timeline** on a uniform 20-year axis, and an **18-spoke radar** split into three
-contiguous wedges.
+**two-lane timeline** on a uniform 20-year axis, and a **radar carrying every rated skill on its
+own spoke**, split into three contiguous wedges.
 
 ## 2. Design tokens
 
@@ -241,8 +241,8 @@ per language.** Where a string is in `cv.json` *and* here, that is a defect, not
 | Timeline band geometry | `cv.json` `start` / `end` via §5.1 |
 | Timeline band colour and `tier` | `cv.json`, per entry. Missing colour = the diagram does not render. See §10 Q7 |
 | Skill names and levels | `cv.skills.technical[]` where `rated: true` |
-| Skill names needing English | `copy.sections.range.skillLabels.<cv name>` — two entries only, `Teamführung` and `C4-Modell / Architekturdiagramme`. The other sixteen render from `cv.json` unchanged |
-| Radar spoke labels | `copy.sections.range.radarLabels.<cv name>` where an entry exists, else the full `cv.json` name. Eight are shortened; the lists always show the full name |
+| Skill names needing a display form | `copy.sections.range.skillLabels.<cv id>` — only where the `cv.json` name is German prose needing English, or is too long to sit in the list. Every other skill renders from `cv.json` unchanged |
+| Radar spoke labels | `copy.sections.range.radarLabels.<cv id>` where an entry exists, else the full `cv.json` name — `skillLabels` is **not** consulted on this path. Only names that collide on the spoke are shortened; the lists always show the full name |
 | Radar title and description | `copy.sections.range.radarTitle` / `.radarDescription` |
 | Scale note | `copy.sections.range.levelScaleNote` |
 | Highlight status text | `copy.microcopy.layerHighlighted` |
@@ -270,7 +270,7 @@ settled here rather than deferred to phase 5:
 1. **`CLAUDE.md` forbids it.** "No runtime dependencies." A charting library is one, and it is
    also a second network request on the critical path against priority 3.
 2. **Neither component is the shape any library draws.** A radar library plots one polygon per
-   dataset over *n* equal axes. This radar has 18 axes, three group wedges that each span a
+   dataset over *n* equal axes. This radar has one axis per rated skill, three group wedges that each span a
    contiguous arc and terminate at a half-step past their first and last member at *that
    member's* radius, labels at a constant radius with `text-anchor` varying by quadrant, and a
    per-group highlight. Every one of those is an override fighting the library's model. The
@@ -376,14 +376,17 @@ The fixed pixel heights are defect A2.
 
 ### 5.2 Radar
 
-An 18-spoke radar carrying all 18 rated skills, split into three contiguous wedges. This is the
-page's signature object.
+A radar carrying every rated skill on its own spoke, split into three contiguous wedges. This is
+the page's signature object. **The spoke count is whatever `cv.json` contains** — currently 17 —
+and every angle derives from it, so the ring closes at any count.
 
 **Geometry — every literal coordinate in the handoff is reproduced by these rules:**
 
 ```
 centre        (200, 200)          viewBox "-118 -48 636 516"
-spoke i       θ = i × 20°, clockwise from 12 o'clock, i = 0…17
+n             the number of rated skills in cv.json
+step          360° / n            (n = 18 → 20°, n = 17 → 21.176°)
+spoke i       θ = i × step, clockwise from 12 o'clock, i = 0…n−1
 data point    r = level × 30      (level 5 → r = 150)
               x = 200 + r·sin θ
               y = 200 − r·cos θ
@@ -396,12 +399,14 @@ spoke lines   centre → r = 150, --rule-faint
 
 | i | Skill | Level | Group |
 |---|---|---|---|
-| 0–5 | Product Management, Product Ownership, Requirements Engineering, Teamführung, Strategic Planning, Stakeholder Management | 5,5,5,4,4,4 | Produkt & Führung |
-| 6–10 | Agile Development (Scrum), User Story Mapping, Design Thinking, Business Model Canvas, Product Roadmapping | 5,5,3,3,5 | Methoden & Werkzeug |
-| 11–17 | C4-Modell / Architekturdiagramme, SQL, Python, Data Analysis, Business Analytics, API-Design, Figma | 3,3,2,4,4,2,3 | Technisch |
+| 0–5 | Product Ownership, Product Discovery, Requirements Engineering, Teamführung, Strategic Planning, Stakeholder Management | 5,4,5,4,4,4 | Produkt & Führung |
+| 6–9 | Agile Development (Scrum), User Story Mapping, Design Thinking, Product Roadmapping | 5,5,3,5 | Methoden & Werkzeug |
+| 10–16 | Software Architektur, SQL, Python, Agentic AI Development, Data Analysis, API-Design, Figma | 3,3,2,3,4,3,3 | Technisch |
 
 This is `cv.json` order within each group, and the group order the UX spec fixed. It matters:
-changing it rotates the shape.
+changing it rotates the shape. **The table is a snapshot, not the contract** — the contract is
+"one spoke per rated skill, in `cv.json` order". Adding or removing a skill is a content edit and
+requires no change here beyond refreshing this snapshot.
 
 **Wedge path** — for a group spanning spokes `a…b`:
 
@@ -413,25 +418,34 @@ L  point at (b + 0.5) using level[b]
 Z
 ```
 
-Verified: the Produkt wedge opens at `174.0 52.3` = index −0.5, r = 150 (matching Product
-Management's 5), and closes at `312.8 241.0` = index 5.5, r = 120 (matching Stakeholder
-Management's 4). Both exact.
+Verified against the handoff at n = 18, the count it was drawn at: the Produkt wedge opens at
+`174.0 52.3` = index −0.5, r = 150 (matching the then-first skill's 5), and closes at
+`312.8 241.0` = index 5.5, r = 120 (matching Stakeholder Management's 4). Both exact, and the
+derived step still reproduces them — `360 / 18 = 20` — so generalising the rule changed no
+coordinate the handoff verified.
 
 **Labels** sit at a **constant radius of 162**, regardless of the data point's radius:
 
 ```
 x = 200 + 162·sin θ
-y = 200 − 162·cos θ      (index 9 only: +4px, baseline correction)
-text-anchor: middle at i = 0 and i = 9; start for i = 1…8; end for i = 10…17
+y = 200 − 162·cos θ      (+4px baseline correction on a spoke pointing straight
+                          down, i.e. θ = 180°; with an odd n there is none)
+text-anchor: middle where θ = 0° or 180°; start where θ < 180°; end where θ > 180°
 ```
+
+The anchor and the baseline correction derive from the **angle**, never from a literal index. At
+n = 18 that reproduces the handoff exactly (middle at i = 0 and i = 9, start for i = 1…8, end for
+i = 10…17); at n = 17 nothing sits at 180°, so only i = 0 is centred and nothing is nudged.
 
 Each label is the skill name plus a `<tspan dx="5">` carrying `n/5`. Two mono scale ticks sit on
 the vertical spoke: „1" at `(206, 195)` and „5" at `(206, 64)`.
 
-Several radar labels are **shortened** from the full skill name — `Scrum`, `Story Mapping`,
-`Roadmapping`, `Product Mgmt`, `Stakeholder Mgmt`, `Requirements Eng.`, `C4 / Architektur`. The
-full names appear in the list beside it. These abbreviations are display strings and belong in
-`copy.json`, not in the generator. See §9, gap G3.
+Several radar labels are **shortened** from the full skill name — currently `Scrum`,
+`Story Mapping`, `Roadmapping`, `Stakeholder Mgmt`, `Requirements Eng.`, `Software Arch.` and
+`Agentic Prototyping`. Which names need shortening is a function of the label's neighbours as
+much as its own length, and is settled by looking at the rendered chart, not by a character
+count. The full names appear in the list beside it. These abbreviations are display strings and
+belong in `copy.json`, not in the generator. See §9, gap G3.
 
 **States.** Three: neutral (no group active), active, dimmed.
 
@@ -443,8 +457,13 @@ full names appear in the list beside it. These abbreviations are display strings
 
 The dimmed state fails AA — defect A4.
 
-**Below 1080px the radar is removed, not shrunk.** The three grouped lists with their `n/5`
-values carry the same information, which is why removing it costs nothing.
+**Below 1080px the radar moves above its groups; it is not removed.** This reverses what this
+section originally said, and §7 is the authority: "nothing is removed from any viewport — in
+particular the radar, which the design deleted below 1080px, is now present at every width."
+`assets/site.css` implements that with `order: 1` on `.range__radar` inside
+`@media (max-width: 1079px)`, and the chart scrolls horizontally inside its own container below
+its 560px minimum. The three grouped lists with their `n/5` values remain a complete text
+equivalent regardless.
 
 ## 6. Interaction inventory
 
@@ -626,19 +645,25 @@ carries the note „Include only if a profile exists". **The build must render l
 `cv.meta.links` and omit what is not there** — it must not ship two placeholder hrefs.
 
 **G3 — the shortened radar labels had no home in `copy.json`. CLOSED in copy rev. 4.**
-`sections.range.radarLabels` now holds **eight** entries — the earlier count of seven was wrong —
-keyed by the `cv.json` skill name, falling back to the full name when absent. Six are
-language-neutral abbreviations (*Product Mgmt*, *Requirements Eng.*, *Stakeholder Mgmt*, *Scrum*,
-*Story Mapping*, *Roadmapping*); two differ per language (*Teamführung* / *Team leadership*,
-*C4 / Architektur* / *C4 / Architecture*).
+`sections.range.radarLabels` holds an entry only for the names that collide on a spoke, keyed by
+the `cv.json` skill **id**, falling back to the full name when absent. Most are language-neutral
+abbreviations (*Requirements Eng.*, *Stakeholder Mgmt*, *Scrum*, *Story Mapping*, *Roadmapping*,
+*Software Arch.*); the rest differ per language (*Teamführung* / *Team leadership*,
+*Agentisches Prototyping* / *Agentic Prototyping*). The set changes with the skill list — it is
+not a fixed count.
 
-**G5 — two skill names and two institution names were German-only facts. CLOSED in copy rev. 4.**
-`cv.json` holds `Teamführung` and `C4-Modell / Architekturdiagramme` as skill names, and
+**G5 — German-only skill and institution names were being rendered as facts. CLOSED in copy
+rev. 4.** `cv.json` holds skill names such as `Teamführung` and `Software Architektur`, and
 `Karlsruher Institut für Technologie (KIT)` and `… – Institut für Produktionstechnik` as
-institutions. Rendered as facts, the **English** page showed all four in German. `copy.json` now
-carries `sections.range.skillLabels` and two `institutionLabel` entries. The other sixteen skill
-names and both Spanish universities are not duplicated — a name needing no translation stays a
-fact. Same bug class copy rev. 3 fixed for the languages block.
+institutions. Rendered as facts, the **English** page showed them in German. `copy.json` now
+carries `sections.range.skillLabels` and two `institutionLabel` entries. Skill names needing no
+translation and both Spanish universities are not duplicated — a name needing no translation
+stays a fact. Same bug class copy rev. 3 fixed for the languages block.
+
+Note the seam this leaves: `skillLabels` feeds the list and the radar's `<desc>`, while the spoke
+label reads `radarLabels` and falls back **straight to the `cv.json` fact**. A skill given a
+`skillLabels` translation but no `radarLabels` entry therefore shows the translation in the list
+and the untranslated fact on its spoke. See §10 Q9.
 
 **G6 — about a dozen rendered strings had no key at all. CLOSED in copy rev. 4.** The ten
 timeline band labels, the two lane labels, the year rail label, and the highlight status text.
@@ -736,6 +761,24 @@ label pair that clears today can collide next spring, on a page nobody has touch
 `tier` at load — walk the bands in order, alternate rows only where a label would overlap its
 predecessor — is roughly ten lines and removes the drift permanently. Recommended; if it stays
 stored data, this document is on record that the arrangement has a shelf life.
+
+**Q8 — a `skillLabels` entry does not reach the spoke. OPEN.** The two label keys are read on
+separate paths: the list and the radar's `<desc>` read `skillLabels`, the spoke reads
+`radarLabels` and falls back straight to the `cv.json` fact. Give a skill a translation in
+`skillLabels` and no `radarLabels` entry, and the list shows the translation while the spoke
+shows the untranslated fact.
+
+This bit once: `strategic-planning` briefly showed *Strategische Planung* in the German list and
+*Strategic Planning* — the `cv.json` fact — on its spoke. **The user fixed it on 2026-09-12 by
+duplicating the translation into `radarLabels`**, which is also what `teamfuhrung` does. The
+concrete bug is gone; the seam that produced it is not.
+
+The standing choice is therefore between **duplicating** every such translation into both keys —
+the status quo, no code change, one string maintained in two places — and **chaining the
+fallback**, `radarLabels` → `skillLabels` → `cv.json` name, after which `radarLabels` would carry
+only genuine abbreviations. The build has not chosen for the user. Note that duplication is what
+`CLAUDE.md` calls the bilingual-maintenance bug, one rung down: not a fact copied per language,
+but a translation copied per render path.
 
 ## 11. What phase 5 must decide
 
